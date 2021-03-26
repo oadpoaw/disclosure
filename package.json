@@ -1,0 +1,48 @@
+{
+  "name": "disclosure-discord",
+  "version": "1.0.0",
+  "description": "Discord Bot Generator CLI",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "node dist/index.js",
+    "prebuild": "rimraf dist",
+    "build": "tsc --build",
+    "v:patch": "npm version patch -m \"chore(version): %s\"",
+    "v:minor": "npm version minor -m \"chore(version): %s\""
+  },
+  "bin": {
+    "disclosure": "dist/scripts/disclosure.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oadpoaw/disclosure.git"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "cli",
+    "generator"
+  ],
+  "author": "oadpoaw",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/oadpoaw/disclosure/issues"
+  },
+  "homepage": "https://github.com/oadpoaw/disclosure#readme",
+  "devDependencies": {
+    "@types/inquirer": "^7.3.1",
+    "@types/minimist": "^1.2.1",
+    "@types/node": "^14.14.35",
+    "@types/ws": "^7.4.0",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.2.3"
+  },
+  "dependencies": {
+    "discord.js": "^12.5.1",
+    "inquirer": "^8.0.0",
+    "minimist": "^1.2.5",
+    "minimist-options": "^4.1.0",
+    "pretty-ms": "^7.0.1"
+  }
+}
