@@ -16,16 +16,15 @@ export interface CommandConfig {
     name: string;
     description: string;
     category?: string;
-    usage: string;
-    args: number;
     cooldown: number;
+    args: number;
+    usage: string[];
     aliases: string[];
     userPermissions: PermissionString[];
     clientPermissions: PermissionString[];
     guildOnly: boolean;
     ownerOnly: boolean;
     argsDefinitions?: ArgsDefinition;
-    path?: string;
 }
 
 export interface Arguments {
@@ -54,12 +53,13 @@ export type ExtractDataType<T extends DataType> =
     T extends 'Command' ? Command :
     never;
 
-export type ArgsDefinition = Record<string, StringDefinition | BooleanDefinition | NumberDefinition | UserDefinition | RoleDefinition | TextChannelDefinition | VoiceChannelDefinition | CategoryChannelDefinition | CommandDefinition>;
+export type ArgsDefinition = Record<string, ArgvDefinition | StringDefinition | BooleanDefinition | NumberDefinition | UserDefinition | RoleDefinition | TextChannelDefinition | VoiceChannelDefinition | CategoryChannelDefinition | CommandDefinition>;
 
 export interface ArgvDefinition {
     type: DataType;
     default?: any;
     alias?: string | string[];
+    validate?: ValidateFunction<any>;
 }
 
 export interface StringDefinition extends ArgvDefinition {
@@ -112,15 +112,17 @@ export interface CommandDefinition extends ArgvDefinition {
 
 export type Prompts = Record<string, PromptOption>;
 
+export type MessageResolvable = any;
+
 export interface PromptOption {
     type: DataType;
-    message: string | MessageEmbed;
+    message: MessageResolvable;
     timeout?: {
         duration: number;
         message?: string;
     };
     validation?: {
-        errorMsg: string | MessageEmbed;
+        errorMsg: MessageResolvable;
         validate: (v: any) => boolean | Promise<boolean>;
     };
 }

@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "test": "node dist/index.js",
+    "test": "echo \"Hello World!\"",
     "prebuild": "rimraf dist",
     "build": "tsc --build",
     "v:patch": "npm version patch -m \"chore(version): %s\"",

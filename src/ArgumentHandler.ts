@@ -10,7 +10,7 @@ export class ArgumentError {
     getMessage() {
 
         if (typeof this.value === 'undefined') {
-            return `Missing '${this.must}' in parameter '--${this.key}'`;
+            return `Missing '${this.must}' in parameter '--${this.key}', it must be required.`;
         }
 
         return `Incorrect value for parameter '--${this.key}', gotten a type of '${typeof this.value}' instead of '${this.must}'`;
@@ -128,11 +128,14 @@ export async function ArgumentHandler<T extends ArgsDefinition>(client: Disclosu
             }
         }
 
+        if (typeof definition.validate === 'function' && ! await definition.validate(content, message)) {
+            break;
+        }
+
         retval[key] = content;
 
     }
 
     return error ?? retval;
-
 
 }

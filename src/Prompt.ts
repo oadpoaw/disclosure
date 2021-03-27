@@ -2,6 +2,7 @@ import { Message } from 'discord.js';
 import ms from 'pretty-ms';
 import { Disclosure } from '.';
 import { ExtractData, Prompts } from '.';
+import { Scaffold } from '.';
 
 export function StringToBoolean(str: string) {
     if (['true', 'yes', 'y'].includes(str.toLowerCase())) return true;
@@ -22,7 +23,7 @@ export async function Prompt<T extends Prompts>(client: Disclosure, message: Mes
         await message.channel.send(opts.message);
 
         const timeout = opts.timeout && opts.timeout.duration ? opts.timeout.duration : 60000;
-        const timeout_message = opts.timeout && opts.timeout.message ? opts.timeout.message : 'You did not reply within **${TIMEOUT}**\n\nPlease try again.';
+        const timeout_message = opts.timeout && opts.timeout.message ? opts.timeout.message : Scaffold.messages.PROMPT.TIMEOUT;
 
         const msg = await client.awaitReply(message, timeout);
 
@@ -43,7 +44,7 @@ export async function Prompt<T extends Prompts>(client: Disclosure, message: Mes
             const bool = StringToBoolean(msg.content);
 
             if (typeof bool !== 'boolean') {
-                await message.channel.send(`Sorry, it should be a valid boolean\nIt's either \`true\`, \`false\`, \`yes\`, \`no\`, \`y\`, \`n\`\n\nPlease try again.`);
+                await message.channel.send(Scaffold.messages.PROMPT.ERRORS.BOOLEAN);
                 status = false;
                 break;
             }
@@ -55,7 +56,7 @@ export async function Prompt<T extends Prompts>(client: Disclosure, message: Mes
             const num = Number(msg.content);
 
             if (Number.isNaN(num)) {
-                await message.channel.send('Sorry, it should be a valid Number\n\nPlease try again.');
+                await message.channel.send(Scaffold.messages.PROMPT.ERRORS.NUMBER);
                 status = false;
                 break;
             }
@@ -67,7 +68,7 @@ export async function Prompt<T extends Prompts>(client: Disclosure, message: Mes
             const user = await client.resolveUser(msg.content);
 
             if (!user) {
-                await message.channel.send("Sorry, it should be a valid User\n\nYou can type the User's ID, Username, Tag or you can even mention the User.\n\nPlease try again.");
+                await message.channel.send(Scaffold.messages.PROMPT.ERRORS.USER);
                 status = false;
                 break;
             }
@@ -79,7 +80,7 @@ export async function Prompt<T extends Prompts>(client: Disclosure, message: Mes
             const role = client.resolveRole(msg.content, message.guild);
 
             if (!role) {
-                await message.channel.send("Sorry, it should be a valid Role\n\nYou can type the Role's ID, Name or you can even mention the Role.\n\nPlease try again.");
+                await message.channel.send(Scaffold.messages.PROMPT.ERRORS.ROLE);
                 status = false;
                 break;
             }
@@ -91,7 +92,7 @@ export async function Prompt<T extends Prompts>(client: Disclosure, message: Mes
             const channel = client.resolveChannel(msg.content, message.guild);
 
             if (!channel || channel.type !== 'text') {
-                await message.channel.send("Sorry, it should be a valid Text Channel\n\nYou can type the Text Channel's ID, Name or you can even mention the text channel.\n\nPlease try again.");
+                await message.channel.send(Scaffold.messages.PROMPT.ERRORS.TEXT_CHANNEL);
                 status = false;
                 break;
             }
@@ -103,7 +104,7 @@ export async function Prompt<T extends Prompts>(client: Disclosure, message: Mes
             const channel = client.resolveChannel(msg.content, message.guild);
 
             if (!channel || channel.type !== 'voice') {
-                await message.channel.send("Sorry, it should be a valid Voice Channel\n\nYou can type the Voice Channel's ID or Name\n\nPlease try again.");
+                await message.channel.send(Scaffold.messages.PROMPT.ERRORS.VOICE_CHANNEL);
                 status = false;
                 break;
             }
@@ -115,7 +116,7 @@ export async function Prompt<T extends Prompts>(client: Disclosure, message: Mes
             const channel = client.resolveChannel(msg.content, message.guild);
 
             if (!channel || channel.type !== 'category') {
-                await message.channel.send("Sorry, it should be a valid Category Channel\n\nYou can type the Category Channel's ID or Name\n\nPlease try again.");
+                await message.channel.send(Scaffold.messages.PROMPT.ERRORS.CATEGORY_CHANNEL);
                 status = false;
                 break;
             }
@@ -127,7 +128,7 @@ export async function Prompt<T extends Prompts>(client: Disclosure, message: Mes
             const command = client.resolveCommand(msg.content.toLowerCase());
 
             if (!command) {
-                await message.channel.send("Sorry, it should be a valid Command\n\nYou can type the Command's name or some of it's aliases\n\nPlease try again.");
+                await message.channel.send(Scaffold.messages.PROMPT.ERRORS.COMMAND);
                 status = false;
                 break;
             }

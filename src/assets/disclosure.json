@@ -1,0 +1,30 @@
+{
+    "prefix": "!",
+    "ownerID": [],
+    "messages": {
+        "THROTTLE": {
+            "MESSAGE": "⏰ Please wait **${EXPIRATION}** before reusing the command again.\n\nThe cooldown for this command is **${COMMAND_COOLDOWN}**"
+        },
+        "COMMAND": {
+            "OWNER_ONLY": "Sorry, this command is only available to the Bot Owner.",
+            "MISSING_PERMISSIONS": "Sorry, but you need the following permission(s) to perform this command.\n```html\n${PERMISSIONS}\n```",
+            "MISSING_BOT_PERMISSIONS": "Sorry, but I need the following permission(s) to perform this command.\n```html\n${PERMISSIONS}\n```",
+            "NO_ARGUMENTS": "Sorry, You didn't provide any arguments, ${AUTHOR}!\nThe proper usage would be:\n```html\n${USAGE}\n```",
+            "NOT_ENOUGH_ARGUMENTS": "Sorry, You didn't specify enough arguments to execute this command.\nThe proper usage would be:\n```html\n${USAGE}\n```",
+            "COMMAND_DISABLED": "Sorry, that command is currently disabled."
+        },
+        "PROMPT": {
+            "TIMEOUT": "You did not reply within **${TIMEOUT}**\n\nPlease try again.",
+            "ERRORS": {
+                "BOOLEAN": "Sorry, it should be a valid boolean\nIt's either `true`, `false`, `yes`, `no`, `y`, `n`\n\nPlease try again.",
+                "NUMBER": "Sorry, it should be a valid Number\n\nPlease try again.",
+                "USER": "Sorry, it should be a valid User\n\nYou can type the User's ID, Username, Tag or you can even mention the User.\n\nPlease try again.",
+                "ROLE": "Sorry, it should be a valid Role\n\nYou can type the Role's ID, Name or you can even mention the Role.\n\nPlease try again.",
+                "TEXT_CHANNEL": "Sorry, it should be a valid Text Channel\n\nYou can type the Text Channel's ID, Name or you can even mention the text channel.\n\nPlease try again.",
+                "VOICE_CHANNEL": "Sorry, it should be a valid Voice Channel\n\nYou can type the Voice Channel's ID or Name\n\nPlease try again.",
+                "CATEGORY_CHANNEL": "Sorry, it should be a valid Category Channel\n\nYou can type the Category Channel's ID or Name\n\nPlease try again.",
+                "COMMAND": "Sorry, it should be a valid Command\n\nYou can type the Command's name or some of it's aliases\n\nPlease try again."
+            }
+        }
+    }
+}

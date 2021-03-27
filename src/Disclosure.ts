@@ -1,7 +1,7 @@
 import { Client, ClientOptions, Collection, Guild, GuildChannel, Message, Role } from 'discord.js';
 import { promises as fs } from 'fs';
 import path from 'path';
-import { Command, DisclosureLogger, ExtendedEvent } from '.';
+import { Command, DisclosureLogger, DiscordEvent, ExtendedEvent } from '.';
 
 export class Disclosure extends Client {
 
@@ -63,7 +63,6 @@ export class Disclosure extends Client {
                             const instance: Command = new cc.default(this);
 
                             instance.config.category = file.split('.')[0];
-                            instance.config.path = cmdPath;
 
                             this.confliction(instance);
 
@@ -93,7 +92,6 @@ export class Disclosure extends Client {
                         const instance: Command = new cc.default(this);
 
                         instance.config.category = null;
-                        instance.config.path = cmdPath;
 
                         this.confliction(instance);
 
@@ -125,16 +123,20 @@ export class Disclosure extends Client {
 
                 const ctx = require(path.join(filePath, eventFile)).default as ExtendedEvent;
 
-                const instance = new ctx(this);
+                if (ctx.prototype instanceof DiscordEvent) {
 
-                if (typeof instance.init === 'function') instance.init();
+                    const instance = new ctx(this);
 
-                if (typeof instance.on === 'function') {
-                    this.on(instance.eventName as string, (...args) => instance.on(...args));
-                }
+                    if (typeof instance.init === 'function') instance.init();
 
-                if (typeof instance.once === 'function') {
-                    this.once(instance.eventName as string, (...args) => instance.once(...args));
+                    if (typeof instance.on === 'function') {
+                        this.on(instance.eventName as string, (...args) => instance.on(...args));
+                    }
+
+                    if (typeof instance.once === 'function') {
+                        this.once(instance.eventName as string, (...args) => instance.once(...args));
+                    }
+
                 }
 
                 delete require.cache[require.resolve(path.join(filePath, eventFile))];
