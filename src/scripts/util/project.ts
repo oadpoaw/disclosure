@@ -147,6 +147,14 @@ async function createEnvFile(projectPath: string, token: string, uri: string) {
     );
 }
 
+async function createTSConfigFile(projectPath: string) {
+    console.log('Creating `tsconfig.json` file...');
+    await fs.writeFile(
+        path.join(projectPath, 'tsconfig.json'),
+        JSON.stringify(TSConfig, null, 2)
+    );
+}
+
 export async function project(cwd: boolean) {
 
     const name: string = cwd ?
@@ -171,6 +179,7 @@ export async function project(cwd: boolean) {
     await createDisclosureJSON(projectPath);
     await createIndexFile(projectPath, uri);
     await createEnvFile(projectPath, token, uri);
+    await createTSConfigFile(projectPath);
     await git(projectPath);
     await installDependencies(projectPath);
 
