@@ -14,7 +14,6 @@
         "allowUnusedLabels": false,
     },
     "include": [
-        "src",
-        "config"
+        "src"
     ]
 }
