@@ -1,4 +1,4 @@
-import { Disclosure } from '.';
+import { Disclosure } from './Disclosure';
 import { ClientEvents } from 'discord.js';
 
 export interface DiscordEvent {

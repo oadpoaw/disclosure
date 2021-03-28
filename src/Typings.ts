@@ -1,5 +1,5 @@
 import { APIMessageContentResolvable, CategoryChannel, Message, MessageAdditions, MessageOptions, PermissionString, Role, TextChannel, User, VoiceChannel } from 'discord.js';
-import { Command } from '.';
+import { Command } from './Command';
 import { Disclosure } from './Disclosure';
 import { DiscordEvent } from './DiscordEvent';
 
@@ -112,7 +112,7 @@ export interface CommandDefinition extends ArgvDefinition {
 
 export type Prompts = Record<string, PromptOption>;
 
-export type MessageResolvable = APIMessageContentResolvable | (MessageOptions & { split?: false }) | MessageAdditions;
+export type MessageResolvable = APIMessageContentResolvable | (MessageOptions & { split?: false; }) | MessageAdditions;
 
 export interface PromptOption {
     type: DataType;
@@ -126,3 +126,5 @@ export interface PromptOption {
         validate: (v: any) => boolean | Promise<boolean>;
     };
 }
+
+export type Dialects = 'mariadb' | ':memory:' | 'mongodb' | 'mssql' | 'mysql' | 'postgres' | 'redis' | 'sqlite';

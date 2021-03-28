@@ -1,4 +1,5 @@
-import { Arguments, CommandConfig, Disclosure } from '.';
+import { Disclosure } from './Disclosure';
+import { Arguments, CommandConfig } from './Typings';
 import { Message } from 'discord.js';
 
 export interface Command {

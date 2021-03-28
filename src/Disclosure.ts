@@ -1,16 +1,25 @@
 import { Client, ClientOptions, Collection, Guild, GuildChannel, Message, Role } from 'discord.js';
 import { promises as fs } from 'fs';
 import path from 'path';
-import { Command, DisclosureLogger, DiscordEvent, ExtendedEvent } from '.';
+import { Command } from './Command';
+import { DisclosureError } from './DisclosureError';
+import { DisclosureLogger, ExtendedEvent} from './Typings';
+import { DiscordEvent } from './DiscordEvent';
+import { StoreProvider } from './database/StoreProvider';
 
 export class Disclosure extends Client {
 
-    constructor(logger: DisclosureLogger = console, clientOptions?: ClientOptions) {
+    constructor(database_uri: string = ':memory:', logger: DisclosureLogger = console, clientOptions?: ClientOptions) {
         super(clientOptions);
+
+        this._database_uri = database_uri ?? ':memory:';
 
         this.logger = logger;
 
     }
+
+    private _database_uri: string;
+    public database: StoreProvider;
 
     public logger: DisclosureLogger;
 
@@ -23,17 +32,17 @@ export class Disclosure extends Client {
 
     private confliction(command: Command) {
 
-        const errors: Error[] = [];
+        const errors: DisclosureError[] = [];
         const config = command.config;
         const collision = this.resolveCommand(config.name.toLowerCase());
 
         if (collision) {
-            errors.push(new Error(`Command with a name/alias of '${config.name}' has been already loaded`));
+            errors.push(new DisclosureError(`Command with a name/alias of '${config.name}' has been already loaded`));
         }
 
         for (const alias of config.aliases) {
             if (this.resolveCommand(alias)) {
-                errors.push(new Error(`A Command with a name/alias of '${alias}' has been already loaded`));
+                errors.push(new DisclosureError(`A Command with a name/alias of '${alias}' has been already loaded`));
             }
         }
 
@@ -75,7 +84,7 @@ export class Disclosure extends Client {
 
                     } catch (err) {
 
-                        this.logger.error(`[COMMANDS] Error loading '${file}/${command}'`).error(err);
+                        this.logger.error(`[COMMANDS] DisclosureError loading '${file}/${command}'`).error(err);
 
                         process.exit(1);
 
@@ -104,7 +113,7 @@ export class Disclosure extends Client {
 
                 } catch (err) {
 
-                    this.logger.error(`[COMMANDS] Error loading '${file}'`).error(err);
+                    this.logger.error(`[COMMANDS] DisclosureError loading '${file}'`).error(err);
 
                     process.exit(1);
 
@@ -143,7 +152,7 @@ export class Disclosure extends Client {
 
             } catch (error) {
 
-                this.logger.error(`[EVENTS] Error loading '${eventFile}'`).error(error);
+                this.logger.error(`[EVENTS] DisclosureError loading '${eventFile}'`).error(error);
 
                 process.exit(1);
 
@@ -255,4 +264,8 @@ export class Disclosure extends Client {
     };
 
 
+}
+
+function Provider(_database_uri: string): StoreProvider<import("./database/StoreProvider").ColumnType> {
+    throw new Error('Function not implemented.');
 }

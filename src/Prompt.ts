@@ -1,8 +1,6 @@
 import { Message } from 'discord.js';
 import ms from 'pretty-ms';
-import { Disclosure } from '.';
-import { ExtractData, Prompts } from '.';
-import { Scaffold } from '.';
+import { Disclosure, ExtractData, Prompts, Scaffold } from '.';
 
 export function StringToBoolean(str: string) {
     if (['true', 'yes', 'y'].includes(str.toLowerCase())) return true;
