@@ -6,7 +6,7 @@
             "MESSAGE": "⏰ Please wait **${EXPIRATION}** before reusing the command again.\n\nThe cooldown for this command is **${COMMAND_COOLDOWN}**"
         },
         "COMMAND": {
-            "OWNER_ONLY": "Sorry, this command is only available to the Bot Owner.",
+            "OWNER_ONLY": "Sorry, this command is only available to the Bot Owner(s).",
             "MISSING_PERMISSIONS": "Sorry, but you need the following permission(s) to perform this command.\n```html\n${PERMISSIONS}\n```",
             "MISSING_BOT_PERMISSIONS": "Sorry, but I need the following permission(s) to perform this command.\n```html\n${PERMISSIONS}\n```",
             "NO_ARGUMENTS": "Sorry, You didn't provide any arguments, ${AUTHOR}!\nThe proper usage would be:\n```html\n${USAGE}\n```",

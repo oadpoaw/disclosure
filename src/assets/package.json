@@ -1,0 +1,20 @@
+{
+  "private": true,
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "node .",
+    "prebuild": "rimraf dist",
+    "build": "tsc --build",
+    "test": "echo \"Hello Disclosure Project!\""
+  },
+  "dependencies": {
+    "disclosure-discord": "",
+    "discord.js": ""
+  },
+  "devDependencies": {
+    "@types/node": "",
+    "@types/ws": "",
+    "rimraf": "",
+    "typescript": ""
+  }
+}

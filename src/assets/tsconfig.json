@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "moduleResolution": "Node",
+        "module": "commonjs",
+        "target": "esnext",
+        "noImplicitAny": true,
+        "sourceMap": false,
+        "pretty": false,
+        "outDir": "./dist",
+        "declaration": false,
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
+        "allowUnreachableCode": false,
+        "allowUnusedLabels": false,
+    },
+    "include": [
+        "src"
+    ]
+}
