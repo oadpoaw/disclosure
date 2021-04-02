@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import minimist from 'minimist';
 import builder from 'minimist-options';
+import { createCommand } from './template/createCommand';
 import { project } from './util/project';
 
 const argv = minimist(process.argv.slice(2), builder({
@@ -19,6 +20,8 @@ const argv = minimist(process.argv.slice(2), builder({
         await project(argv.cwd);
 
     } else if (argv._[0] === 'command') {
+
+        await createCommand(argv);
 
     } else if (argv._[0] === 'event') {
 
