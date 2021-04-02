@@ -3,9 +3,11 @@ import { promises as fs } from 'fs';
 import path from 'path';
 import { Command } from './Command';
 import { DisclosureError } from './DisclosureError';
-import { DisclosureLogger, ExtendedEvent} from './Typings';
+import { DisclosureLogger, ExtendedEvent } from './Typings';
 import { DiscordEvent } from './DiscordEvent';
-import { StoreProvider } from './database/StoreProvider';
+import { FunctionProvider, StoreProvider } from './database/StoreProvider';
+import { Provider } from './database/Provider';
+import { Dispatcher } from './Dispatcher';
 
 export class Disclosure extends Client {
 
@@ -19,13 +21,14 @@ export class Disclosure extends Client {
     }
 
     private _database_uri: string;
-    public database: StoreProvider;
+    public database: FunctionProvider;
 
     public logger: DisclosureLogger;
-
-    private commands: Collection<string, Command>;
+    public commands: Collection<string, Command>;
+    public dispatcher: Dispatcher;
 
     async initialize() {
+        this.database = await Provider(this._database_uri);
         await this.registerCommands();
         await this.registerEvents();
     }
@@ -247,25 +250,4 @@ export class Disclosure extends Client {
 
     }
 
-    async awaitReply(message: Message, time: number = 60000): Promise<Message | boolean> {
-        try {
-            const collected = await message.channel.awaitMessages(
-                (m) => m.author.id === message.author.id,
-                {
-                    max: 1,
-                    time,
-                    errors: ['time'],
-                }
-            );
-            return collected.first();
-        } catch (e) {
-            return false;
-        }
-    };
-
-
-}
-
-function Provider(_database_uri: string): StoreProvider<import("./database/StoreProvider").ColumnType> {
-    throw new Error('Function not implemented.');
 }
