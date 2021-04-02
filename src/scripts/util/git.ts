@@ -6,8 +6,6 @@ import { promisify } from 'util';
 import ChildProcess from 'child_process';
 const exec = promisify(ChildProcess.exec);
 
-const gitignore = `node_modules/\ndist/\n.env`;
-
 export async function git(projectPath: string) {
     if (lookpath('git')) {
         await prompt([
@@ -26,7 +24,7 @@ export async function git(projectPath: string) {
 
                 await fs.writeFile(
                     path.join(projectPath, '.gitignore'),
-                    gitignore
+                    `node_modules/\ndist/\n.env`
                 );
 
                 console.log('Running:');
@@ -42,7 +40,7 @@ export async function git(projectPath: string) {
                         type: 'input',
                         message: 'Enter Git Commit Message',
                         name: 'message',
-                        default: "initial commit",
+                        default: "Initial commit",
                     }
                 ]).then(({ message }) => message) as string;
 
