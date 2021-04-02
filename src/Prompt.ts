@@ -23,7 +23,7 @@ export async function Prompt<T extends Prompts>(client: Disclosure, message: Mes
         const timeout = opts.timeout && opts.timeout.duration ? opts.timeout.duration : 60000;
         const timeout_message = opts.timeout && opts.timeout.message ? opts.timeout.message : Scaffold.messages.PROMPT.TIMEOUT;
 
-        const msg = await client.awaitReply(message, timeout);
+        const msg = await client.dispatcher.awaitReply(message, timeout);
 
         if (typeof msg === 'boolean') {
             await message.channel.send(timeout_message.replace('${TIMEOUT}', ms(timeout)));
