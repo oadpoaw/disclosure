@@ -1,5 +1,6 @@
 import { ColumnType, ExtractColumnType, FunctionProvider, StoreProvider } from '../StoreProvider';
 import { Collection } from 'discord.js';
+import { validate } from '../util/validate';
 
 export function Memory(): FunctionProvider {
 
@@ -14,6 +15,7 @@ export function Memory(): FunctionProvider {
                 return storage.get(generateKey(k));
             }
             async set(k: string, v: ExtractColumnType<T>) {
+                validate(k, t);
                 storage.set(generateKey(k), v);
             }
             async del(k: string) {
