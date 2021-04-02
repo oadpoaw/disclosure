@@ -1,23 +1,7 @@
 import { Message } from 'discord.js';
 import minimist from 'minimist';
 import builder, { Options as MinimistOptions } from 'minimist-options';
-import { ArgsDefinition, ExtractData, Disclosure, DataType } from '.';
-
-export class ArgumentError {
-
-    constructor(public key: string, public value: any, public must: DataType) { }
-
-    getMessage() {
-
-        if (typeof this.value === 'undefined') {
-            return `Missing '${this.must}' in parameter '--${this.key}', it must be required.`;
-        }
-
-        return `Incorrect value for parameter '--${this.key}', gotten a type of '${typeof this.value}' instead of '${this.must}'`;
-
-    }
-
-}
+import { ArgsDefinition, ExtractData, Disclosure, ArgumentError } from '.';
 
 export async function ArgumentHandler<T extends ArgsDefinition>(client: Disclosure, message: Message, args: string[], definitions: T) {
 
@@ -34,7 +18,7 @@ export async function ArgumentHandler<T extends ArgsDefinition>(client: Disclosu
         };
     }
 
-    const retval = minimist(args, builder(options)) as ExtractData<T>;
+    const retval = minimist(args, builder(options)) as ExtractData<T> & { _: string[]; };
 
     let error: ArgumentError = undefined;
 
