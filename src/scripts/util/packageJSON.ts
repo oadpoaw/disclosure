@@ -1,7 +1,7 @@
 import { promises as fs } from 'fs';
 import path from 'path';
 import Package from '../../assets/package.json';
-import { version, dependencies, devDependencies, peerDependencies } from '../../../package.json';
+import { version, dependencies, devDependencies } from '../../../package.json';
 import { Dialects } from '../../Typings';
 
 export async function packageJSON(projectPath: string, dialect: Dialects) {
@@ -17,15 +17,15 @@ export async function packageJSON(projectPath: string, dialect: Dialects) {
     if (dialect !== ':memory:') {
         if (dialect === 'mongodb') {
             //@ts-ignore
-            Package.dependencies['mongoose'] = peerDependencies['mongoose'];
+            Package.dependencies['mongoose'] = devDependencies['mongoose'];
         } else if (dialect === 'redis') {
             //@ts-ignore
-            Package.dependencies['redis'] = peerDependencies['redis'];
+            Package.dependencies['ioredis'] = devDependencies['ioredis'];
             //@ts-ignore
-            Package.devDependencies['@types/redis'] = devDependencies['@types/redis'];
+            Package.devDependencies['@types/ioredis'] = devDependencies['@types/ioredis'];
         } else {
             //@ts-ignore
-            Package.dependencies['sequelize'] = peerDependencies['sequelize'];
+            Package.dependencies['sequelize'] = devDependencies['sequelize'];
             //@ts-ignore
             Package.devDependencies['@types/sequelize'] = devDependencies['@types/sequelize'];
             //@ts-ignore
@@ -34,24 +34,24 @@ export async function packageJSON(projectPath: string, dialect: Dialects) {
             switch (dialect) {
                 case 'mariadb':
                     //@ts-ignore
-                    Package.dependencies['mariadb'] = peerDependencies['mariadb'];
+                    Package.dependencies['mariadb'] = devDependencies['mariadb'];
                     break;
                 case 'mssql':
                     //@ts-ignore
-                    Package.dependencies['tedious'] = peerDependencies['tedious'];
+                    Package.dependencies['tedious'] = devDependencies['tedious'];
                     break;
                 case 'mysql':
                     //@ts-ignore
-                    Package.dependencies['mysql2'] = peerDependencies['mysql2'];
+                    Package.dependencies['mysql2'] = devDependencies['mysql2'];
                     break;
                 case 'postgres':
                     //@ts-ignore
-                    Package.dependencies['pg'] = peerDependencies['pg'];
+                    Package.dependencies['pg'] = devDependencies['pg'];
                     //@ts-ignore
-                    Package.dependencies['pg-hstore'] - peerDependencies['pg-hstore'];
+                    Package.dependencies['pg-hstore'] - devDependencies['pg-hstore'];
                 case 'sqlite':
                     //@ts-ignore
-                    Package.dependencies['sqlite3'] = peerDependencies['sqlite3'];
+                    Package.dependencies['sqlite3'] = devDependencies['sqlite3'];
                     break;
             }
 
