@@ -26,7 +26,7 @@ export async function Sequelize(uri: string): Promise<FunctionProvider> {
                             return undefined;
                         }
                         async set(k: string, v: ExtractColumnType<T>) {
-                            validate(k, t);
+                            validate(v, t);
                             const inst = await model.findOne({ where: { key: k } });
                             if (inst) await inst.update({ value: v }, { where: { key: v } });
                             else await model.create({ key: k, value: v });

@@ -18,7 +18,7 @@ export async function Redis(uri: string): Promise<FunctionProvider> {
                             return value as ExtractColumnType<T>;
                         }
                         async set(k: string, v: ExtractColumnType<T>) {
-                            validate(k, t);
+                            validate(v, t);
                             if (typeof v !== 'undefined') {
                                 await redis.set(generateKey(k), v as any);
                             }

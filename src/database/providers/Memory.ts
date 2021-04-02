@@ -15,7 +15,7 @@ export function Memory(): FunctionProvider {
                 return storage.get(generateKey(k));
             }
             async set(k: string, v: ExtractColumnType<T>) {
-                validate(k, t);
+                validate(v, t);
                 storage.set(generateKey(k), v);
             }
             async del(k: string) {

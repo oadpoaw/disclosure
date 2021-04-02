@@ -27,7 +27,7 @@ export async function MongoDB(uri: string): Promise<FunctionProvider> {
                             return undefined;
                         }
                         async set(k: string, v: ExtractColumnType<T>) {
-                            validate(k, t);
+                            validate(v, t);
                             const inst = await model.findOneAndUpdate({ key: k }, { value: v });
                             if (!inst) await model.create({ key: k, value: v });
                         }

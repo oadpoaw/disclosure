@@ -5,7 +5,7 @@ import { Command } from './Command';
 import { DisclosureError } from './DisclosureError';
 import { DisclosureLogger, ExtendedEvent } from './Typings';
 import { DiscordEvent } from './DiscordEvent';
-import { FunctionProvider, StoreProvider } from './database/StoreProvider';
+import { FunctionProvider } from './database/StoreProvider';
 import { Provider } from './database/Provider';
 import { Dispatcher } from './Dispatcher';
 
