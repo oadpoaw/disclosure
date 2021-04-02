@@ -7,6 +7,7 @@
         },
         "COMMAND": {
             "OWNER_ONLY": "Sorry, this command is only available to the Bot Owner(s).",
+            "GUILD_ONLY": "Sorry, this command can only be executed in a guild.",
             "MISSING_PERMISSIONS": "Sorry, but you need the following permission(s) to perform this command.\n```html\n${PERMISSIONS}\n```",
             "MISSING_BOT_PERMISSIONS": "Sorry, but I need the following permission(s) to perform this command.\n```html\n${PERMISSIONS}\n```",
             "NO_ARGUMENTS": "Sorry, You didn't provide any arguments, ${AUTHOR}!\nThe proper usage would be:\n```html\n${USAGE}\n```",
