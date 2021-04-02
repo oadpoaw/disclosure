@@ -2,6 +2,7 @@
 import minimist from 'minimist';
 import builder from 'minimist-options';
 import { createCommand } from './template/createCommand';
+import createEvent from './template/createEvent';
 import { project } from './util/project';
 
 const argv = minimist(process.argv.slice(2), builder({
@@ -10,10 +11,19 @@ const argv = minimist(process.argv.slice(2), builder({
         default: false,
         alias: ['c']
     },
+    force: {
+        type: 'boolean',
+        default: false,
+        alias: ['f'],
+    },
     arguments: 'string',
 }));
 
 (async function () {
+
+    if (argv.force) {
+        console.warn(`[WARN] Using '--force' or '-f'`);
+    }
 
     if (!argv._.length) {
 
@@ -24,6 +34,8 @@ const argv = minimist(process.argv.slice(2), builder({
         await createCommand(argv);
 
     } else if (argv._[0] === 'event') {
+
+        await createEvent();
 
     }
 
