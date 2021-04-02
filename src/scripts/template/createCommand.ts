@@ -16,11 +16,10 @@ function createCommandString(data: any) {
 import { Message } from 'discord.js';
 
 export default class extends Command {
-
     constructor(client: Disclosure)  {
         super(client, {
             name: '${name}',
-            description: '${description}',
+            description: '${description.replace(/\'/, '\\\'')}',
             cooldown: ${cooldown},
             args: ${args},
             usage: ['${usage.replace(/\'/, '\\\'')}'],
@@ -137,7 +136,7 @@ export async function createCommand(argv: ParsedArgs) {
         `${answers.name}.ts`
     );
 
-    if (existsSync(opath)) {
+    if (existsSync(opath) && !argv.force) {
         console.error(`A command named '${answers.name}' already exists.`);
         process.exit(1);
     } else {
