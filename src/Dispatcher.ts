@@ -1,4 +1,4 @@
-import { Message } from 'discord.js';
+import { CollectorFilter, Message } from 'discord.js';
 import { Command } from './Command';
 import { Disclosure } from './Disclosure';
 import { DisclosureError, DisclosureTypeError } from './DisclosureError';
@@ -38,9 +38,8 @@ export class Dispatcher {
         return this.inhibitors.delete(inhibitor);
     }
 
-
     private createID(message: Message) {
-        return message.author.id + message.channel.id;
+        return `${message.author.id}:${message.channel.id}`;
     }
 
     addAwait(message: Message) {
@@ -62,11 +61,11 @@ export class Dispatcher {
         return true;
     }
 
-    async awaitReply(message: Message, time: number = 60000): Promise<Message | boolean> {
+    async awaitReply(message: Message, time: number = 60000, filter: CollectorFilter = (m) => m.author.id === message.author.id): Promise<Message | boolean> {
         try {
             this.addAwait(message);
             const collected = await message.channel.awaitMessages(
-                (m) => m.author.id === message.author.id,
+                filter,
                 {
                     max: 1,
                     time,

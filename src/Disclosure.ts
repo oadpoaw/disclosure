@@ -1,4 +1,4 @@
-import { Client, ClientOptions, Collection, Guild, GuildChannel, Message, Role } from 'discord.js';
+import { Client, ClientOptions, Collection, Guild, GuildChannel, Role } from 'discord.js';
 import { promises as fs } from 'fs';
 import path from 'path';
 import { Command } from './Command';
@@ -18,6 +18,8 @@ export class Disclosure extends Client {
 
         this.logger = logger;
 
+        this.dispatcher = new Dispatcher(this);
+
     }
 
     private _database_uri: string;
@@ -31,6 +33,7 @@ export class Disclosure extends Client {
         this.database = await Provider(this._database_uri);
         await this.registerCommands();
         await this.registerEvents();
+        this.dispatcher.listen();
     }
 
     private confliction(command: Command) {
