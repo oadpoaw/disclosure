@@ -38,6 +38,8 @@ disclosure command
 disclosure event
 # For a new event
 ```
+![func](https://github.com/ZeroDiscord/disclosure/blob/main/test2.gif)
+## Sleek Functions
 
 # What Databases does it support?
 
