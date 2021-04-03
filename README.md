@@ -22,7 +22,7 @@ npm install -g disclosure-discord#
 #### Step 2:
 ```sh <br>
 disclosure
-# Some sleek shit to start up generating your very own project
+# Some sleek stuff to start up generating your very own project
 ```
 ![done](https://github.com/ZeroDiscord/disclosure/blob/main/test.gif)
 ### And You Are Done!
