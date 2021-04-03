@@ -50,3 +50,4 @@ disclosure event
 ### • [In-memorY](https://en.wikipedia.org/wiki/In-memory_database)
 ### • [MsSQL](https://en.wikipedia.org/wiki/Microsoft_SQL_Server)
 ## And More!
+![love](https://forthebadge.com/images/badges/built-with-love.svg)
