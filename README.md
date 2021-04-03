@@ -1,7 +1,8 @@
 # Disclosure™
 [![TS](https://forthebadge.com/images/badges/made-with-typescript.svg)]()
-## A Discord Bot Generator CLI
-### This right here is a simple tool (`` Command Line Interface ``) to scaffold a Discord bot that you or your team would stun the whole discord with in future!
+## A Discord Bot Generator CLI & Command Handler
+### This right here is a simple tool (`` Command Line Interface ``) to scaffold a Discord bot that you or your team would stun the whole discord with in future! 
+### It not only generates an awesome project you can work with but also supports you with it's very own in-built Command Handler
 
 #### This CLI tool allows you to create and manage your Discord Bot project by adding/registering commands & events and **much much more!** , organizing all of your commands & events into its own folder and groups. It will help you Integrate with Git and furthermore help you installing your dependecies and will choose a database for you as well as set it up!
 
