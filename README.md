@@ -38,4 +38,13 @@ disclosure event
 # For a new event
 ```
 
-( WIP )
+# What Databses does it support?
+
+### • [SQLite](https://www.sqlite.org/index.html)
+### • [PostgreSQL](https://www.postgresql.org/)
+### • [MariaDB](https://mariadb.org/)
+### • [MySQL](https://www.mysql.com/)
+### • [Redis](https://redis.io/)
+### • [In-memorY](https://en.wikipedia.org/wiki/In-memory_database)
+### • [MsSQL](https://en.wikipedia.org/wiki/Microsoft_SQL_Server)
+## And More!
