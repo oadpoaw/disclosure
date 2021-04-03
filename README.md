@@ -51,5 +51,5 @@ disclosure event
 ### • [MsSQL](https://en.wikipedia.org/wiki/Microsoft_SQL_Server)
 ## And More!
 # Join Us For Support 
-[![Join](https://github.com/ZeroDiscord/disclosure/blob/main/Capture.PNG)](https://discord.gg/HG8s98Uk)
+[![Join](https://github.com/ZeroDiscord/disclosure/blob/main/Capture.PNG)](https://discord.gg/HG8s98Uk) <br>
 ![love](https://forthebadge.com/images/badges/built-with-love.svg)
