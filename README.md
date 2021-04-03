@@ -39,7 +39,7 @@ disclosure event
 # For a new event
 ```
 
-# What Databses does it support?
+# What Databases does it support?
 
 ### • [SQLite](https://www.sqlite.org/index.html)
 ### • [PostgreSQL](https://www.postgresql.org/)
