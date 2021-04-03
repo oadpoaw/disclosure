@@ -1,5 +1,5 @@
-# Disclosure 
-[![TS](https://forthebadge.com/images/badges/made-with-typescript.svg)](https://forthebadge.com)
+# Disclosure™
+[![TS](https://forthebadge.com/images/badges/made-with-typescript.svg)]()
 ## A Discord Bot Generator CLI
 ### This right here is a simple tool (`` command line programme ``) to scaffold a Discord bot that you or your team would stun the whole discord with in future!
 
