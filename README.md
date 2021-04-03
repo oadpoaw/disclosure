@@ -17,7 +17,7 @@
 #### Step 1: 
 Install Disclosure 
 ```sh <br> 
-npm install -g disclosure-discord#
+npm install -g disclosure-discord@latest
 # Installing it
 ``` 
 #### Step 2:
