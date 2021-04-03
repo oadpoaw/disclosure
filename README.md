@@ -16,6 +16,7 @@ You can generate a Discord project with the finest file structure , which will p
 ## Features
 - Easy to use!
 - A CLI to generate a discord bot project! with Git Integration!
+- Awesome TypeScript Definitions for awesome developer tooling!
 - Built-in Command Handler, includes:
   - Argument Parsing
   - Command Inhibitors
@@ -42,6 +43,19 @@ disclosure
 ![done](/assets/test.gif)
 #### And You Are Done!
 
+## Initial Project Structure
+```sh
+├───src
+|   ├───commands
+|   ├───events
+|   └───index.ts
+├───.env
+├───disclosure.json
+├───package-lock.json
+└───package.json
+```
+Yep!, just that and with few lines of code!
+
 ## Easy to Use!
 
 ### Super-duper easy to use 
@@ -54,6 +68,16 @@ disclosure event
 # For a new event
 ```
 ![func](/assets/test2.gif)
+
+### Running the Bot
+
+```sh
+npm run build
+# To build the project
+
+npm start
+# To start the bot!
+```
 
 ## What Databases does it support?
 
