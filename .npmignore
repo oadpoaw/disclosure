@@ -1,3 +1,6 @@
 .github/
 src/
 .npm/
+assets/
+doc/
+docs/
