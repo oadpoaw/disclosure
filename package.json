@@ -1,6 +1,6 @@
 {
   "name": "disclosure-discord",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "Discord Bot Generator CLI",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
