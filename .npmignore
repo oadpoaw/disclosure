@@ -1,4 +1,4 @@
 .github/
 src/
 .npm/
-tsconfig.json
+./tsconfig.json
