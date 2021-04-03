@@ -6,5 +6,19 @@
 #### This CLI tool allows you to create and manage your Discord Bot project by adding/registering commands & events and **much much more!** , organizing all of your commands & events into its own folder and groups. It will help you Intigrate with Git and furthermore help you installing your dependecies and will choose a database for you as well as set it up!
 
 #### You can generate a Discord project with the finest file structure , which will provide a slightly better experience to your whole coding experience for the bot~!
+[![works](https://forthebadge.com/images/badges/it-works-why.svg)]() <br>
+
+# Easy To Setup
+
+## What could have you ever asked for? It is the best CLI made for your project out there so far!
+### Don't Believe Me? Let me show you how:
+
+#### Step 1: 
+Install Disclosure 
+```sh <br> 
+npm install -g disclosure-discord#
+# Installing it
+``` 
+#### Step 2:
 
 ( WIP )
