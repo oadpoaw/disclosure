@@ -55,9 +55,6 @@ export type ArgsDefinition = Record<string, ArgvDefinition | StringDefinition | 
 
 export interface ArgvDefinition {
     type: DataType;
-    default?: any;
-    alias?: string | string[];
-    validate?: ValidateFunction<any>;
 }
 
 export interface StringDefinition extends ArgvDefinition {
