@@ -227,62 +227,62 @@ export type Prompts = Record<string, PromptOption & (
          * Return `true` if  the validation **succeeded**.
          * Return `false` if the validation **failed**.
          */
-        validate: ValidateFunction<boolean>;
+        validate?: ValidateFunction<boolean>;
     } | {
         type: 'string';
         /**
          * Return `true` if  the validation **succeeded**.
          * Return `false` if the validation **failed**.
          */
-        validate: ValidateFunction<string>;
+        validate?: ValidateFunction<string>;
     } | {
         type: 'number';
         /**
          * Return `true` if  the validation **succeeded**.
          * Return `false` if the validation **failed**.
          */
-        validate: ValidateFunction<number>;
+        validate?: ValidateFunction<number>;
     } | {
         type: 'User';
         /**
          * Return `true` if  the validation **succeeded**.
          * Return `false` if the validation **failed**.
          */
-        validate: ValidateFunction<User>;
+        validate?: ValidateFunction<User>;
     } | {
         type: 'Role';
         /**
          * Return `true` if  the validation **succeeded**.
          * Return `false` if the validation **failed**.
          */
-        validate: ValidateFunction<Role>;
+        validate?: ValidateFunction<Role>;
     } | {
         type: 'TextChannel';
         /**
          * Return `true` if  the validation **succeeded**.
          * Return `false` if the validation **failed**.
          */
-        validate: ValidateFunction<TextChannel>;
+        validate?: ValidateFunction<TextChannel>;
     } | {
         type: 'VoiceChannel';
         /**
          * Return `true` if  the validation **succeeded**.
          * Return `false` if the validation **failed**.
          */
-        validate: ValidateFunction<VoiceChannel>;
+        validate?: ValidateFunction<VoiceChannel>;
     } | {
         type: 'CategoryChannel';
         /**
          * Return `true` if  the validation **succeeded**.
          * Return `false` if the validation **failed**.
          */
-        validate: ValidateFunction<CategoryChannel>;
+        validate?: ValidateFunction<CategoryChannel>;
     } | {
         type: 'Command';
         /**
          * Return `true` if  the validation **succeeded**.
          * Return `false` if the validation **failed**.
          */
-        validate: ValidateFunction<Command>;
+        validate?: ValidateFunction<Command>;
     })
 >;
