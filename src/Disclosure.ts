@@ -20,6 +20,8 @@ export class Disclosure extends Client {
 
         this.dispatcher = new Dispatcher(this);
 
+        this.commands = new Collection();
+
     }
 
     private _database_uri: string;
