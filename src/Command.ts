@@ -10,12 +10,12 @@ export interface Command {
 
     /**
      * Run statements before the command is executed.
-     * @returns `true` to execute the command, `false` to cancel the execution of the command
+     * @returns `true` to execute the command, `false` to cancel the execution of the command.
      */
     beforeExecute?(message: Message, argv: Arguments): boolean | Promise<boolean>;
 
     /**
-     * @return `false` to bypass command cooldown
+     * @return `false` to bypass command cooldown.
      */
     execute(message: Message, argv: Arguments): any | Promise<any>;
 
