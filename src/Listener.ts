@@ -52,7 +52,7 @@ export class Listener {
 
     async exec(message: Message) {
 
-        if (this.client.dispatcher.shouldHandleMessage(message)) return;
+        if (!this.client.dispatcher.shouldHandleMessage(message)) return;
 
         let prefix = Scaffold.prefix;
 
