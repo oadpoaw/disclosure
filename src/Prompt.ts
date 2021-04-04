@@ -8,6 +8,11 @@ export function StringToBoolean(str: string) {
     return undefined;
 }
 
+/**
+ * Prompts a discord user with predefined questions with ease.
+ * 
+ * @returns `undefined` if the prompting failed.
+ */
 export async function Prompt<T extends Prompts>(client: Disclosure, message: Message, prompts: T): Promise<ExtractData<T> | undefined> {
 
     const retval = {} as ExtractData<T>;
@@ -137,16 +142,10 @@ export async function Prompt<T extends Prompts>(client: Disclosure, message: Mes
 
         retval[key] = content;
 
-        if (opts.validation && opts.validation.validate) {
-
-            const valid = await opts.validation.validate(content);
-
-            if (!valid) {
-                await message.channel.send(opts.validation.errorMsg);
-                status = false;
-                break;
-            }
-
+        //@ts-ignore
+        if (typeof opts.validate === 'function' && ! await opts.validate(content, message)) {
+            status = false;
+            break;
         }
 
         status = true;
