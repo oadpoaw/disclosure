@@ -1,7 +1,5 @@
 import { APIMessageContentResolvable, CategoryChannel, Message, MessageAdditions, MessageOptions, PermissionString, Role, TextChannel, User, VoiceChannel } from 'discord.js';
-import { Command } from './Command';
-import { Disclosure } from './Disclosure';
-import { DiscordEvent } from './DiscordEvent';
+import { Command, Disclosure, DiscordEvent } from '.';
 
 export interface DisclosureLogger {
     info: (message: any) => any;

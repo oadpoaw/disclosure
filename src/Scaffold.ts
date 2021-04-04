@@ -36,9 +36,9 @@ function compare(a: any, b: any) {
     }
 }
 
-export let _scaffold: typeof Defaults;
+export type Config = typeof Defaults;
 
-(async function () {
+export async function Scaffold(): Promise<Config> {
     try {
 
         const buffer = await fs.readFile(path.join(path.resolve(process.cwd()), 'disclosure.json'));
@@ -46,10 +46,11 @@ export let _scaffold: typeof Defaults;
 
         compare(Defaults, configuration);
 
-        _scaffold = merge(Defaults, configuration) as typeof Defaults;
+        return merge(Defaults, configuration);
 
     } catch (err) {
         console.log(new DisclosureError(`This is not a valid Disclosure Project. Please make sure you're inside a Disclosure Project`));
         process.exit(1);
     }
-}());
+
+}

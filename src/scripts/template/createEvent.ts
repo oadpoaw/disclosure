@@ -3,9 +3,10 @@ import { promises as fs, existsSync } from 'fs';
 import path from 'path';
 import { Events } from './Events';
 import { ClientEvents } from 'discord.js';
+import { Scaffold } from '../..';
 
 export default async function createEvent() {
-    await import('../../');
+    await Scaffold();
 
     const { eventName } = await prompt([
         {

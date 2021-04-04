@@ -1,7 +1,5 @@
 import { CollectorFilter, Message } from 'discord.js';
-import { Command } from './Command';
-import { Disclosure } from './Disclosure';
-import { DisclosureError, DisclosureTypeError } from './DisclosureError';
+import { Command, Disclosure, DisclosureError, DisclosureTypeError, } from '.';
 
 export type Inhibitor = (m: Message, c: Command) => boolean | Promise<boolean>;
 

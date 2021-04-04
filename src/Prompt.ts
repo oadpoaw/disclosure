@@ -1,6 +1,6 @@
 import { Message } from 'discord.js';
 import ms from 'pretty-ms';
-import { Disclosure, ExtractData, Prompts, Scaffold } from '.';
+import { Disclosure, ExtractData, Prompts } from '.';
 
 export function StringToBoolean(str: string) {
     if (['true', 'yes', 'y'].includes(str.toLowerCase())) return true;
@@ -21,7 +21,7 @@ export async function Prompt<T extends Prompts>(client: Disclosure, message: Mes
         await message.channel.send(opts.message);
 
         const timeout = opts.timeout && opts.timeout.duration ? opts.timeout.duration : 60000;
-        const timeout_message = opts.timeout && opts.timeout.message ? opts.timeout.message : Scaffold.messages.PROMPT.TIMEOUT;
+        const timeout_message = opts.timeout && opts.timeout.message ? opts.timeout.message : client.config.messages.PROMPT.TIMEOUT;
 
         const msg = await client.dispatcher.awaitReply(message, timeout);
 
@@ -42,7 +42,7 @@ export async function Prompt<T extends Prompts>(client: Disclosure, message: Mes
             const bool = StringToBoolean(msg.content);
 
             if (typeof bool !== 'boolean') {
-                await message.channel.send(Scaffold.messages.PROMPT.ERRORS.BOOLEAN);
+                await message.channel.send(client.config.messages.PROMPT.ERRORS.BOOLEAN);
                 status = false;
                 break;
             }
@@ -54,7 +54,7 @@ export async function Prompt<T extends Prompts>(client: Disclosure, message: Mes
             const num = Number(msg.content);
 
             if (Number.isNaN(num)) {
-                await message.channel.send(Scaffold.messages.PROMPT.ERRORS.NUMBER);
+                await message.channel.send(client.config.messages.PROMPT.ERRORS.NUMBER);
                 status = false;
                 break;
             }
@@ -66,7 +66,7 @@ export async function Prompt<T extends Prompts>(client: Disclosure, message: Mes
             const user = await client.resolveUser(msg.content);
 
             if (!user) {
-                await message.channel.send(Scaffold.messages.PROMPT.ERRORS.USER);
+                await message.channel.send(client.config.messages.PROMPT.ERRORS.USER);
                 status = false;
                 break;
             }
@@ -78,7 +78,7 @@ export async function Prompt<T extends Prompts>(client: Disclosure, message: Mes
             const role = client.resolveRole(msg.content, message.guild);
 
             if (!role) {
-                await message.channel.send(Scaffold.messages.PROMPT.ERRORS.ROLE);
+                await message.channel.send(client.config.messages.PROMPT.ERRORS.ROLE);
                 status = false;
                 break;
             }
@@ -90,7 +90,7 @@ export async function Prompt<T extends Prompts>(client: Disclosure, message: Mes
             const channel = client.resolveChannel(msg.content, message.guild);
 
             if (!channel || channel.type !== 'text') {
-                await message.channel.send(Scaffold.messages.PROMPT.ERRORS.TEXT_CHANNEL);
+                await message.channel.send(client.config.messages.PROMPT.ERRORS.TEXT_CHANNEL);
                 status = false;
                 break;
             }
@@ -102,7 +102,7 @@ export async function Prompt<T extends Prompts>(client: Disclosure, message: Mes
             const channel = client.resolveChannel(msg.content, message.guild);
 
             if (!channel || channel.type !== 'voice') {
-                await message.channel.send(Scaffold.messages.PROMPT.ERRORS.VOICE_CHANNEL);
+                await message.channel.send(client.config.messages.PROMPT.ERRORS.VOICE_CHANNEL);
                 status = false;
                 break;
             }
@@ -114,7 +114,7 @@ export async function Prompt<T extends Prompts>(client: Disclosure, message: Mes
             const channel = client.resolveChannel(msg.content, message.guild);
 
             if (!channel || channel.type !== 'category') {
-                await message.channel.send(Scaffold.messages.PROMPT.ERRORS.CATEGORY_CHANNEL);
+                await message.channel.send(client.config.messages.PROMPT.ERRORS.CATEGORY_CHANNEL);
                 status = false;
                 break;
             }
@@ -126,7 +126,7 @@ export async function Prompt<T extends Prompts>(client: Disclosure, message: Mes
             const command = client.resolveCommand(msg.content.toLowerCase());
 
             if (!command) {
-                await message.channel.send(Scaffold.messages.PROMPT.ERRORS.COMMAND);
+                await message.channel.send(client.config.messages.PROMPT.ERRORS.COMMAND);
                 status = false;
                 break;
             }

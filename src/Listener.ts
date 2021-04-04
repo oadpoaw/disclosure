@@ -1,5 +1,5 @@
 import { Message, MessageEmbed, SnowflakeUtil } from 'discord.js';
-import { ArgumentError, Command, Disclosure, Scaffold } from '.';
+import { ArgumentError, Command, Disclosure} from '.';
 import { ArgumentHandler } from './ArgumentHandler';
 import { StoreProvider } from './database/StoreProvider';
 import Escapes from '@xetha/escapes';
@@ -35,7 +35,7 @@ export class Listener {
                 this.cooldowns.del(this.generateKey(command, message));
             } else {
                 return message.channel.send(
-                    Scaffold.messages.THROTTLE.MESSAGE
+                    this.client.config.messages.THROTTLE.MESSAGE
                         .replace('${EXPIRATION}', ms(Math.floor(expiration - now)))
                         .replace('${COMMAND_COOLDOWN}', command.config.cooldown.toString())
                 );
@@ -54,10 +54,10 @@ export class Listener {
 
         if (!this.client.dispatcher.shouldHandleMessage(message)) return;
 
-        let prefix = Scaffold.prefix;
+        let prefix = this.client.config.prefix;
 
         if (message.guild) {
-            prefix = await this.guilds.get(message.guild.id) ?? Scaffold.prefix;
+            prefix = await this.guilds.get(message.guild.id) ?? this.client.config.prefix;
         }
 
         const prefixRegex = new RegExp(`^(<@!?${this.client.user.id}>|${Escapes.regex(prefix)})\\s*`);
@@ -77,12 +77,12 @@ export class Listener {
 
             if (await this.client.dispatcher.inihibit(message, command)) return;
 
-            if (command.config.ownerOnly && !Scaffold.ownerID.includes(message.author.id)) {
-                return message.channel.send(Scaffold.messages.COMMAND.OWNER_ONLY);
+            if (command.config.ownerOnly && !this.client.config.ownerID.includes(message.author.id)) {
+                return message.channel.send(this.client.config.messages.COMMAND.OWNER_ONLY);
             }
 
             if (command.config.guildOnly && message.channel.type === 'dm') {
-                return message.channel.send(Scaffold.messages.COMMAND.GUILD_ONLY);
+                return message.channel.send(this.client.config.messages.COMMAND.GUILD_ONLY);
             }
 
             if (message.channel.type !== 'dm') {
@@ -93,7 +93,7 @@ export class Listener {
                     )
                 ) {
                     return message.channel.send(
-                        Scaffold.messages.COMMAND.MISSING_BOT_PERMISSIONS.replace(
+                        this.client.config.messages.COMMAND.MISSING_BOT_PERMISSIONS.replace(
                             '${PERMISSIONS}',
                             `${command.config.clientPermissions.map(toProperCase).join(', ')}`
                         )
@@ -106,7 +106,7 @@ export class Listener {
                     )
                 ) {
                     return message.channel.send(
-                        Scaffold.messages.COMMAND.MISSING_PERMISSIONS.replace(
+                        this.client.config.messages.COMMAND.MISSING_PERMISSIONS.replace(
                             '${PERMISSIONS}',
                             `${command.config.userPermissions.map(toProperCase).join(', ')}`
                         )
@@ -118,13 +118,13 @@ export class Listener {
 
             if (command.config.args && !args.length) {
                 return message.channel.send(
-                    Scaffold.messages.COMMAND.NO_ARGUMENTS
+                    this.client.config.messages.COMMAND.NO_ARGUMENTS
                         .replace('${AUTHOR}', message.author.toString())
                         .replace('${USAGE}', command.config.usage.join('\n'))
                 );
             } else if (command.config.args && command.config.args > args.length) {
                 message.channel.send(
-                    Scaffold.messages.COMMAND.NOT_ENOUGH_ARGUMENTS
+                    this.client.config.messages.COMMAND.NOT_ENOUGH_ARGUMENTS
                         .replace('${USAGE}', command.config.usage.join('\n'))
                 );
             }
@@ -159,7 +159,7 @@ export class Listener {
                 .setAuthor(`Error executing command ${command.config.name}`)
                 .setDescription(`Error ID: \`${errorID}\``);
 
-            if (Scaffold.ownerID.includes(message.author.id)) {
+            if (this.client.config.ownerID.includes(message.author.id)) {
                 embed.setDescription(`Error ID: \`${errorID}\`\n\n\`\`\`xl\n${err.stack.substr(0, 256)}\`\`\``);
             }
 

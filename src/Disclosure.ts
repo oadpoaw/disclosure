@@ -1,13 +1,9 @@
 import { Client, ClientOptions, Collection, Guild, GuildChannel, Role } from 'discord.js';
 import { promises as fs } from 'fs';
 import path from 'path';
-import { Command } from './Command';
-import { DisclosureError } from './DisclosureError';
-import { DisclosureLogger, ExtendedEvent } from './Typings';
-import { DiscordEvent } from './DiscordEvent';
 import { FunctionProvider } from './database/StoreProvider';
 import { Provider } from './database/Provider';
-import { Dispatcher } from './Dispatcher';
+import { Command, Config, DisclosureError, DisclosureLogger, DiscordEvent, Dispatcher, ExtendedEvent, Scaffold, } from '.';
 
 export class Disclosure extends Client {
 
@@ -22,16 +18,19 @@ export class Disclosure extends Client {
 
         this.commands = new Collection();
 
+
     }
 
-    private _database_uri: string;
+    private readonly _database_uri: string;
     public database: FunctionProvider;
+    public config: Config;
 
-    public logger: DisclosureLogger;
-    public commands: Collection<string, Command>;
-    public dispatcher: Dispatcher;
+    public readonly logger: DisclosureLogger;
+    public readonly commands: Collection<string, Command>;
+    public readonly dispatcher: Dispatcher;
 
     async initialize() {
+        this.config = await Scaffold();
         this.database = await Provider(this._database_uri);
         await this.registerCommands();
         await this.registerEvents();

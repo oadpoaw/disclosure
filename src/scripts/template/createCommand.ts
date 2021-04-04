@@ -3,6 +3,7 @@ import { promises as fs, lstatSync, existsSync } from 'fs';
 import path from 'path';
 import { ParsedArgs } from 'minimist';
 import { PermissionString } from 'discord.js';
+import { Scaffold } from '../..';
 
 function createCommandString(data: any) {
 
@@ -51,7 +52,7 @@ const permissions: PermissionString[] = [
 ];
 
 export async function createCommand(argv: ParsedArgs) {
-    await import('../..');
+    await Scaffold();
 
     console.log('Command:');
     const answers = await prompt([
