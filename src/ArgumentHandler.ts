@@ -28,7 +28,8 @@ export async function ArgumentHandler<T extends ArgsDefinition>(client: Disclosu
 
         let content: any = retval[key];
 
-        if (typeof content === 'undefined') content = definition.default ?? undefined;
+        //@ts-ignore
+        if (typeof content === 'undefined' && typeof definition.default !== 'undefined') content = definition.default ?? undefined;
 
         if (typeof content === 'undefined') {
             error = new ArgumentError(key, content, definition.type);
@@ -112,6 +113,7 @@ export async function ArgumentHandler<T extends ArgsDefinition>(client: Disclosu
             }
         }
 
+        //@ts-ignore
         if (typeof definition.validate === 'function' && ! await definition.validate(content, message)) {
             break;
         }
