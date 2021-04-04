@@ -63,7 +63,7 @@ jobs:
       - run: rm -rf src package.json package-lock.json .github tsconfig.json typedoc.
 
       - run: |
-          cp assets docs/
+          cp -R assets docs/
           cp CNAME docs/
           cp .nojekyll docs/
           cp README.md docs/
