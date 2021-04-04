@@ -60,7 +60,7 @@ jobs:
       - run: npm ci
       - run: npm run docs
       - run: |
-          rm src package.json package-lock.json .github assets
+          rm -rf src package.json package-lock.json .github assets
           cp CNAME docs/
           cp .nojekyll docs/
           cp README.md docs/
