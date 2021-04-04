@@ -6,7 +6,7 @@ import { ClientEvents } from 'discord.js';
 import { Scaffold } from '../..';
 
 export default async function createEvent() {
-    await Scaffold();
+    Scaffold();
 
     const { eventName } = await prompt([
         {

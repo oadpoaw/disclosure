@@ -112,7 +112,6 @@ async function getDatabaseURI(dialect: Dialects) {
             validate: (uri) => {
                 try {
                     const protocol = new URL(uri).protocol.replace(':', '');
-                    console.log({ protocol, dialect });
                     if (protocol !== dialect) {
                         if (dialect === 'mongodb') {
                             if (protocol !== 'mongodb+srv') {

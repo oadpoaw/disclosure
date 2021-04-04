@@ -1,4 +1,4 @@
-import { promises as fs } from 'fs';
+import { readFileSync } from 'fs';
 import path from 'path';
 import { DisclosureError } from '.';
 import Defaults from './assets/disclosure.json';
@@ -17,6 +17,9 @@ function merge(defaults: any, obj: any) {
     return obj;
 }
 
+/**
+ * Strict Compare the two objects and it's types
+ */
 function compare(a: any, b: any) {
     if (typeof b !== 'object' || Array.isArray(b)) {
         throw new Error();
@@ -38,10 +41,10 @@ function compare(a: any, b: any) {
 
 export type Config = typeof Defaults;
 
-export async function Scaffold(): Promise<Config> {
+export function Scaffold(): Config {
     try {
 
-        const buffer = await fs.readFile(path.join(path.resolve(process.cwd()), 'disclosure.json'));
+        const buffer = readFileSync(path.join(path.resolve(process.cwd()), 'disclosure.json'));
         const configuration = JSON.parse(buffer.toString());
 
         compare(Defaults, configuration);
@@ -52,5 +55,4 @@ export async function Scaffold(): Promise<Config> {
         console.log(new DisclosureError(`This is not a valid Disclosure Project. Please make sure you're inside a Disclosure Project`));
         process.exit(1);
     }
-
 }

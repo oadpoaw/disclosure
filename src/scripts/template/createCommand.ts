@@ -52,7 +52,7 @@ const permissions: PermissionString[] = [
 ];
 
 export async function createCommand(argv: ParsedArgs) {
-    await Scaffold();
+    Scaffold();
 
     console.log('Command:');
     const answers = await prompt([
