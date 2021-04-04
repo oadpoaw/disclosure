@@ -60,7 +60,7 @@ jobs:
       - run: npm ci
       - run: npm run docs
       - run: |
-          rm -rf src package.json package-lock.json .github assets
+          rm -rf src package.json package-lock.json .github assets tsconfig.json typedoc.json
           cp CNAME docs/
           cp .nojekyll docs/
           cp README.md docs/
@@ -69,10 +69,4 @@ jobs:
           git config --local user.name "oadpoaw"
           git add .
           git commit -m "docs"
-
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: gh-pages
-          force: true
+          git push -u origin gh-pages
