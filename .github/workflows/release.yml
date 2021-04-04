@@ -59,9 +59,12 @@ jobs:
           node-version: 14.x
       - run: npm ci
       - run: npm run docs
-      - run: rm src package.json package-lock.json .github
-
       - run: |
+          rm src package.json package-lock.json .github assets
+          cp CNAME docs/
+          cp .nojekyll docs/
+          cp README.md docs/
+          cp LICENSE docs/
           git config --local user.email "oadpoaw@gmail.com"
           git config --local user.name "oadpoaw"
           git add .
@@ -72,3 +75,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: gh-pages
+          force: true

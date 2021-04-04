@@ -2,6 +2,5 @@
 src/
 .npm/
 assets/
-doc/
 docs/
 typedoc.json
