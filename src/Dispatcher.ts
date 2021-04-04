@@ -55,7 +55,6 @@ export class Dispatcher {
     }
 
     shouldHandleMessage(message: Message) {
-        if (message.partial) return false;
         if (message.author.bot) return false;
         if (this.hasAwait(message)) return false;
         return true;
