@@ -73,9 +73,10 @@ jobs:
           git config --local user.email "oadpoaw@gmail.com"
           git config --local user.name "oadpoaw"
 
-          TARGET_BRANCH="gh-pages"
-
           git add .
           git commit -m "docs"
 
-          git push origin $TARGET_BRANCH --force
+          git push origin HEAD:gh-pages --force
+
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
