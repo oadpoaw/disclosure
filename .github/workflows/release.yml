@@ -60,9 +60,10 @@ jobs:
 
       - run: npm ci
       - run: npm run docs
-      - run: rm -rf src package.json package-lock.json .github assets tsconfig.json typedoc.
+      - run: rm -rf src package.json package-lock.json .github tsconfig.json typedoc.
 
       - run: |
+          cp assets docs/
           cp CNAME docs/
           cp .nojekyll docs/
           cp README.md docs/
