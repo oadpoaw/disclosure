@@ -8,6 +8,7 @@
     "test": "echo \"Hello World!\"",
     "prebuild": "rimraf dist",
     "build": "tsc --build",
+    "docs": "typedoc",
     "v:patch": "npm version patch -m \"chore(version): %s\"",
     "v:minor": "npm version minor -m \"chore(version): %s\""
   },
