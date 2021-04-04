@@ -57,16 +57,25 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 14.x
+
       - run: npm ci
       - run: npm run docs
+      - run: rm -rf src package.json package-lock.json .github assets tsconfig.json typedoc.
+
       - run: |
-          rm -rf src package.json package-lock.json .github assets tsconfig.json typedoc.json
           cp CNAME docs/
           cp .nojekyll docs/
           cp README.md docs/
           cp LICENSE docs/
+
+      - run: |
+
           git config --local user.email "oadpoaw@gmail.com"
           git config --local user.name "oadpoaw"
+
+          TARGET_BRANCH="gh-pages"
+
           git add .
           git commit -m "docs"
-          git push -u origin gh-pages
+
+          git push origin $TARGET_BRANCH --force
