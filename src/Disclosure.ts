@@ -58,7 +58,7 @@ export class Disclosure extends Client {
 
     private async registerCommands() {
 
-        const filePath = path.join(process.cwd(), 'src', 'commands');
+        const filePath = path.join(process.cwd(), 'dist', 'commands');
         const files = await fs.readdir(filePath);
 
         for (const file of files) {
@@ -68,32 +68,34 @@ export class Disclosure extends Client {
 
                 for (const command of commands) {
 
-                    try {
+                    if (command.endsWith('.js')) {
+                        try {
 
-                        const cmdPath = path.join(filePath, file, command);
-                        const cc = require(cmdPath);
+                            const cmdPath = path.join(filePath, file, command);
+                            const cc = require(cmdPath);
 
-                        if (cc.default.prototype instanceof Command) {
+                            if (cc.default.prototype instanceof Command) {
 
-                            const instance: Command = new cc.default(this);
+                                const instance: Command = new cc.default(this);
 
-                            instance.config.category = file.split('.')[0];
+                                instance.config.category = file.split('.')[0];
 
-                            this.confliction(instance);
+                                this.confliction(instance);
 
-                            if (typeof instance.init === 'function') instance.init();
-                            this.commands.set(instance.config.name, instance);
+                                if (typeof instance.init === 'function') instance.init();
+                                this.commands.set(instance.config.name, instance);
+
+                            }
+
+                            delete require.cache[require.resolve(cmdPath)];
+
+                        } catch (err) {
+
+                            this.logger.error(`[COMMANDS] DisclosureError loading '${file}/${command}'`).error(err);
+
+                            process.exit(1);
 
                         }
-
-                        delete require.cache[require.resolve(cmdPath)];
-
-                    } catch (err) {
-
-                        this.logger.error(`[COMMANDS] DisclosureError loading '${file}/${command}'`).error(err);
-
-                        process.exit(1);
-
                     }
                 }
             } else if (file.endsWith('.js')) {
@@ -130,38 +132,40 @@ export class Disclosure extends Client {
 
     private async registerEvents() {
 
-        const filePath = path.join(process.cwd(), 'src', 'events');
+        const filePath = path.join(process.cwd(), 'dist', 'events');
         const files = await fs.readdir(filePath);
 
         for (const eventFile of files) {
-            try {
+            if (eventFile.endsWith('.js')) {
+                try {
 
-                const ctx = require(path.join(filePath, eventFile)).default as ExtendedEvent;
+                    const ctx = require(path.join(filePath, eventFile)).default as ExtendedEvent;
 
-                if (ctx.prototype instanceof DiscordEvent) {
+                    if (ctx.prototype instanceof DiscordEvent) {
 
-                    const instance = new ctx(this);
+                        const instance = new ctx(this);
 
-                    if (typeof instance.init === 'function') instance.init();
+                        if (typeof instance.init === 'function') instance.init();
 
-                    if (typeof instance.on === 'function') {
-                        this.on(instance.eventName as string, (...args) => instance.on(...args));
+                        if (typeof instance.on === 'function') {
+                            this.on(instance.eventName as string, (...args) => instance.on(...args));
+                        }
+
+                        if (typeof instance.once === 'function') {
+                            this.once(instance.eventName as string, (...args) => instance.once(...args));
+                        }
+
                     }
 
-                    if (typeof instance.once === 'function') {
-                        this.once(instance.eventName as string, (...args) => instance.once(...args));
-                    }
+                    delete require.cache[require.resolve(path.join(filePath, eventFile))];
+
+                } catch (error) {
+
+                    this.logger.error(`[EVENTS] DisclosureError loading '${eventFile}'`).error(error);
+
+                    process.exit(1);
 
                 }
-
-                delete require.cache[require.resolve(path.join(filePath, eventFile))];
-
-            } catch (error) {
-
-                this.logger.error(`[EVENTS] DisclosureError loading '${eventFile}'`).error(error);
-
-                process.exit(1);
-
             }
         }
     }
