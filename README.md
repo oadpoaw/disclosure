@@ -29,26 +29,18 @@ You can generate a Discord project with the finest file structure , which will p
 ### What could have you ever asked for? It is the best CLI made for your project out there so far!
 Don't Believe Me? Let me show you how:
 
-#### Step 1: 
-Install Disclosure Globally
-```sh <br> 
-npm install -g disclosure-discord@latest
-# Installing it
-``` 
-#### Step 2:
-```sh <br>
-disclosure
-# Some sleek stuff to start up generating your very own project
+```sh
+# Using npx to ensure that we are always using the latest version of disclosure-discord
+$ npx disclosure-discord
 ```
 ![done](/assets/test.gif)
-#### And You Are Done!
 
 ## Initial Project Structure
 ```sh
 ├───src
-|   ├───commands
-|   ├───events
-|   └───index.ts
+│   ├───commands
+│   ├───events
+│   └───index.ts
 ├───.env
 ├───disclosure.json
 ├───package-lock.json
@@ -61,10 +53,10 @@ Yep!, just that and with few lines of code!
 ### Super-duper easy to use 
 Simple commands 
 ```sh <br> 
-disclosure command 
+$ npx disclosure-discord command
 # For a new command
 
-disclosure event
+$ npx disclosure-discord event
 # For a new event
 ```
 ![func](/assets/test2.gif)
