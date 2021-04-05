@@ -6,7 +6,7 @@ export default class extends Command {
     constructor(client: Disclosure) {
         super(client, {
             name: 'eval',
-            description: 'Evaluates Arbitary JavaScript',
+            description: 'Evaluates Arbitary JavaScript (Must be inside a code block)',
             cooldown: 3,
             args: 1,
             usage: ['eval <...code>'],
@@ -48,7 +48,6 @@ export default class extends Command {
                 .addField(`Output`, `\`\`\`xl\n${Escapes.backticks((error.stack ? error.stack.replace(this.client.token, '{DISCORD_TOKEN}') : JSON.stringify(error, null, 2).replace(this.client.token, '{DISCORD_TOKEN}'))).substr(0, 1000)}\n\`\`\``)
             );
         }
-
     }
 
 }
