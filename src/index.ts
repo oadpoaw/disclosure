@@ -1,7 +1,7 @@
 import { config } from 'dotenv';
 config();
 
-export * from './database/util/validate';
+export * from './database/StoreProvider';
 export * from './Command';
 export * from './Constants';
 export * from './Disclosure';
