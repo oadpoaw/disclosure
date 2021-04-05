@@ -56,7 +56,7 @@ export class Dispatcher {
                         this.client.config.messages.COMMAND.MISSING_BOT_PERMISSIONS.replace(
                             '${PERMISSIONS}',
                             `${command.config.clientPermissions
-                                .map((name) => name.replace(/\_/g, '').replace(/(^\w{1})|(\s{1}\w{1})/g, (m) => (m).toUpperCase()))
+                                .map((name) => name.replace(/\_/g, ' ').replace(/(^\w{1})|(\s{1}\w{1})/g, (m) => (m).toUpperCase()))
                                 .join(', ')
                             }`
                         )
@@ -75,7 +75,7 @@ export class Dispatcher {
                         this.client.config.messages.COMMAND.MISSING_PERMISSIONS.replace(
                             '${PERMISSIONS}',
                             `${command.config.userPermissions
-                                .map((name) => name.replace(/\_/g, '').replace(/(^\w{1})|(\s{1}\w{1})/g, (m) => (m).toUpperCase()))
+                                .map((name) => name.replace(/\_/g, ' ').replace(/(^\w{1})|(\s{1}\w{1})/g, (m) => (m).toUpperCase()))
                                 .join(', ')
                             }`
                         )
@@ -95,7 +95,7 @@ export class Dispatcher {
                 message.channel.send(
                     this.client.config.messages.COMMAND.NO_ARGUMENTS
                         .replace('${AUTHOR}', message.author.toString())
-                        .replace('${USAGE}', command.config.usage.join('\n'))
+                        .replace('${USAGE}', `**${command.config.usage.join('\n')}**`)
                 );
 
                 return false;
@@ -103,7 +103,7 @@ export class Dispatcher {
             } else if (command.config.args && command.config.args > args.length) {
                 message.channel.send(
                     this.client.config.messages.COMMAND.NOT_ENOUGH_ARGUMENTS
-                        .replace('${USAGE}', command.config.usage.join('\n'))
+                        .replace('${USAGE}', `**${command.config.usage.join('\n')}**`)
                 );
 
                 return false;
@@ -207,10 +207,7 @@ export class Dispatcher {
     }
 
     private async inihibit(message: Message, command: Command, args: string[]) {
-        const inhibitors: [Inhibitor, number][] = [];
-        this.inhibitors.forEach((inhibitor) => inhibitors.push(inhibitor));
-        const sorted = inhibitors.sort(([, a], [, b]) => b - a);
-        for (const [inhibitor] of sorted) {
+        for (const [inhibitor] of [...this.inhibitors].sort(([, a], [, b]) => b - a)) {
             let status = inhibitor(message, command, args);
             if (status.constructor.name === 'Promise') status = await status;
             if (!status) return true;
