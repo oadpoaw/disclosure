@@ -1,6 +1,4 @@
-import { ColumnType, ExtractColumnType, FunctionProvider, StoreProvider } from '../StoreProvider';
-import { DisclosureError } from '../../DisclosureError';
-import { validate } from '../util/validate';
+import { ColumnType, DisclosureError, ExtractColumnType, FunctionProvider, StoreProvider, validate } from '../..';
 
 export function Redis(uri: string): FunctionProvider {
     try {

@@ -1,6 +1,5 @@
-import { ColumnType, ExtractColumnType, FunctionProvider, StoreProvider } from '../StoreProvider';
+import { ColumnType, ExtractColumnType, FunctionProvider, StoreProvider, validate } from '../..';
 import { Collection } from 'discord.js';
-import { validate } from '../util/validate';
 
 export function Memory(): FunctionProvider {
 
