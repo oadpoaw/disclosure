@@ -9,15 +9,24 @@ export class Disclosure extends Client {
 
     /**
      * 
-     * @param database_uri the databse uri @default ':memory:'
-     * @param clientOptions the ClientOptions to be passed to Discord.js Client @default {}
-     * @param logger the logger to be used @default console
+     * @param database the database uri or a FunctionProvider
+     * @default ':memory:'
+     * @param clientOptions the ClientOptions to be passed to Discord.js Client 
+     * @default {}
+     * @param logger the logger to be used
+     *  @default console
      */
-    constructor(database_uri: string = ':memory:', clientOptions?: ClientOptions, logger: DisclosureLogger = console) {
+    constructor(database: string | FunctionProvider = ':memory:', clientOptions: ClientOptions = {}, logger: DisclosureLogger = console) {
         super(clientOptions);
 
         this.config = Scaffold();
-        this.database = Provider(database_uri);
+
+        if (typeof database === 'string') {
+            this.database = Provider(database);
+        } else {
+            this.database = database;
+        }
+
         this.logger = logger;
         this.commands = new Collection();
         this.dispatcher = new Dispatcher(this);
