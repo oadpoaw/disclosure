@@ -1,13 +1,13 @@
 import { Message } from 'discord.js';
 import minimist from 'minimist';
-import builder, { Options as MinimistOptions } from 'minimist-options';
+import builder, { Options } from 'minimist-options';
 import { ArgsDefinition, ExtractData, Disclosure, ArgumentError } from '.';
 
 export async function ArgumentHandler<T extends ArgsDefinition>(client: Disclosure, message: Message, args: string[], definitions: T) {
 
     if (typeof definitions !== 'object') definitions = {} as T;
 
-    const options: MinimistOptions = {
+    const options: Options = {
         arguments: 'string',
     };
 
@@ -17,6 +17,16 @@ export async function ArgumentHandler<T extends ArgsDefinition>(client: Disclosu
             alias: definitions[key].alias ?? [],
         };
     }
+
+    /**
+     * If the user passed `--__proto__` it will throw an error.
+     * So this is a work around to counter it.
+     * 
+     * This is called Prototype Pollution
+     * 
+     * See {@link https://medium.com/node-modules/what-is-prototype-pollution-and-why-is-it-such-a-big-deal-2dd8d89a93c}
+     */
+    args = args.filter((arg) => arg !== '--__proto__');
 
     const retval = minimist(args, builder(options)) as ExtractData<T> & { _: string[]; };
 
@@ -29,7 +39,10 @@ export async function ArgumentHandler<T extends ArgsDefinition>(client: Disclosu
         let content: any = retval[key];
 
         //@ts-ignore
-        if (typeof content === 'undefined' && typeof definition.default !== 'undefined') content = definition.default ?? undefined;
+        if (typeof content === 'undefined' && typeof definition.default !== 'undefined') {
+            //@ts-ignore
+            content = definition.default ?? undefined;
+        }
 
         if (typeof content === 'undefined') {
             error = new ArgumentError(key, content, definition.type);
