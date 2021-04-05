@@ -191,7 +191,7 @@ export class Disclosure extends Client {
         const config = command.config;
         const collision = this.resolveCommand(config.name.toLowerCase());
 
-        if (!['help', 'eval', 'enable', 'disable'].includes(config.name) && collision) {
+        if (!['help', 'eval', 'enable', 'disable', 'ping'].includes(config.name) && collision) {
             errors.push(new DisclosureError(`Command with a name/alias of '${config.name}' has been already loaded`));
         }
 
