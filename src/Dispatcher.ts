@@ -1,11 +1,12 @@
 import { Message, MessageEmbed, SnowflakeUtil } from 'discord.js';
-import { ArgumentError, Command, Disclosure, DisclosureTypeError, } from '.';
+import { ArgumentError, Command, Disclosure, Arguments } from '.';
 import { StoreProvider } from './database/StoreProvider';
 import Escapes from '@xetha/escapes';
 import ms from 'pretty-ms';
 import { ArgumentHandler } from './ArgumentHandler';
 
-export type Inhibitor = (m: Message, c: Command) => boolean | Promise<boolean>;
+export type Inhibitor = (m: Message, c: Command, args: string[]) => boolean | Promise<boolean>;
+export type PrefixGenerator = (m: Message) => string | Promise<string>;
 
 export class Dispatcher {
 
@@ -14,15 +15,151 @@ export class Dispatcher {
         this.awaiting = new Set();
         this.inhibitors = new Set();
 
-        this.guilds = client.database('guilds', 'string');
         this.cooldowns = client.database('cooldowns', 'number');
+        this.guilds = client.database('guilds', 'string');
 
         client.on('message', (message) => this.exec(message));
+
+        this.addInhibitor((message, command) => {
+            if (command.config.ownerOnly && !this.client.config.ownerID.includes(message.author.id)) {
+                message.channel.send(this.client.config.messages.COMMAND.OWNER_ONLY);
+
+                return false;
+
+            }
+
+            return true;
+
+        }, 4);
+
+        this.addInhibitor((message, command) => {
+            if (command.config.guildOnly && message.channel.type === 'dm') {
+                message.channel.send(this.client.config.messages.COMMAND.GUILD_ONLY);
+
+                return false;
+
+            }
+
+            return true;
+
+        }, 3);
+
+        this.addInhibitor((message, command) => {
+            if (message.channel.type !== 'dm') {
+                if (command.config.clientPermissions &&
+                    (
+                        !message.guild.me.permissions.has(command.config.clientPermissions) ||
+                        !message.channel.permissionsFor(message.guild.me).has(command.config.clientPermissions)
+                    )
+                ) {
+                    message.channel.send(
+                        this.client.config.messages.COMMAND.MISSING_BOT_PERMISSIONS.replace(
+                            '${PERMISSIONS}',
+                            `${command.config.clientPermissions
+                                .map((name) => name.replace(/\_/g, '').replace(/(^\w{1})|(\s{1}\w{1})/g, (m) => (m).toUpperCase()))
+                                .join(', ')
+                            }`
+                        )
+                    );
+
+                    return false;
+
+                }
+                if (command.config.userPermissions &&
+                    (
+                        !message.guild.me.permissions.has(command.config.userPermissions) ||
+                        !message.channel.permissionsFor(message.member).has(command.config.userPermissions)
+                    )
+                ) {
+                    message.channel.send(
+                        this.client.config.messages.COMMAND.MISSING_PERMISSIONS.replace(
+                            '${PERMISSIONS}',
+                            `${command.config.userPermissions
+                                .map((name) => name.replace(/\_/g, '').replace(/(^\w{1})|(\s{1}\w{1})/g, (m) => (m).toUpperCase()))
+                                .join(', ')
+                            }`
+                        )
+                    );
+
+                    return false;
+
+                }
+            }
+
+            return true;
+
+        }, 2);
+
+        this.addInhibitor((message, command, args) => {
+            if (command.config.args && !args.length) {
+                message.channel.send(
+                    this.client.config.messages.COMMAND.NO_ARGUMENTS
+                        .replace('${AUTHOR}', message.author.toString())
+                        .replace('${USAGE}', command.config.usage.join('\n'))
+                );
+
+                return false;
+
+            } else if (command.config.args && command.config.args > args.length) {
+                message.channel.send(
+                    this.client.config.messages.COMMAND.NOT_ENOUGH_ARGUMENTS
+                        .replace('${USAGE}', command.config.usage.join('\n'))
+                );
+
+                return false;
+
+            }
+
+            return true;
+
+        }, 1);
+
+        this.generator = async (message) => {
+
+            let prefix = this.client.config.prefix;
+
+            if (message.guild) {
+                prefix = await this.guilds.get(message.guild.id) ?? this.client.config.prefix;
+            }
+
+            if (typeof prefix !== 'string') {
+                prefix = this.client.config.prefix;
+            }
+
+            return prefix;
+
+        };
 
     }
 
     private readonly awaiting: Set<string>;
-    private readonly inhibitors: Set<Inhibitor>;
+    private readonly inhibitors: Set<[Inhibitor, number]>;
+
+    /**
+     * The Bot Prefix generator. Useful for per guild prefixes.
+     * 
+     * 
+     * @default
+     * ```js
+     * (message) => {
+     *
+     *      let prefix = this.client.config.prefix;
+     *
+     *      if (message.guild) {
+     *          prefix = await this.guilds.get(message.guild.id) ?? this.client.config.prefix;
+     *      } 
+     *
+     *      if (typeof prefix !== 'string') {
+     *          prefix = this.client.config.prefix;
+     *      }
+     *
+     *      return prefix;
+     *
+     * }
+     * ```
+     * 
+     */
+    public generator: PrefixGenerator;
 
     /**
      * Cooldowns stored as
@@ -35,27 +172,15 @@ export class Dispatcher {
      * 
      */
     public readonly cooldowns: StoreProvider<'number'>;
-
-    /**
-     * Guild prefixes stored as
-     * `key: string`
-     */
     public readonly guilds: StoreProvider<'string'>;
 
     /**
      * 
      * @param inhibitor Return `true` to continue executing the command. Return `false` to discontinue executing the command.
+     * @param priority The priority of the inhibitor. Defaults to `0`
      */
-    addInhibitor(inhibitor: Inhibitor) {
-        if (typeof inhibitor !== 'function') throw new DisclosureTypeError('The Inhibitor must be a function.');
-        if (this.inhibitors.has(inhibitor)) return false;
-        this.inhibitors.add(inhibitor);
-        return true;
-    }
-
-    removeInhibitor(inhibitor: Inhibitor) {
-        if (typeof inhibitor !== 'function') throw new DisclosureTypeError('The Inhibitor must be a function.');
-        return this.inhibitors.delete(inhibitor);
+    addInhibitor(inhibitor: Inhibitor, priority: number = 0) {
+        this.inhibitors.add([inhibitor, priority]);
     }
 
     async awaitReply(message: Message, time: number = 60000): Promise<Message | boolean> {
@@ -75,19 +200,18 @@ export class Dispatcher {
             return collected.first();
 
         } catch (e) {
-
             return false;
-
         } finally {
-
             this.delAwait(message.author.id);
-
         }
     }
 
-    private async inihibit(message: Message, command: Command) {
-        for (const inhibitor of this.inhibitors) {
-            let status = inhibitor(message, command);
+    private async inihibit(message: Message, command: Command, args: string[]) {
+        const inhibitors: [Inhibitor, number][] = [];
+        this.inhibitors.forEach((inhibitor) => inhibitors.push(inhibitor));
+        const sorted = inhibitors.sort(([, a], [, b]) => b - a);
+        for (const [inhibitor] of sorted) {
+            let status = inhibitor(message, command, args);
             if (status.constructor.name === 'Promise') status = await status;
             if (!status) return true;
         }
@@ -111,9 +235,11 @@ export class Dispatcher {
     }
 
     private shouldHandleMessage(message: Message) {
-        if (message.partial) return false;
-        if (message.author.bot) return false;
-        if (this.hasAwait(message.author.id)) return false;
+        if (
+            message.partial ||
+            message.author.bot ||
+            this.hasAwait(message.author.id)
+        ) return false;
         return true;
     }
 
@@ -148,13 +274,7 @@ export class Dispatcher {
 
         if (this.shouldHandleMessage(message)) {
 
-            let prefix = this.client.config.prefix;
-
-            if (message.guild) {
-                prefix = await this.guilds.get(message.guild.id) ?? this.client.config.prefix;
-            }
-
-            const prefixRegex = new RegExp(`^(<@!?${this.client.user.id}>|${Escapes.regex(prefix)})\\s*`);
+            const prefixRegex = new RegExp(`^(<@!?${this.client.user.id}>|${Escapes.regex(await this.generator(message))})\\s*`);
             if (!prefixRegex.test(message.content)) return;
 
             const [, matchedPrefix] = message.content.match(prefixRegex);
@@ -167,65 +287,15 @@ export class Dispatcher {
 
             this.addAwait(message.author.id);
 
-            if (command.config.ownerOnly && !this.client.config.ownerID.includes(message.author.id)) {
-                return message.channel.send(this.client.config.messages.COMMAND.OWNER_ONLY);
-            }
-
-            if (command.config.guildOnly && message.channel.type === 'dm') {
-                return message.channel.send(this.client.config.messages.COMMAND.GUILD_ONLY);
-            }
-
-            if (message.channel.type !== 'dm') {
-                if (command.config.clientPermissions &&
-                    (
-                        !message.guild.me.permissions.has(command.config.clientPermissions) ||
-                        !message.channel.permissionsFor(message.guild.me).has(command.config.clientPermissions)
-                    )
-                ) {
-                    return message.channel.send(
-                        this.client.config.messages.COMMAND.MISSING_BOT_PERMISSIONS.replace(
-                            '${PERMISSIONS}',
-                            `${command.config.clientPermissions.map((name) => name.replace(/\_/g, '').replace(/(^\w{1})|(\s{1}\w{1})/g, (m) => (m).toUpperCase())).join(', ')}`
-                        )
-                    );
-                }
-                if (command.config.userPermissions &&
-                    (
-                        !message.guild.me.permissions.has(command.config.userPermissions) ||
-                        !message.channel.permissionsFor(message.member).has(command.config.userPermissions)
-                    )
-                ) {
-                    return message.channel.send(
-                        this.client.config.messages.COMMAND.MISSING_PERMISSIONS.replace(
-                            '${PERMISSIONS}',
-                            `${command.config.userPermissions.map((name) => name.replace(/\_/g, '').replace(/(^\w{1})|(\s{1}\w{1})/g, (m) => (m).toUpperCase())).join(', ')}`
-                        )
-                    );
-                }
-            }
-
             try {
 
                 if (await this.throttleHandle(message, command)) return;
 
-                if (command.config.args && !args.length) {
-                    return message.channel.send(
-                        this.client.config.messages.COMMAND.NO_ARGUMENTS
-                            .replace('${AUTHOR}', message.author.toString())
-                            .replace('${USAGE}', command.config.usage.join('\n'))
-                    );
-                } else if (command.config.args && command.config.args > args.length) {
-                    message.channel.send(
-                        this.client.config.messages.COMMAND.NOT_ENOUGH_ARGUMENTS
-                            .replace('${USAGE}', command.config.usage.join('\n'))
-                    );
-                }
+                if (await this.inihibit(message, command, args)) return;
 
                 const argv = await ArgumentHandler(this.client, message, args, command.config.argsDefinitions);
 
                 if (argv instanceof ArgumentError) return message.channel.send(argv.message);
-
-                if (await this.inihibit(message, command)) return;
 
                 let flow: boolean = true;
 
@@ -239,10 +309,10 @@ export class Dispatcher {
 
                 if (flow !== false) {
                     await this.throttleExec(message, command);
-                }
 
-                if (flow !== false && typeof command.afterExecute === 'function') {
-                    await command.afterExecute(message, argv);
+                    if (typeof command.afterExecute === 'function') {
+                        await command.afterExecute(message, argv);
+                    }
                 }
 
             } catch (err) {
