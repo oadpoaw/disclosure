@@ -191,13 +191,13 @@ export class Disclosure extends Client {
         const config = command.config;
         const collision = this.resolveCommand(config.name.toLowerCase());
 
-        if (!['help', 'eval', 'enable', 'disable', 'ping'].includes(config.name) && collision) {
-            errors.push(new DisclosureError(`Command with a name/alias of '${config.name}' has been already loaded`));
+        if (!['disable', 'enable', 'eval', 'help', 'ping'].includes(config.name) && collision) {
+            errors.push(new DisclosureError(`Command with a name/alias of '${config.name}' has been already loaded.`));
         }
 
         for (const alias of config.aliases) {
             if (this.resolveCommand(alias)) {
-                errors.push(new DisclosureError(`A Command with a name/alias of '${alias}' has been already loaded`));
+                errors.push(new DisclosureError(`A Command with a name/alias of '${alias}' has been already loaded.`));
             }
         }
 
@@ -227,12 +227,13 @@ export class Disclosure extends Client {
 
                                 const instance: Command = new cc.default(this);
 
-                                instance.config.category = file.split('.')[0];
+                                instance.config.category = file.toLowerCase();
 
                                 this.confliction(instance);
 
                                 if (typeof instance.init === 'function') instance.init();
                                 this.commands.set(instance.config.name, instance);
+                                await this.dispatcher.enable(instance);
 
                             }
 
@@ -240,7 +241,8 @@ export class Disclosure extends Client {
 
                         } catch (err) {
 
-                            this.logger.error(`[COMMANDS] DisclosureError loading '${file}/${command}'`).error(err);
+                            this.logger.error(`[COMMANDS] DisclosureError loading '${file}/${command}'`);
+                            this.logger.error(err);
 
                             process.exit(1);
 
@@ -263,6 +265,7 @@ export class Disclosure extends Client {
 
                         if (typeof instance.init === 'function') instance.init();
                         this.commands.set(instance.config.name, instance);
+                        await this.dispatcher.enable(instance);
 
                     }
 
@@ -270,7 +273,8 @@ export class Disclosure extends Client {
 
                 } catch (err) {
 
-                    this.logger.error(`[COMMANDS] DisclosureError loading '${file}'`).error(err);
+                    this.logger.error(`[COMMANDS] DisclosureError loading '${file}'`);
+                    this.logger.error(err);
 
                     process.exit(1);
 
@@ -310,7 +314,8 @@ export class Disclosure extends Client {
 
                 } catch (error) {
 
-                    this.logger.error(`[EVENTS] DisclosureError loading '${eventFile}'`).error(error);
+                    this.logger.error(`[EVENTS] DisclosureError loading '${eventFile}'`);
+                    this.logger.error(error);
 
                     process.exit(1);
 
