@@ -28,7 +28,7 @@ export async function ArgumentHandler<T extends ArgsDefinition>(client: Disclosu
      */
     args = args.filter((arg) => arg !== '--__proto__');
 
-    const retval = minimist(args, builder(options)) as ExtractData<T> & { _: string[]; };
+    const retval = minimist(args, builder(options)) as ExtractData<T> & { _: string[]; __: string[]; };
 
     let error: ArgumentError = undefined;
 
@@ -134,6 +134,8 @@ export async function ArgumentHandler<T extends ArgsDefinition>(client: Disclosu
         retval[key] = content;
 
     }
+
+    if (!error) retval.__ = args;
 
     return error ?? retval;
 

@@ -84,6 +84,11 @@ export interface Arguments {
      * The arguments stored in a string array
      */
     _: string[];
+
+    /**
+     * Whole arguments stored in a string array
+     */
+    __: string[];
     [key: string]: any;
 }
 
