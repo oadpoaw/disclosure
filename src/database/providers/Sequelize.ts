@@ -42,6 +42,10 @@ export function Sequelize(uri: string): FunctionProvider {
                     return !!(await model.destroy({ where: { key: k } }));
                 }
 
+                async clr() {
+                    await model.destroy();
+                }
+
             };
         };
 

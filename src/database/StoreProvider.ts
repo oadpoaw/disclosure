@@ -4,9 +4,29 @@ export abstract class StoreProvider<T extends ColumnType = ColumnType> {
 
     constructor() { }
 
+    /**
+     * Retrieves the data assigned to the key.
+     * @param k 
+     */
     abstract get(k: string): Promise<ExtractColumnType<T>>;
+
+    /**
+     * Sets the data assigned to the key.
+     * @param k 
+     * @param v 
+     */
     abstract set(k: string, v: ExtractColumnType<T>): Promise<void>;
+
+    /**
+     * Deletes the data assigned to the key.
+     * @param k 
+     */
     abstract del(k: string): Promise<boolean>;
+
+    /**
+     * Clears the contents of the store.
+     */
+    abstract clr(): Promise<void>;
 
 }
 

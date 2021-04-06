@@ -41,6 +41,10 @@ export function MongoDB(uri: string): FunctionProvider {
                     return !!(await model.deleteOne({ key: k })).deletedCount;
                 }
 
+                async clr() {
+                    await model.deleteMany();
+                }
+
             };
         };
 
