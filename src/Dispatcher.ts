@@ -7,14 +7,17 @@ import { ArgumentHandler } from './ArgumentHandler';
 
 export type Inhibitor = (m: Message, c: Command, args: string[]) => boolean | Promise<boolean>;
 export type PrefixGenerator = (m: Message) => string | Promise<string>;
+export type CooldownKeyGenerator = (m: Message, c: Command) => string;
 
 export class Dispatcher {
 
     constructor(private client: Disclosure) {
 
         this.awaiting = new Set();
+        this.commands = new Set();
         this.inhibitors = new Set();
 
+        this._commands = client.database('commands', 'string');
         this.cooldowns = client.database('cooldowns', 'number');
         this.guilds = client.database('guilds', 'string');
 
@@ -114,52 +117,89 @@ export class Dispatcher {
 
         }, 1);
 
-        this.generator = async (message) => {
+        this.generators = {
 
-            let prefix = this.client.config.prefix;
+            prefix: async (message) => {
 
-            if (message.guild) {
-                prefix = await this.guilds.get(message.guild.id) ?? this.client.config.prefix;
+                let prefix = this.client.config.prefix;
+
+                if (message.guild) {
+                    prefix = await this.guilds.get(message.guild.id) ?? this.client.config.prefix;
+                }
+
+                if (typeof prefix !== 'string') {
+                    prefix = this.client.config.prefix;
+                }
+
+                return prefix;
+
+            },
+
+            cooldown: (message, command) => {
+                return `${command.config.name}:${message.author.id}`;
             }
-
-            if (typeof prefix !== 'string') {
-                prefix = this.client.config.prefix;
-            }
-
-            return prefix;
 
         };
+
+        this.client.on('command', (data: ['enable' | 'disable', string]) => {
+            if (data[0] === 'enable') {
+                this.commands.add(data[1]);
+            } else if (data[0] === 'disable') {
+                this.commands.delete(data[1]);
+            }
+        });
 
     }
 
     private readonly awaiting: Set<string>;
+    private readonly commands: Set<string>;
     private readonly inhibitors: Set<[Inhibitor, number]>;
+    private readonly _commands: StoreProvider<'string'>;
 
     /**
-     * The Bot Prefix generator. Useful for per guild prefixes.
-     * 
-     * 
-     * @default
-     * ```js
-     * (message) => {
-     *
-     *      let prefix = this.client.config.prefix;
-     *
-     *      if (message.guild) {
-     *          prefix = await this.guilds.get(message.guild.id) ?? this.client.config.prefix;
-     *      } 
-     *
-     *      if (typeof prefix !== 'string') {
-     *          prefix = this.client.config.prefix;
-     *      }
-     *
-     *      return prefix;
-     *
-     * }
-     * ```
-     * 
+     * Generators for flexibility on editing how would the dispatcher will get the prefix, to store cooldowns etc.
      */
-    public generator: PrefixGenerator;
+    public readonly generators: {
+
+        /**
+         * The Bot Prefix generator. Useful for per guild prefixes.
+         * 
+         * 
+         * @default
+         * ```js
+         * (message) => {
+         *
+         *      let prefix = this.client.config.prefix;
+         *
+         *      if (message.guild) {
+         *          prefix = await this.guilds.get(message.guild.id) ?? this.client.config.prefix;
+         *      } 
+         *
+         *      if (typeof prefix !== 'string') {
+         *          prefix = this.client.config.prefix;
+         *      }
+         *
+         *      return prefix;
+         *
+         * }
+         * ```
+         * 
+         */
+        prefix: PrefixGenerator;
+
+        /**
+         * The Cooldown Key generator. Tells the dispatcher how to store cooldowns in the database
+         * 
+         * @default
+         * ```js
+         * (message, command, _args) => {
+         *      return `${command.config.name}:${message.author.id}`
+         * }
+         * ```
+         */
+        cooldown: CooldownKeyGenerator;
+
+    };
 
     /**
      * Cooldowns stored as
@@ -173,6 +213,50 @@ export class Dispatcher {
      */
     public readonly cooldowns: StoreProvider<'number'>;
     public readonly guilds: StoreProvider<'string'>;
+
+    private async broadcast(action: 'enable' | 'disable', name: string) {
+        if (action === 'enable') {
+            await this._commands.set(name, name);
+        } else {
+            await this._commands.del(name);
+        }
+        if (this.client.shard) {
+            this.client.shard.broadcastEval(`this.emit('command', ['${action}','${name}'])`);
+        } else {
+            this.client.emit('command', [action, name]);
+        }
+    }
+
+    /**
+     * 
+     * @param command The command to check
+     * @returns `true` if it's enabled. `false` if it's disabled.
+     */
+    check(command: Command) {
+        return this.commands.has(command.config.name);
+    }
+
+    /**
+     * 
+     * @param command The command to enable
+     * @returns `true` if it's enabled. `false` if it's already enabled.
+     */
+    async enable(command: Command) {
+        if (this.commands.has(command.config.name)) return false;
+        this.broadcast('enable', command.config.name);
+        return true;
+    }
+
+    /**
+     * 
+     * @param command The command to disable
+     * @returns `true` if it's disabled. `false` if it's already disabled.
+     */
+    async disable(command: Command) {
+        if (!this.commands.has(command.config.name)) return false;
+        this.broadcast('disable', command.config.name);
+        return true;
+    }
 
     /**
      * 
@@ -215,10 +299,6 @@ export class Dispatcher {
         return false;
     }
 
-    private generateKey(command: Command, message: Message) {
-        return `${command.config.name}:${message.author.id}`;
-    }
-
     private addAwait(id: string) {
         return this.awaiting.add(id);
     }
@@ -242,14 +322,14 @@ export class Dispatcher {
 
     private async throttleHandle(message: Message, command: Command) {
 
-        const expiration = await this.cooldowns.get(this.generateKey(command, message));
+        const expiration = await this.cooldowns.get(await this.generators.cooldown(message, command));
 
         if (expiration) {
 
             const now = Date.now();
 
             if (expiration < now) {
-                this.cooldowns.del(this.generateKey(command, message));
+                this.cooldowns.del(await this.generators.cooldown(message, command));
             } else {
                 return message.channel.send(
                     this.client.config.messages.THROTTLE.MESSAGE
@@ -264,14 +344,17 @@ export class Dispatcher {
     }
 
     private async throttleExec(message: Message, command: Command) {
-        await this.cooldowns.set(this.generateKey(command, message), Date.now() + (command.config.cooldown * 1000));
+        await this.cooldowns.set(
+            await this.generators.cooldown(message, command),
+            Date.now() + (command.config.cooldown * 1000)
+        );
     }
 
     private async exec(message: Message) {
 
         if (this.shouldHandleMessage(message)) {
 
-            const prefixRegex = new RegExp(`^(<@!?${this.client.user.id}>|${Escapes.regex(await this.generator(message))})\\s*`);
+            const prefixRegex = new RegExp(`^(<@!?${this.client.user.id}>|${Escapes.regex(await this.generators.prefix(message))})\\s*`);
             if (!prefixRegex.test(message.content)) return;
 
             const [, matchedPrefix] = message.content.match(prefixRegex);
@@ -316,7 +399,9 @@ export class Dispatcher {
 
                 const errorID = SnowflakeUtil.generate();
 
-                this.client.logger.error(errorID).error(`Error executing command '${command.config.name}'`).error(err);
+                this.client.logger.error(errorID);
+                this.client.logger.error(`Error executing command '${command.config.name}'`);
+                this.client.logger.error(err);
 
                 const embed = new MessageEmbed()
                     .setColor('RED')
