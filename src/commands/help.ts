@@ -88,7 +88,7 @@ export default class extends Command {
         // using Set to avoid duplicates
         const categories = [... new Set(categorized.map((cmd) => cmd.config.category))];
 
-        const prefix = await this.client.dispatcher.generator(message);
+        const prefix = await this.client.dispatcher.generators.prefix(message);
 
         message.channel.send(new MessageEmbed()
             .setTimestamp()
