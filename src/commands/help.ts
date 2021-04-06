@@ -1,4 +1,4 @@
-import { Disclosure, Command, Arguments } from 'disclosure-discord';
+import { Disclosure, Command, Arguments } from '..';
 import { Message, MessageEmbed } from 'discord.js';
 import ms from 'pretty-ms';
 

@@ -18,12 +18,15 @@ export default class extends Command {
         });
     }
 
-    async execute(message: Message, argv: Arguments) {
-        if (!/\`\`\`(([a-z0-9-]+?)\n+)?\n*([^]+?)\n*\`\`\`/i.test(message.content)) {
-            return message.channel.send(`That is not a valid JS Code`);
-        }
+    get codeblockRegex() {
+        return /\`\`\`(([a-z0-9-]+?)\n+)?\n*([^]+?)\n*\`\`\`/i;
+    }
 
-        const code = message.content.match(/\`\`\`(([a-z0-9-]+?)\n+)?\n*([^]+?)\n*\`\`\`/i)[3];
+    async execute(message: Message, argv: Arguments) {
+
+        const code = this.codeblockRegex.test(message.content) ?
+            message.content.match(this.codeblockRegex)[3]
+            : argv.__.join(' ');
 
         try {
 
