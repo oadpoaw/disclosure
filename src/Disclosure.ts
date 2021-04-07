@@ -5,6 +5,10 @@ import { FunctionProvider } from './database/StoreProvider';
 import { Provider } from './database/Provider';
 import { Command, Config, DisclosureError, DisclosureLogger, DiscordEvent, Dispatcher, Scaffold, } from '.';
 
+interface ExtendedCommand {
+    new(client: Disclosure): Command;
+}
+
 export class Disclosure extends Client {
 
     /**
@@ -205,6 +209,19 @@ export class Disclosure extends Client {
 
     }
 
+    private async loadCommand(instance: Command | ExtendedCommand, category: string = null) {
+        const command = instance instanceof Command ? instance : new instance(this);
+
+        command.config.category = category.toLowerCase();
+
+        this.confliction(command);
+
+        if (typeof command.init === 'function') command.init();
+        this.commands.set(command.config.name, command);
+        await this.dispatcher.enable(command);
+
+    }
+
     private async registerCommands() {
 
         const filePath = path.join(process.cwd(), 'dist', 'commands');
@@ -221,21 +238,9 @@ export class Disclosure extends Client {
                         try {
 
                             const cmdPath = path.join(filePath, file, command);
-                            const cc = require(cmdPath);
+                            const instance = require(cmdPath).default;
 
-                            if (cc.default.prototype instanceof Command) {
-
-                                const instance: Command = new cc.default(this);
-
-                                instance.config.category = file.toLowerCase();
-
-                                this.confliction(instance);
-
-                                if (typeof instance.init === 'function') instance.init();
-                                this.commands.set(instance.config.name, instance);
-                                await this.dispatcher.enable(instance);
-
-                            }
+                            await this.loadCommand(instance, file);
 
                             delete require.cache[require.resolve(cmdPath)];
 
@@ -253,21 +258,9 @@ export class Disclosure extends Client {
                 try {
 
                     const cmdPath = path.join(filePath, file);
-                    const cc = require(cmdPath);
+                    const instance = require(cmdPath).default;
 
-                    if (cc.default.prototype instanceof Command) {
-
-                        const instance: Command = new cc.default(this);
-
-                        instance.config.category = null;
-
-                        this.confliction(instance);
-
-                        if (typeof instance.init === 'function') instance.init();
-                        this.commands.set(instance.config.name, instance);
-                        await this.dispatcher.enable(instance);
-
-                    }
+                    await this.loadCommand(instance);
 
                     delete require.cache[require.resolve(cmdPath)];
 
@@ -292,13 +285,14 @@ export class Disclosure extends Client {
             if (eventFile.endsWith('.js')) {
                 try {
 
-                    const ctx = require(path.join(filePath, eventFile)).default;
+                    const eventPath = path.join(filePath, eventFile);
+                    const instance = require(eventPath).default;
 
-                    if (ctx.prototype instanceof DiscordEvent) {
+                    if (instance instanceof DiscordEvent) {
 
-                        const instance: DiscordEvent = new ctx(this);
-
-                        if (typeof instance.init === 'function') instance.init();
+                        if (typeof instance.init === 'function') {
+                            instance.init();
+                        }
 
                         if (typeof instance.on === 'function') {
                             this.on(instance.eventName as string, (...args) => instance.on(...args));
@@ -310,7 +304,7 @@ export class Disclosure extends Client {
 
                     }
 
-                    delete require.cache[require.resolve(path.join(filePath, eventFile))];
+                    delete require.cache[require.resolve(eventPath)];
 
                 } catch (error) {
 
