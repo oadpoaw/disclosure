@@ -15,8 +15,9 @@ You can generate a Discord project with the finest file structure , which will p
 
 ## Features
 - Easy to use!
-- A CLI to generate a discord bot project! with Git Integration!
+- A CLI to generate a Discord Bot Project! 
 - Awesome TypeScript Definitions for awesome developer tooling!
+- Sharding Support!
 - Built-in Command Handler, includes:
   - Argument Parsing
   - Command Inhibitors
@@ -81,7 +82,6 @@ npm start
  - [Redis](https://redis.io/)
  - [In-Memory](https://en.wikipedia.org/wiki/In-memory_database)
  - [MsSQL](https://en.wikipedia.org/wiki/Microsoft_SQL_Server)
- - And More!
 
 # Join Us For Support 
 [![Join](/assets/Capture.png)](https://discord.gg/HG8s98Uk) <br>
