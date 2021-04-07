@@ -11,7 +11,7 @@ export async function packageJSON(projectPath: string, dialect: Dialects) {
     Package.dependencies['discord.js'] = dependencies['discord.js'];
     Package.devDependencies['@types/node'] = devDependencies['@types/node'];
     Package.devDependencies['@types/ws'] = devDependencies['@types/ws'];
-    Package.devDependencies['rimraf'] = devDependencies['rimraf'];
+    Package.devDependencies['rimraf'] = dependencies['rimraf'];
     Package.devDependencies['typescript'] = devDependencies['typescript'];
 
     if (dialect !== ':memory:') {
@@ -21,15 +21,9 @@ export async function packageJSON(projectPath: string, dialect: Dialects) {
         } else if (dialect === 'redis') {
             //@ts-ignore
             Package.dependencies['ioredis'] = devDependencies['ioredis'];
-            //@ts-ignore
-            Package.devDependencies['@types/ioredis'] = devDependencies['@types/ioredis'];
         } else {
             //@ts-ignore
             Package.dependencies['sequelize'] = devDependencies['sequelize'];
-            //@ts-ignore
-            Package.devDependencies['@types/sequelize'] = devDependencies['@types/sequelize'];
-            //@ts-ignore
-            Package.devDependencies['@types/validator'] = devDependencies['@types/validator'];
 
             switch (dialect) {
                 case 'mariadb':
