@@ -13,6 +13,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 14.x
+
       - run: npm ci
       - run: npm run build
       - run: npm test
@@ -24,6 +25,7 @@ jobs:
         run: |
           SUM=`sha256sum disclosure.tar.gz`
           echo $SUM > checksum.txt
+
       - name: Create release
         uses: softprops/action-gh-release@v1
         env:
@@ -42,6 +44,7 @@ jobs:
         with:
           node-version: 14.x
           registry-url: https://registry.npmjs.org/
+
       - run: npm ci
       - run: npm run build
       - run: npm test
@@ -69,7 +72,7 @@ jobs:
           cp README.md docs/
           cp LICENSE docs/
 
-      - run: rm -rf assets CNAME .nojekyll
+      - run: rm -rf assets CNAME .nojekyll README.md LICENSE
 
       - run: |
 
