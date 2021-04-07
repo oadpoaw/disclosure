@@ -26,25 +26,17 @@ export class Dispatcher {
         this.addInhibitor((message, command) => {
             if (command.config.ownerOnly && !this.client.config.ownerID.includes(message.author.id)) {
                 message.channel.send(this.client.config.messages.COMMAND.OWNER_ONLY);
-
                 return false;
-
             }
-
             return true;
-
         }, 4);
 
         this.addInhibitor((message, command) => {
             if (command.config.guildOnly && message.channel.type === 'dm') {
                 message.channel.send(this.client.config.messages.COMMAND.GUILD_ONLY);
-
                 return false;
-
             }
-
             return true;
-
         }, 3);
 
         this.addInhibitor((message, command) => {
@@ -64,9 +56,7 @@ export class Dispatcher {
                             }`
                         )
                     );
-
                     return false;
-
                 }
                 if (command.config.userPermissions &&
                     (
@@ -83,14 +73,10 @@ export class Dispatcher {
                             }`
                         )
                     );
-
                     return false;
-
                 }
             }
-
             return true;
-
         }, 2);
 
         this.addInhibitor((message, command, args) => {
@@ -100,39 +86,28 @@ export class Dispatcher {
                         .replace('${AUTHOR}', message.author.toString())
                         .replace('${USAGE}', `**${command.config.usage.join('\n')}**`)
                 );
-
                 return false;
-
             } else if (command.config.args && command.config.args > args.length) {
                 message.channel.send(
                     this.client.config.messages.COMMAND.NOT_ENOUGH_ARGUMENTS
                         .replace('${USAGE}', `**${command.config.usage.join('\n')}**`)
                 );
-
                 return false;
-
             }
-
             return true;
-
         }, 1);
 
         this.generators = {
 
             prefix: async (message) => {
-
                 let prefix = this.client.config.prefix;
-
                 if (message.guild) {
                     prefix = await this.guilds.get(message.guild.id) ?? this.client.config.prefix;
                 }
-
                 if (typeof prefix !== 'string') {
                     prefix = this.client.config.prefix;
                 }
-
                 return prefix;
-
             },
 
             cooldown: (message, command) => {
