@@ -4,3 +4,5 @@ src/
 assets/
 docs/
 typedoc.json
+CNAME
+.nojekyll
