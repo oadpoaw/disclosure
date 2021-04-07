@@ -29,8 +29,8 @@ export interface Command {
 export abstract class Command {
 
     constructor(
-        protected client: Disclosure,
-        public config: CommandConfig
+        protected readonly client: Disclosure,
+        public readonly config: CommandConfig
     ) { }
 
 }
