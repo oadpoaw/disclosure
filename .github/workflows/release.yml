@@ -60,7 +60,7 @@ jobs:
 
       - run: npm ci
       - run: npm run docs
-      - run: rm -rf src package.json package-lock.json .github tsconfig.json typedoc.
+      - run: rm -rf src package.json package-lock.json .github tsconfig.json typedoc.json
 
       - run: |
           cp -R assets docs/
@@ -68,6 +68,8 @@ jobs:
           cp .nojekyll docs/
           cp README.md docs/
           cp LICENSE docs/
+
+      - run: rm -rf assets CNAME .nojekyll
 
       - run: |
 
