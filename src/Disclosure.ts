@@ -74,8 +74,12 @@ export class Disclosure extends Client {
      */
     async initialize() {
         if (this.initialized) throw new DisclosureError(`Disclosure Client Has Already Been Initialized`);
-        await this.registerCommands();
-        await this.registerEvents();
+        try {
+            await this.registerCommands();
+            await this.registerEvents();
+        } catch (_err) {
+            // ignore the error, since it can throw an error if the directory is empty
+        }
         await this.dispatcher.synchronize();
         this.initialized = true;
     }
@@ -214,7 +218,7 @@ export class Disclosure extends Client {
 
         const command = new instance(this);
 
-        command.config.category = category.toLowerCase();
+        command.config.category = category ? category.toLowerCase() : null;
 
         this.confliction(command);
 
