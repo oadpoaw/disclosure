@@ -12,7 +12,7 @@
             "MISSING_BOT_PERMISSIONS": "Sorry, but I need the following permission(s) to perform this command.\n```html\n${PERMISSIONS}\n```",
             "NO_ARGUMENTS": "Sorry, You didn't provide any arguments, ${AUTHOR}!\nThe proper usage would be:\n```html\n${USAGE}\n```",
             "NOT_ENOUGH_ARGUMENTS": "Sorry, You didn't specify enough arguments to execute this command.\nThe proper usage would be:\n```html\n${USAGE}\n```",
-            "COMMAND_DISABLED": "Sorry, that command is currently disabled."
+            "COMMAND_DISABLED": "Sorry, that command is currently disabled.\nReason: **${REASON}**"
         },
         "PROMPT": {
             "TIMEOUT": "You did not reply within **${TIMEOUT}**\n\nPlease try again.",

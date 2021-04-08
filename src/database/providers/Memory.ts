@@ -1,26 +1,35 @@
-import { ColumnType, ExtractColumnType, FunctionProvider, StoreProvider } from '../StoreProvider';
+import { ColumnType, ExtractColumnType, FunctionProvider, StoreProvider, validate } from '../..';
 import { Collection } from 'discord.js';
-import { validate } from '../util/validate';
 
 export function Memory(): FunctionProvider {
 
-    const storage = new Collection<string, any>();
-
     const provider: FunctionProvider = <T extends ColumnType>(s: string, t: T) => {
 
-        const generateKey = (k: string) => `${s}:${t}:${k}`;
+        const storage = new Collection<string, ExtractColumnType<T>>();
 
         return new class extends StoreProvider {
+
             async get(k: string): Promise<ExtractColumnType<T>> {
-                return storage.get(generateKey(k));
+                return storage.get(k);
             }
+
             async set(k: string, v: ExtractColumnType<T>) {
                 validate(v, t);
-                storage.set(generateKey(k), v);
+                storage.set(k, v);
             }
+
             async del(k: string) {
-                return storage.delete(generateKey(k));
+                return storage.delete(k);
             }
+
+            async clr() {
+                storage.clear();
+            }
+
+            async all() {
+                return storage.map((v, k) => [k, v]) as [string, ExtractColumnType<T>][];
+            }
+
         };
     };
 

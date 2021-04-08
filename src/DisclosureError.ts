@@ -1,4 +1,4 @@
-import { DataType } from './Typings';
+import { DataType } from '.';
 
 export class DisclosureError extends Error {
     constructor(message: string) {

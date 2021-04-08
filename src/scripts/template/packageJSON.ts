@@ -7,13 +7,23 @@ import { Dialects } from '../../Typings';
 export async function packageJSON(projectPath: string, dialect: Dialects) {
     console.log(`Creating \`package.json\` ...`);
 
+    /**
+     * So we can keep the dependencies up to date
+     */
+
     Package.dependencies['disclosure-discord'] = `^${version}`;
     Package.dependencies['discord.js'] = dependencies['discord.js'];
     Package.devDependencies['@types/node'] = devDependencies['@types/node'];
     Package.devDependencies['@types/ws'] = devDependencies['@types/ws'];
-    Package.devDependencies['rimraf'] = devDependencies['rimraf'];
+    Package.devDependencies['concurrently'] = devDependencies['concurrently'];
+    Package.devDependencies['nodemon'] = devDependencies['nodemon'];
+    Package.devDependencies['rimraf'] = dependencies['rimraf'];
     Package.devDependencies['typescript'] = devDependencies['typescript'];
 
+    /**
+     * Manually installing these packages according to whata database is used for
+     * the disclosure databse
+     */
     if (dialect !== ':memory:') {
         if (dialect === 'mongodb') {
             //@ts-ignore
@@ -21,15 +31,9 @@ export async function packageJSON(projectPath: string, dialect: Dialects) {
         } else if (dialect === 'redis') {
             //@ts-ignore
             Package.dependencies['ioredis'] = devDependencies['ioredis'];
-            //@ts-ignore
-            Package.devDependencies['@types/ioredis'] = devDependencies['@types/ioredis'];
         } else {
             //@ts-ignore
             Package.dependencies['sequelize'] = devDependencies['sequelize'];
-            //@ts-ignore
-            Package.devDependencies['@types/sequelize'] = devDependencies['@types/sequelize'];
-            //@ts-ignore
-            Package.devDependencies['@types/validator'] = devDependencies['@types/validator'];
 
             switch (dialect) {
                 case 'mariadb':

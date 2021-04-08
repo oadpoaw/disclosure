@@ -5,18 +5,19 @@ import Config from '../../assets/disclosure.json';
 import TSConfig from '../../assets/tsconfig.json';
 import { Dialects } from '../../Typings';
 import { Providers } from '../../Constants';
-import { isFileExists } from './isFileExists';
+import { isFileExists } from '../util/isFileExists';
 import { packageJSON } from './packageJSON';
 import { promisify } from 'util';
 import ChildProcess from 'child_process';
-import { git } from './git';
 import { indexFile } from '../template/indexFile';
+import rimraf from 'rimraf';
+import { lookpath } from 'lookpath';
+import { shardFile } from './shardFile';
+
 const exec = promisify(ChildProcess.exec);
 
 async function overwrite(projectPath: string) {
-    const exists = await isFileExists(path.join(projectPath, 'disclosure.json')) ||
-        await isFileExists(path.join(projectPath, 'src')) ||
-        await isFileExists(path.join(projectPath, 'package.json'));
+    const exists = await isFileExists(path.join(projectPath, 'disclosure.json'));
 
     if (exists) {
         await prompt([
@@ -60,8 +61,14 @@ function credentials() {
             name: 'protocol',
             choices: Providers,
             default: ':memory:',
+        },
+        {
+            type: 'confirm',
+            message: 'Use Automatic Bot Sharding?',
+            name: 'sharding',
+            default: false,
         }
-    ]) as Promise<{ token: string, protocol: Dialects; }>;
+    ]) as Promise<{ token: string, protocol: Dialects; sharding: boolean; }>;
 }
 
 async function installDependencies(projectPath: string) {
@@ -112,7 +119,6 @@ async function getDatabaseURI(dialect: Dialects) {
             validate: (uri) => {
                 try {
                     const protocol = new URL(uri).protocol.replace(':', '');
-                    console.log({ protocol, dialect });
                     if (protocol !== dialect) {
                         if (dialect === 'mongodb') {
                             if (protocol !== 'mongodb+srv') {
@@ -131,12 +137,19 @@ async function getDatabaseURI(dialect: Dialects) {
     ]).then(({ uri }) => uri) as string;
 }
 
-async function createIndexFile(projectPath: string, uri: string) {
+async function createIndexFile(projectPath: string, uri: string, sharding: boolean) {
     console.log('Creating `src/index.ts` file...');
     await fs.writeFile(
         path.join(projectPath, 'src', 'index.ts'),
-        indexFile(uri)
+        sharding ? shardFile() : indexFile(uri)
     );
+    if (sharding) {
+        console.log('Creating `src/Bot.ts` file...');
+        await fs.writeFile(
+            path.join(projectPath, 'src', 'Bot.ts'),
+            indexFile(uri)
+        );
+    }
 }
 
 async function createEnvFile(projectPath: string, token: string, uri: string) {
@@ -155,33 +168,59 @@ async function createTSConfigFile(projectPath: string) {
     );
 }
 
-export async function project(cwd: boolean) {
+export async function createProject() {
 
-    const name: string = cwd ?
-        path.basename(path.resolve(process.cwd())) :
-        await prompt([{
+    const name: string = await prompt([
+        {
             type: 'input',
             message: 'Enter Project Name',
             name: 'name',
-        }]).then(({ name }) => name);
+        }
+    ]).then(({ name }) => name);
 
-    const projectPath = cwd ? path.resolve(process.cwd()) : path.join(path.resolve(process.cwd()), name);
+    const projectPath = path.join(path.resolve(process.cwd()), name);
 
     await overwrite(projectPath);
 
-    if (!cwd) await fs.mkdir(projectPath);
+    try {
 
-    const { protocol, token } = await credentials();
-    const uri = await getDatabaseURI(protocol);
+        const { protocol, token, sharding } = await credentials();
+        const uri = await getDatabaseURI(protocol);
 
-    await packageJSON(projectPath, protocol);
-    await createFolderStructure(projectPath);
-    await createDisclosureJSON(projectPath);
-    await createIndexFile(projectPath, uri);
-    await createEnvFile(projectPath, token, uri);
-    await createTSConfigFile(projectPath);
-    await git(projectPath);
-    await installDependencies(projectPath);
+        await fs.mkdir(projectPath);
+        await packageJSON(projectPath, protocol);
+        await createFolderStructure(projectPath);
+        await createDisclosureJSON(projectPath);
+        await createIndexFile(projectPath, uri, sharding);
+        await createEnvFile(projectPath, token, uri);
+        await createTSConfigFile(projectPath);
+        await installDependencies(projectPath);
+
+    } catch (err) {
+
+        console.error(err);
+
+        console.log(`Deleting ./${path.basename(projectPath)}`);
+
+        rimraf(projectPath, console.error);
+
+        process.exit(1);
+
+    }
+
+    try {
+        if (lookpath('git')) {
+            await fs.writeFile(
+                path.join(projectPath, '.gitignore'),
+                `node_modules/\ndist/\n.env`
+            );
+            await exec('git init', { cwd: projectPath });
+            await exec('git add .', { cwd: projectPath });
+            await exec(`git commit -m "Initial Disclosure Project"`, { cwd: projectPath });
+        }
+    } catch (_err) {
+
+    }
 
     console.log(`Disclosure Project '${name}' created.`);
 

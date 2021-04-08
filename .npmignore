@@ -1,4 +1,8 @@
 .github/
 src/
 .npm/
-tsconfig.json
+assets/
+docs/
+typedoc.json
+CNAME
+.nojekyll

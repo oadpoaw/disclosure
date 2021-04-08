@@ -13,6 +13,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 14.x
+
       - run: npm ci
       - run: npm run build
       - run: npm test
@@ -24,6 +25,7 @@ jobs:
         run: |
           SUM=`sha256sum disclosure.tar.gz`
           echo $SUM > checksum.txt
+
       - name: Create release
         uses: softprops/action-gh-release@v1
         env:
@@ -34,6 +36,7 @@ jobs:
             checksum.txt
 
   npm-release:
+    needs: release
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -41,9 +44,45 @@ jobs:
         with:
           node-version: 14.x
           registry-url: https://registry.npmjs.org/
+
       - run: npm ci
       - run: npm run build
       - run: npm test
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  docs:
+    needs: release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+
+      - run: npm ci
+      - run: npm run docs
+      - run: rm -rf src package.json package-lock.json .github tsconfig.json
+
+      - run: |
+          cp -R assets docs/
+          cp CNAME docs/
+          cp .nojekyll docs/
+          cp README.md docs/
+          cp LICENSE docs/
+
+      - run: rm -rf assets CNAME .nojekyll README.md LICENSE
+
+      - run: |
+
+          git config --local user.email "oadpoaw@gmail.com"
+          git config --local user.name "oadpoaw"
+
+          git add .
+          git commit -m "docs"
+
+          git push origin HEAD:gh-pages --force
+
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

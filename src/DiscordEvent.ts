@@ -23,8 +23,8 @@ export interface DiscordEvent {
 export abstract class DiscordEvent {
 
     constructor(
-        protected client: Disclosure,
-        public eventName: keyof ClientEvents
+        protected readonly client: Disclosure,
+        public readonly eventName: keyof ClientEvents
     ) { }
 
 }
