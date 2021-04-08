@@ -63,7 +63,7 @@ jobs:
 
       - run: npm ci
       - run: npm run docs
-      - run: rm -rf src package.json package-lock.json .github tsconfig.json typedoc.json
+      - run: rm -rf src package.json package-lock.json .github tsconfig.json
 
       - run: |
           cp -R assets docs/
