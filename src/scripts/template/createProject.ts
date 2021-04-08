@@ -12,6 +12,7 @@ import ChildProcess from 'child_process';
 import { indexFile } from '../template/indexFile';
 import rimraf from 'rimraf';
 import { lookpath } from 'lookpath';
+import { shardFile } from './shardFile';
 
 const exec = promisify(ChildProcess.exec);
 
@@ -60,8 +61,14 @@ function credentials() {
             name: 'protocol',
             choices: Providers,
             default: ':memory:',
+        },
+        {
+            type: 'confirm',
+            message: 'Use Automatic Bot Sharding?',
+            name: 'sharding',
+            default: false,
         }
-    ]) as Promise<{ token: string, protocol: Dialects; }>;
+    ]) as Promise<{ token: string, protocol: Dialects; sharding: boolean; }>;
 }
 
 async function installDependencies(projectPath: string) {
@@ -130,12 +137,19 @@ async function getDatabaseURI(dialect: Dialects) {
     ]).then(({ uri }) => uri) as string;
 }
 
-async function createIndexFile(projectPath: string, uri: string) {
+async function createIndexFile(projectPath: string, uri: string, sharding: boolean) {
     console.log('Creating `src/index.ts` file...');
     await fs.writeFile(
         path.join(projectPath, 'src', 'index.ts'),
-        indexFile(uri)
+        sharding ? shardFile() : indexFile(uri)
     );
+    if (sharding) {
+        console.log('Creating `src/Bot.ts` file...');
+        await fs.writeFile(
+            path.join(projectPath, 'src', 'Bot.ts'),
+            indexFile(uri)
+        );
+    }
 }
 
 async function createEnvFile(projectPath: string, token: string, uri: string) {
@@ -170,14 +184,14 @@ export async function createProject() {
 
     try {
 
-        const { protocol, token } = await credentials();
+        const { protocol, token, sharding } = await credentials();
         const uri = await getDatabaseURI(protocol);
 
         await fs.mkdir(projectPath);
         await packageJSON(projectPath, protocol);
         await createFolderStructure(projectPath);
         await createDisclosureJSON(projectPath);
-        await createIndexFile(projectPath, uri);
+        await createIndexFile(projectPath, uri, sharding);
         await createEnvFile(projectPath, token, uri);
         await createTSConfigFile(projectPath);
         await installDependencies(projectPath);

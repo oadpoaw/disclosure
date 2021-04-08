@@ -10,6 +10,7 @@ export type MessageResolvable = APIMessageContentResolvable | (MessageOptions & 
 export interface DisclosureLogger {
     info: (message: any) => any;
     error: (message: any) => any;
+    warn: (message: any) => any;
 }
 
 export interface CommandConfig {

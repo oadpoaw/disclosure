@@ -236,7 +236,7 @@ export class Dispatcher {
     /**
      * 
      * @param inhibitor Return `true` to continue executing the command. Return `false` to discontinue executing the command.
-     * @param priority The priority of the inhibitor. Defaults to `0`
+     * @param priority The priority of the inhibitor. Defaults to `0`. Higher the number, Higher the priority
      */
     addInhibitor(inhibitor: Inhibitor, priority: number = 0) {
         this.inhibitors.add([inhibitor, priority]);

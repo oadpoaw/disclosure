@@ -1,9 +1,8 @@
 import { Client, ClientOptions, Collection, Guild, GuildChannel, Role } from 'discord.js';
 import { promises as fs } from 'fs';
 import path from 'path';
-import { FunctionProvider } from './database/StoreProvider';
 import { Provider } from './database/Provider';
-import { Command, Config, DisclosureError, DisclosureLogger, DiscordEvent, Dispatcher, Scaffold, } from '.';
+import { Command, Config, DisclosureError, DisclosureLogger, DiscordEvent, Dispatcher, FunctionProvider, Scaffold } from '.';
 import Commands from './commands';
 
 interface ExtendedCommand {
@@ -322,6 +321,39 @@ export class Disclosure extends Client {
                     process.exit(1);
 
                 }
+            }
+        }
+    }
+
+    /**
+     * Get the total count of users or guilds.
+     * 
+     * Useful for making APIs
+     */
+    async getCount(props: 'users' | 'guilds') {
+        if (this.shard) {
+            if (props === 'users') {
+
+                const raw = await this.shard.broadcastEval(`this.guilds.cache.reduce((acc, cur) => acc + cur.memberCount, 0)`);
+
+                return raw.reduce((acc, cur) => acc + cur, 0);
+
+            } else if (props === 'guilds') {
+
+                const raw = await this.shard.broadcastEval(`this.guilds.cache.size`);
+
+                return raw.reduce((acc, cur) => acc + cur, 0);
+
+            }
+        } else {
+            if (props === 'users') {
+
+                return this.guilds.cache.reduce((acc, cur) => acc + cur.memberCount, 0);
+
+            } else if (props === 'guilds') {
+
+                return this.guilds.cache.size;
+
             }
         }
     }
