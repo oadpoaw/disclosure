@@ -60,7 +60,7 @@ $ npx disclosure-discord command
 $ npx disclosure-discord event
 # For a new event
 ```
-![func](/assets/test2.gif)
+![func](https://zerosnaps.cf/6mostjrj.gif)
 
 ### Running the Bot
 
