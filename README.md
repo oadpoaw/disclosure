@@ -34,7 +34,7 @@ Don't Believe Me? Let me show you how:
 # Using npx to ensure that we are always using the latest version of disclosure-discord
 $ npx disclosure-discord
 ```
-![done](/assets/test.gif)
+![done](https://zerosnaps.cf/6mostjrj.gif)
 
 ## Initial Project Structure
 ```sh
@@ -60,7 +60,7 @@ $ npx disclosure-discord command
 $ npx disclosure-discord event
 # For a new event
 ```
-![func](https://zerosnaps.cf/6mostjrj.gif)
+![func](/assets/test2.gif)
 
 ### Running the Bot
 
