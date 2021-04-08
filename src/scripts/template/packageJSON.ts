@@ -7,13 +7,23 @@ import { Dialects } from '../../Typings';
 export async function packageJSON(projectPath: string, dialect: Dialects) {
     console.log(`Creating \`package.json\` ...`);
 
+    /**
+     * So we can keep the dependencies up to date
+     */
+
     Package.dependencies['disclosure-discord'] = `^${version}`;
     Package.dependencies['discord.js'] = dependencies['discord.js'];
     Package.devDependencies['@types/node'] = devDependencies['@types/node'];
     Package.devDependencies['@types/ws'] = devDependencies['@types/ws'];
+    Package.devDependencies['concurrently'] = devDependencies['concurrently'];
+    Package.devDependencies['nodemon'] = devDependencies['nodemon'];
     Package.devDependencies['rimraf'] = dependencies['rimraf'];
     Package.devDependencies['typescript'] = devDependencies['typescript'];
 
+    /**
+     * Manually installing these packages according to whata database is used for
+     * the disclosure databse
+     */
     if (dialect !== ':memory:') {
         if (dialect === 'mongodb') {
             //@ts-ignore

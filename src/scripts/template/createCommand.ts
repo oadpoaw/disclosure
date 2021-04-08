@@ -16,7 +16,7 @@ function createCommandString(data: any) {
     return `import { Disclosure, Command, Arguments } from 'disclosure-discord';
 import { Message } from 'discord.js';
 
-export default new class extends Command {
+export default class extends Command {
     constructor(client: Disclosure)  {
         super(client, {
             name: '${name}',

@@ -7,7 +7,7 @@ export const Events: Record<keyof ClientEvents, string> = {
 import { DMChannel, GuildChannel } from 'discord.js';
 
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-channelCreate
-export default new class extends DiscordEvent {
+export default class extends DiscordEvent {
     constructor(client: Disclosure) {
         super(client, 'channelCreate');
     }
@@ -23,7 +23,7 @@ export default new class extends DiscordEvent {
 import { DMChannel, GuildChannel } from 'discord.js';
 
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-channelDelete
-export default new class extends DiscordEvent {
+export default class extends DiscordEvent {
     constructor(client: Disclosure) {
         super(client, 'channelCreate');
     }
@@ -39,7 +39,7 @@ export default new class extends DiscordEvent {
 import { GuildChannel, TextChannel } from 'discord.js';
 
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-channelPinsUpdate
-export default new class extends DiscordEvent {
+export default class extends DiscordEvent {
     constructor(client: Disclosure) {
         super(client, 'channelPinsUpdate');
     }
@@ -55,7 +55,7 @@ export default new class extends DiscordEvent {
 import { DMChannel, GuildChannel } from 'discord.js';
 
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-channelUpdate
-export default new class extends DiscordEvent {
+export default class extends DiscordEvent {
     constructor(client: Disclosure) {
         super(client, 'channelUpdate');
     }
@@ -71,7 +71,7 @@ export default new class extends DiscordEvent {
 import { DMChannel, GuildChannel } from 'discord.js';
 
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-debug
-export default new class extends DiscordEvent {
+export default class extends DiscordEvent {
     constructor(client: Disclosure) {
         super(client, 'debug');
     }
@@ -87,7 +87,7 @@ export default new class extends DiscordEvent {
 import { DMChannel, GuildChannel } from 'discord.js';
 
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-disconnect
-export default new class extends DiscordEvent {
+export default class extends DiscordEvent {
     constructor(client: Disclosure) {
         super(client, 'disconnect');
     }
@@ -103,7 +103,7 @@ export default new class extends DiscordEvent {
 import { GuildEmoji } from 'discord.js';
 
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-emojiCreate
-export default new class extends DiscordEvent {
+export default class extends DiscordEvent {
     constructor(client: Disclosure) {
         super(client, 'emojiCreate');
     }
@@ -119,7 +119,7 @@ export default new class extends DiscordEvent {
 import { GuildEmoji } from 'discord.js';
 
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-emojiDelete
-export default new class extends DiscordEvent {
+export default class extends DiscordEvent {
     constructor(client: Disclosure) {
         super(client, 'emojiDelete');
     }
@@ -135,7 +135,7 @@ export default new class extends DiscordEvent {
 import { GuildEmoji } from 'discord.js';
 
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-emojiUpdate
-export default new class extends DiscordEvent {
+export default class extends DiscordEvent {
     constructor(client: Disclosure) {
         super(client, 'emojiUpdate');
     }
@@ -150,7 +150,7 @@ export default new class extends DiscordEvent {
         `import { Disclosure, DiscordEvent } from 'disclosure-discord';
 
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-error
-export default new class extends DiscordEvent {
+export default class extends DiscordEvent {
     constructor(client: Disclosure) {
         super(client, 'error');
     }
@@ -166,7 +166,7 @@ export default new class extends DiscordEvent {
 import { GuildMember, User } from 'discord.js';
 
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildBanAdd
-export default new class extends DiscordEvent {
+export default class extends DiscordEvent {
     constructor(client: Disclosure) {
         super(client, 'guildBanAdd');
     }
@@ -182,7 +182,7 @@ export default new class extends DiscordEvent {
 import { GuildMember, User } from 'discord.js';
 
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildBanRemove
-export default new class extends DiscordEvent {
+export default class extends DiscordEvent {
     constructor(client: Disclosure) {
         super(client, 'guildBanRemove');
     }
@@ -198,7 +198,7 @@ export default new class extends DiscordEvent {
 import { Guild } from 'discord.js';
 
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildCreate
-export default new class extends DiscordEvent {
+export default class extends DiscordEvent {
     constructor(client: Disclosure) {
         super(client, 'guildCreate');
     }
@@ -214,7 +214,7 @@ export default new class extends DiscordEvent {
 import { Guild } from 'discord.js';
 
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildDelete
-export default new class extends DiscordEvent {
+export default class extends DiscordEvent {
     constructor(client: Disclosure) {
         super(client, 'guildDelete');
     }
@@ -230,7 +230,7 @@ export default new class extends DiscordEvent {
 import { Guild } from 'discord.js';
 
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildIntegrationsUpdate
-export default new class extends DiscordEvent {
+export default class extends DiscordEvent {
     constructor(client: Disclosure) {
         super(client, 'guildIntegrationsUpdate');
     }
@@ -246,7 +246,7 @@ export default new class extends DiscordEvent {
 import { GuildMember } from 'discord.js';
 
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildMemberAdd
-export default new class extends DiscordEvent {
+export default class extends DiscordEvent {
     constructor(client: Disclosure) {
         super(client, 'guildMemberAdd');
     }
@@ -262,7 +262,7 @@ export default new class extends DiscordEvent {
 import { GuildMember } from 'discord.js';
 
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildMemberAvailable
-export default new class extends DiscordEvent {
+export default class extends DiscordEvent {
     constructor(client: Disclosure) {
         super(client, 'guildMemberAvailable');
     }
@@ -278,7 +278,7 @@ export default new class extends DiscordEvent {
 import { GuildMember } from 'discord.js';
 
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildMemberRemove
-export default new class extends DiscordEvent {
+export default class extends DiscordEvent {
     constructor(client: Disclosure) {
         super(client, 'guildMemberRemove');
     }
@@ -294,7 +294,7 @@ export default new class extends DiscordEvent {
 import { Collection, Guild, GuildMember, Snowflake } from 'discord.js';
 
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildMembersChunk
-export default new class extends DiscordEvent {
+export default class extends DiscordEvent {
     constructor(client: Disclosure) {
         super(client, 'guildMembersChunk');
     }
@@ -310,7 +310,7 @@ export default new class extends DiscordEvent {
 import { GuildMember, Speaking } from 'discord.js';
 
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildMemberSpeaking
-export default new class extends DiscordEvent {
+export default class extends DiscordEvent {
     constructor(client: Disclosure) {
         super(client, 'guildMemberSpeaking');
     }
@@ -326,7 +326,7 @@ export default new class extends DiscordEvent {
 import { GuildMember } from 'discord.js';
 
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildMemberUpdate
-export default new class extends DiscordEvent {
+export default class extends DiscordEvent {
     constructor(client: Disclosure) {
         super(client, 'guildMemberUpdate');
     }
@@ -342,7 +342,7 @@ export default new class extends DiscordEvent {
 import { Guild } from 'discord.js';
 
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildUnavailable
-export default new class extends DiscordEvent {
+export default class extends DiscordEvent {
     constructor(client: Disclosure) {
         super(client, 'guildUnavailable');
     }
@@ -358,7 +358,7 @@ export default new class extends DiscordEvent {
 import { Guild } from 'discord.js';
 
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildUpdate
-export default new class extends DiscordEvent {
+export default class extends DiscordEvent {
     constructor(client: Disclosure) {
         super(client, 'guildUpdate');
     }
@@ -373,7 +373,7 @@ export default new class extends DiscordEvent {
         `import { Disclosure, DiscordEvent } from 'disclosure-discord';
 
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-invalidated
-export default new class extends DiscordEvent {
+export default class extends DiscordEvent {
     constructor(client: Disclosure) {
         super(client, 'invalidated');
     }
@@ -389,7 +389,7 @@ export default new class extends DiscordEvent {
 import { Invite } from 'discord.js';
 
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-inviteCreate
-export default new class extends DiscordEvent {
+export default class extends DiscordEvent {
     constructor(client: Disclosure) {
         super(client, 'inviteCreate');
     }
@@ -405,7 +405,7 @@ export default new class extends DiscordEvent {
 import { Invite } from 'discord.js';
 
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-inviteDelete
-export default new class extends DiscordEvent {
+export default class extends DiscordEvent {
     constructor(client: Disclosure) {
         super(client, 'inviteDelete');
     }
@@ -421,7 +421,7 @@ export default new class extends DiscordEvent {
 import { Message } from 'discord.js';
 
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-message
-export default new class extends DiscordEvent {
+export default class extends DiscordEvent {
     constructor(client: Disclosure) {
         super(client, 'message');
     }
@@ -437,7 +437,7 @@ export default new class extends DiscordEvent {
 import { Message } from 'discord.js';
 
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-messageDelete
-export default new class extends DiscordEvent {
+export default class extends DiscordEvent {
     constructor(client: Disclosure) {
         super(client, 'messageDelete');
     }
@@ -453,7 +453,7 @@ export default new class extends DiscordEvent {
 import { Collection, Message, Snowflake } from 'discord.js';
 
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-messageDeleteBulk
-export default new class extends DiscordEvent {
+export default class extends DiscordEvent {
     constructor(client: Disclosure) {
         super(client, 'messageDeleteBulk');
     }
@@ -469,7 +469,7 @@ export default new class extends DiscordEvent {
 import { MessageReaction, User } from 'discord.js';
 
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-messageReactionAdd
-export default new class extends DiscordEvent {
+export default class extends DiscordEvent {
     constructor(client: Disclosure) {
         super(client, 'messageReactionAdd');
     }
@@ -485,7 +485,7 @@ export default new class extends DiscordEvent {
 import { MessageReaction, User } from 'discord.js';
 
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-messageReactionRemove
-export default new class extends DiscordEvent {
+export default class extends DiscordEvent {
     constructor(client: Disclosure) {
         super(client, 'messageReactionRemove');
     }
@@ -501,7 +501,7 @@ export default new class extends DiscordEvent {
 import { Message } from 'discord.js';
 
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-messageReactionRemoveAll
-export default new class extends DiscordEvent {
+export default class extends DiscordEvent {
     constructor(client: Disclosure) {
         super(client, 'messageReactionRemoveAll');
     }
@@ -517,7 +517,7 @@ export default new class extends DiscordEvent {
 import { MessageReaction } from 'discord.js';
 
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-messageReactionRemoveEmoji
-export default new class extends DiscordEvent {
+export default class extends DiscordEvent {
     constructor(client: Disclosure) {
         super(client, 'messageReactionRemoveEmoji');
     }
@@ -533,7 +533,7 @@ export default new class extends DiscordEvent {
 import { Message } from 'discord.js';
 
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-messageUpdate
-export default new class extends DiscordEvent {
+export default class extends DiscordEvent {
     constructor(client: Disclosure) {
         super(client, 'messageUpdate');
     }
@@ -549,7 +549,7 @@ export default new class extends DiscordEvent {
 import { Presence } from 'discord.js';
 
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-presenceUpdate
-export default new class extends DiscordEvent {
+export default class extends DiscordEvent {
     constructor(client: Disclosure) {
         super(client, 'presenceUpdate');
     }
@@ -565,7 +565,7 @@ export default new class extends DiscordEvent {
 import { RateLimitData } from 'discord.js';
 
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-rateLimit
-export default new class extends DiscordEvent {
+export default class extends DiscordEvent {
     constructor(client: Disclosure) {
         super(client, 'rateLimit');
     }
@@ -580,7 +580,7 @@ export default new class extends DiscordEvent {
         `import { Disclosure, DiscordEvent } from 'disclosure-discord';
 
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-ready
-export default new class extends DiscordEvent {
+export default class extends DiscordEvent {
     constructor(client: Disclosure) {
         super(client, 'ready');
     }
@@ -596,7 +596,7 @@ export default new class extends DiscordEvent {
 import { Role } from 'discord.js';
 
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-roleCreate
-export default new class extends DiscordEvent {
+export default class extends DiscordEvent {
     constructor(client: Disclosure) {
         super(client, 'roleCreate');
     }
@@ -612,7 +612,7 @@ export default new class extends DiscordEvent {
 import { Role } from 'discord.js';
 
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-roleDelete
-export default new class extends DiscordEvent {
+export default class extends DiscordEvent {
     constructor(client: Disclosure) {
         super(client, 'roleDelete');
     }
@@ -628,7 +628,7 @@ export default new class extends DiscordEvent {
 import { Role } from 'discord.js';
 
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-roleUpdate
-export default new class extends DiscordEvent {
+export default class extends DiscordEvent {
     constructor(client: Disclosure) {
         super(client, 'roleUpdate');
     }
@@ -643,7 +643,7 @@ export default new class extends DiscordEvent {
         `import { Disclosure, DiscordEvent } from 'disclosure-discord';
 
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-shardDisconnect
-export default new class extends DiscordEvent {
+export default class extends DiscordEvent {
     constructor(client: Disclosure) {
         super(client, 'shardDisconnect');
     }
@@ -658,7 +658,7 @@ export default new class extends DiscordEvent {
         `import { Disclosure, DiscordEvent } from 'disclosure-discord';
 
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-shardError
-export default new class extends DiscordEvent {
+export default class extends DiscordEvent {
     constructor(client: Disclosure) {
         super(client, 'shardError');
     }
@@ -673,7 +673,7 @@ export default new class extends DiscordEvent {
         `import { Disclosure, DiscordEvent } from 'disclosure-discord';
 
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-shardReady
-export default new class extends DiscordEvent {
+export default class extends DiscordEvent {
     constructor(client: Disclosure) {
         super(client, 'shardReady');
     }
@@ -688,7 +688,7 @@ export default new class extends DiscordEvent {
         `import { Disclosure, DiscordEvent } from 'disclosure-discord';
 
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-shardReconnecting
-export default new class extends DiscordEvent {
+export default class extends DiscordEvent {
     constructor(client: Disclosure) {
         super(client, 'shardReconnecting');
     }
@@ -703,7 +703,7 @@ export default new class extends DiscordEvent {
         `import { Disclosure, DiscordEvent } from 'disclosure-discord';
 
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-shardResume
-export default new class extends DiscordEvent {
+export default class extends DiscordEvent {
     constructor(client: Disclosure) {
         super(client, 'shardResume');
     }
@@ -719,7 +719,7 @@ export default new class extends DiscordEvent {
 import { Channel, User } from 'discord.js';
 
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-typingStart
-export default new class extends DiscordEvent {
+export default class extends DiscordEvent {
     constructor(client: Disclosure) {
         super(client, 'typingStart');
     }
@@ -735,7 +735,7 @@ export default new class extends DiscordEvent {
 import { User } from 'discord.js';
 
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-userUpdate
-export default new class extends DiscordEvent {
+export default class extends DiscordEvent {
     constructor(client: Disclosure) {
         super(client, 'userUpdate');
     }
@@ -751,7 +751,7 @@ export default new class extends DiscordEvent {
 import { VoiceState } from 'discord.js';
 
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-voiceStateUpdate
-export default new class extends DiscordEvent {
+export default class extends DiscordEvent {
     constructor(client: Disclosure) {
         super(client, 'voiceStateUpdate');
     }
@@ -766,7 +766,7 @@ export default new class extends DiscordEvent {
         `import { Disclosure, DiscordEvent } from 'disclosure-discord';
 
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-warn
-export default new class extends DiscordEvent {
+export default class extends DiscordEvent {
     constructor(client: Disclosure) {
         super(client, 'warn');
     }
@@ -782,7 +782,7 @@ export default new class extends DiscordEvent {
 import { TextChannel } from 'discord.js';
 
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-webhookUpdate
-export default new class extends DiscordEvent {
+export default class extends DiscordEvent {
     constructor(client: Disclosure) {
         super(client, 'webhookUpdate');
     }
