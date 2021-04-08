@@ -43,15 +43,15 @@ const argv = minimist(process.argv.slice(2), builder({
 
         switch (answer) {
             case 'Bot': {
-                createProject();
+                await createProject();
                 break;
             }
             case 'Command': {
-                createCommand(argv);
+                await createCommand(argv);
                 break;
             }
             case 'Event': {
-                createEvent();
+                await createEvent();
                 break;
             }
         }
