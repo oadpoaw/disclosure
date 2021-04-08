@@ -1,4 +1,10 @@
 import { ColumnType, DisclosureError, ExtractColumnType, FunctionProvider, StoreProvider, validate } from '../../';
+import { Document } from 'mongoose';
+
+interface ModelDefinition<T extends ColumnType> extends Document {
+    key: string;
+    value: ExtractColumnType<T>;
+}
 
 export function MongoDB(uri: string): FunctionProvider {
     try {
@@ -18,7 +24,7 @@ export function MongoDB(uri: string): FunctionProvider {
                     t === 'number' ? Number :
                         t === 'string' ? String : undefined;
 
-            const model = connection.model(s, new mongoose.Schema({
+            const model = connection.model<ModelDefinition<T>>(s, new mongoose.Schema({
                 key: String,
                 value: type,
             }));
@@ -27,14 +33,19 @@ export function MongoDB(uri: string): FunctionProvider {
 
                 async get(k: string): Promise<ExtractColumnType<T>> {
                     const inst = await model.findOne({ key: k });
-                    if (inst) return inst.get('value');
+                    if (inst) return inst.value;
                     return undefined;
                 }
 
                 async set(k: string, v: ExtractColumnType<T>) {
                     validate(v, t);
-                    const inst = await model.findOneAndUpdate({ key: k }, { value: v });
-                    if (!inst) await model.create({ key: k, value: v });
+                    const inst = await model.findOne({ key: k });
+                    if (inst) {
+                        inst.value = v;
+                        await inst.save();
+                    } else {
+                        await model.create({ key: k, value: v });
+                    }
                 }
 
                 async del(k: string) {
@@ -43,6 +54,12 @@ export function MongoDB(uri: string): FunctionProvider {
 
                 async clr() {
                     await model.deleteMany();
+                }
+
+                async all() {
+                    const entries = await model.find({});
+                    const mapped = entries.map((entry) => [entry.key, entry.value]);
+                    return mapped as [string, ExtractColumnType<T>][];
                 }
 
             };

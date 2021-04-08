@@ -26,6 +26,10 @@ export function Memory(): FunctionProvider {
                 storage.clear();
             }
 
+            async all() {
+                return storage.map((v, k) => [k, v]) as [string, ExtractColumnType<T>][];
+            }
+
         };
     };
 

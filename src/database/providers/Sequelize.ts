@@ -46,6 +46,12 @@ export function Sequelize(uri: string): FunctionProvider {
                     await model.destroy();
                 }
 
+                async all() {
+                    const entries = await model.findAll();
+                    const mapped = entries.map((entry) => [entry.getDataValue('key'), entry.getDataValue('value')]);
+                    return mapped as [string, ExtractColumnType<T>][];
+                }
+
             };
         };
 

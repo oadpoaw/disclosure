@@ -28,6 +28,11 @@ export abstract class StoreProvider<T extends ColumnType = ColumnType> {
      */
     abstract clr(): Promise<void>;
 
+    /**
+     * Gets all of the items in the store.
+     */
+    abstract all(): Promise<[string, ExtractColumnType<T>][]>;
+
 }
 
 export type ColumnType = 'boolean' | 'number' | 'string';
