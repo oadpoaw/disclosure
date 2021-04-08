@@ -3,9 +3,9 @@
   "main": "dist/index.js",
   "scripts": {
     "start": "node .",
+    "dev": "concurrently \"tsc -w\" \"nodemon dist/index.js\"",
     "prebuild": "rimraf dist",
-    "build": "tsc --build",
-    "test": "echo \"Hello Disclosure Project!\""
+    "build": "tsc --build"
   },
   "dependencies": {
     "disclosure-discord": "",
@@ -14,6 +14,8 @@
   "devDependencies": {
     "@types/node": "",
     "@types/ws": "",
+    "concurrently": "",
+    "nodemon": "",
     "rimraf": "",
     "typescript": ""
   }
