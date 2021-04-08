@@ -44,11 +44,6 @@ export async function ArgumentHandler<T extends ArgsDefinition>(client: Disclosu
             content = definition.default ?? undefined;
         }
 
-        if (typeof content === 'undefined') {
-            error = new ArgumentError(key, content, definition.type);
-            break;
-        }
-
         if (definition.type === 'string') {
             if (typeof content !== 'string') {
                 error = new ArgumentError(key, content, definition.type);
