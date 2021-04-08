@@ -20,10 +20,10 @@ export default new class extends Command {
     constructor(client: Disclosure)  {
         super(client, {
             name: '${name}',
-            description: '${description.replace(/\'/, '\\\'')}',
+            description: '${description.replace(/\'/g, '\\\'')}',
             cooldown: ${cooldown},
             args: ${args},
-            usage: ['${usage.replace(/\'/, '\\\'')}'],
+            usage: ['${usage.replace(/\'/g, '\\\'')}'],
             aliases: [],
             userPermissions: [${userPermissions.length ? userPermissions.map((p: string) => `'${p}'`).join(', ') : ''}],
             clientPermissions: [${clientPermissions.length ? clientPermissions.map((p: string) => `'${p}'`).join(', ') : ''}],
