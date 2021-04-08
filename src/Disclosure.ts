@@ -4,6 +4,7 @@ import path from 'path';
 import { FunctionProvider } from './database/StoreProvider';
 import { Provider } from './database/Provider';
 import { Command, Config, DisclosureError, DisclosureLogger, DiscordEvent, Dispatcher, Scaffold, } from '.';
+import Commands from './commands';
 
 interface ExtendedCommand {
     new(client: Disclosure): Command;
@@ -209,8 +210,9 @@ export class Disclosure extends Client {
 
     }
 
-    private async loadCommand(instance: Command | ExtendedCommand, category: string = null) {
-        const command = instance instanceof Command ? instance : new instance(this);
+    private async loadCommand(instance: ExtendedCommand, category: string = null) {
+
+        const command = new instance(this);
 
         command.config.category = category.toLowerCase();
 
@@ -226,6 +228,12 @@ export class Disclosure extends Client {
 
         const filePath = path.join(process.cwd(), 'dist', 'commands');
         const files = await fs.readdir(filePath);
+
+        await this.loadCommand(Commands.disable);
+        await this.loadCommand(Commands.enable);
+        await this.loadCommand(Commands.eval);
+        await this.loadCommand(Commands.help);
+        await this.loadCommand(Commands.ping);
 
         for (const file of files) {
             if ((await fs.lstat(path.join(filePath, file))).isDirectory()) {
