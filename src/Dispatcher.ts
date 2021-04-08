@@ -1,4 +1,4 @@
-import { Message, MessageEmbed, SnowflakeUtil } from 'discord.js';
+import { Collection, Message, MessageEmbed, SnowflakeUtil } from 'discord.js';
 import { ArgumentError, Command, Disclosure, Arguments } from '.';
 import { StoreProvider } from './database/StoreProvider';
 import Escapes from '@xetha/escapes';
@@ -14,14 +14,23 @@ export class Dispatcher {
     constructor(private client: Disclosure) {
 
         this.awaiting = new Set();
-        this.commands = new Set();
+        this.cache = new Collection();
         this.inhibitors = new Set();
 
-        this._commands = client.database('commands', 'string');
+        this.DisabledCommands = client.database('commands', 'string');
         this.cooldowns = client.database('cooldowns', 'number');
         this.guilds = client.database('guilds', 'string');
 
         client.on('message', (message) => this.exec(message));
+
+        this.addInhibitor((message, command) => {
+            const reason = this.check(command);
+            if (reason) {
+                message.channel.send(this.client.config.messages.COMMAND.COMMAND_DISABLED.replace(/\${REASON}/, reason));
+                return false;
+            }
+            return true;
+        }, 5);
 
         this.addInhibitor((message, command) => {
             if (command.config.ownerOnly && !this.client.config.ownerID.includes(message.author.id)) {
@@ -98,7 +107,6 @@ export class Dispatcher {
         }, 1);
 
         this.generators = {
-
             prefix: async (message) => {
                 let prefix = this.client.config.prefix;
                 if (message.guild) {
@@ -109,27 +117,33 @@ export class Dispatcher {
                 }
                 return prefix;
             },
-
             cooldown: (message, command) => {
                 return `${command.config.name}:${message.author.id}`;
             }
-
         };
 
-        this.client.on('command', (data: ['enable' | 'disable', string]) => {
+        this.client.on('command', async (data: ['enable' | 'disable', string]) => {
             if (data[0] === 'enable') {
-                this.commands.add(data[1]);
+                this.cache.delete(data[1]);
             } else if (data[0] === 'disable') {
-                this.commands.delete(data[1]);
+                this.cache.set(data[1], await this.DisabledCommands.get(data[1]));
             }
         });
 
     }
 
+    /**
+     * storage for the user awaiting
+     */
     private readonly awaiting: Set<string>;
-    private readonly commands: Set<string>;
+
+    /** storage for the disabled commands */
+    private readonly cache: Collection<string, string>;
+
+    /** storage for the inhibitors */
     private readonly inhibitors: Set<[Inhibitor, number]>;
-    private readonly _commands: StoreProvider<'string'>;
+
+    private readonly DisabledCommands: StoreProvider<'string'>
 
     /**
      * Generators for flexibility on editing how would the dispatcher will get the prefix, to store cooldowns etc.
@@ -143,22 +157,16 @@ export class Dispatcher {
          * @default
          * ```js
          * (message) => {
-         *
          *      let prefix = this.client.config.prefix;
-         *
          *      if (message.guild) {
          *          prefix = await this.guilds.get(message.guild.id) ?? this.client.config.prefix;
-         *      } 
-         *
+         *      }
          *      if (typeof prefix !== 'string') {
          *          prefix = this.client.config.prefix;
          *      }
-         *
          *      return prefix;
-         *
          * }
          * ```
-         * 
          */
         prefix: PrefixGenerator;
 
@@ -190,11 +198,6 @@ export class Dispatcher {
     public readonly guilds: StoreProvider<'string'>;
 
     private async broadcast(action: 'enable' | 'disable', name: string) {
-        if (action === 'enable') {
-            await this._commands.set(name, name);
-        } else {
-            await this._commands.del(name);
-        }
         if (this.client.shard) {
             this.client.shard.broadcastEval(`this.emit('command', ['${action}','${name}'])`);
         } else {
@@ -203,12 +206,22 @@ export class Dispatcher {
     }
 
     /**
+     * Synchronize the DisabledCommands to the cache
+     */
+    async synchronize() {
+        const entries = await this.DisabledCommands.all();
+        for (const [name, reason] of entries) {
+            this.cache.set(name, reason);
+        }
+    }
+
+    /**
      * 
      * @param command The command to check
-     * @returns `true` if it's enabled. `false` if it's disabled.
+     * @returns The reason why is it disabled.
      */
     check(command: Command) {
-        return this.commands.has(command.config.name);
+        return this.cache.get(command.config.name);
     }
 
     /**
@@ -217,7 +230,8 @@ export class Dispatcher {
      * @returns `true` if it's enabled. `false` if it's already enabled.
      */
     async enable(command: Command) {
-        if (this.commands.has(command.config.name)) return false;
+        if (!this.cache.has(command.config.name)) return false;
+        await this.DisabledCommands.del(command.config.name);
         this.broadcast('enable', command.config.name);
         return true;
     }
@@ -227,8 +241,9 @@ export class Dispatcher {
      * @param command The command to disable
      * @returns `true` if it's disabled. `false` if it's already disabled.
      */
-    async disable(command: Command) {
-        if (!this.commands.has(command.config.name)) return false;
+    async disable(command: Command, reason: string = 'No reason provided.') {
+        if (this.cache.has(command.config.name)) return false;
+        await this.DisabledCommands.set(command.config.name, reason);
         this.broadcast('disable', command.config.name);
         return true;
     }
@@ -242,10 +257,13 @@ export class Dispatcher {
         this.inhibitors.add([inhibitor, priority]);
     }
 
+    /**
+     * Await a message from the Message#Author with a timeout
+     */
     async awaitReply(message: Message, time: number = 60000): Promise<Message | boolean> {
         try {
 
-            this.addAwait(message.author.id);
+            this.awaiting.add(message.author.id);
 
             const collected = await message.channel.awaitMessages(
                 (m) => m.author.id === message.author.id,
@@ -261,7 +279,7 @@ export class Dispatcher {
         } catch (e) {
             return false;
         } finally {
-            this.delAwait(message.author.id);
+            this.awaiting.delete(message.author.id);
         }
     }
 
@@ -274,37 +292,25 @@ export class Dispatcher {
         return false;
     }
 
-    private addAwait(id: string) {
-        return this.awaiting.add(id);
-    }
-
-    private hasAwait(id: string) {
-        return this.awaiting.has(id);
-    }
-
-    private delAwait(id: string) {
-        return this.awaiting.delete(id);
-    }
-
     private shouldHandleMessage(message: Message) {
         if (
             message.partial ||
             message.author.bot ||
-            this.hasAwait(message.author.id)
+            this.awaiting.has(message.author.id)
         ) return false;
         return true;
     }
 
     private async throttleHandle(message: Message, command: Command) {
 
-        const expiration = await this.cooldowns.get(await this.generators.cooldown(message, command));
+        const expiration = await this.cooldowns.get(this.generators.cooldown(message, command));
 
         if (expiration) {
 
             const now = Date.now();
 
             if (expiration < now) {
-                this.cooldowns.del(await this.generators.cooldown(message, command));
+                this.cooldowns.del(this.generators.cooldown(message, command));
             } else {
                 return message.channel.send(
                     this.client.config.messages.THROTTLE.MESSAGE
@@ -320,7 +326,7 @@ export class Dispatcher {
 
     private async throttleExec(message: Message, command: Command) {
         await this.cooldowns.set(
-            await this.generators.cooldown(message, command),
+            this.generators.cooldown(message, command),
             Date.now() + (command.config.cooldown * 1000)
         );
     }
@@ -340,7 +346,7 @@ export class Dispatcher {
 
             if (!command) return;
 
-            this.addAwait(message.author.id);
+            this.awaiting.add(message.author.id);
 
             try {
 
@@ -391,7 +397,7 @@ export class Dispatcher {
                 message.channel.send(embed);
 
             } finally {
-                this.delAwait(message.author.id);
+                this.awaiting.delete(message.author.id);
             }
         }
     }

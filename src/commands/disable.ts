@@ -8,7 +8,7 @@ export default class extends Command {
             description: 'Disables a enabled command.',
             cooldown: 3,
             args: 1,
-            usage: ['disable <Command>'],
+            usage: ['disable <Command> [...Reason]'],
             aliases: [],
             userPermissions: [],
             clientPermissions: [],
@@ -19,15 +19,19 @@ export default class extends Command {
 
     async execute(message: Message, argv: Arguments) {
 
-        const name = argv._[0].toLowerCase();
+        const args = argv._;
+
+        const name = args.shift().toLowerCase();
 
         const command = this.client.resolveCommand(name);
 
         if (!command) return message.channel.send(`That command does not exist.`);
 
-        const status = await this.client.dispatcher.disable(command);
+        const reason = args.length ? args.join(' ') : 'No reason provided.';
 
-        message.channel.send(`Command \`${command.config.name}\` ${status ? 'has been disabled.' : 'is already disabled.'}`);
+        const status = await this.client.dispatcher.disable(command, reason);
+
+        message.channel.send(`Command \`${command.config.name}\` ${status ? `has been disabled.\nReason: ${reason}` : 'is already disabled.'}`);
 
     }
 

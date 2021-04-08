@@ -76,6 +76,7 @@ export class Disclosure extends Client {
         if (this.initialized) throw new DisclosureError(`Disclosure Client Has Already Been Initialized`);
         await this.registerCommands();
         await this.registerEvents();
+        await this.dispatcher.synchronize();
         this.initialized = true;
     }
 
@@ -219,7 +220,6 @@ export class Disclosure extends Client {
 
         if (typeof command.init === 'function') command.init();
         this.commands.set(command.config.name, command);
-        await this.dispatcher.enable(command);
 
     }
 
