@@ -18,6 +18,7 @@ You can generate a Discord project with the finest file structure , which will p
 - A CLI to generate a Discord Bot Project! 
 - Awesome TypeScript Definitions for awesome developer tooling!
 - Sharding Support!
+- Active support!
 - Built-in Command Handler, includes:
   - Argument Parsing
   - Command Inhibitors
