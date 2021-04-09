@@ -8,6 +8,7 @@ import { ArgumentHandler } from './ArgumentHandler';
 export type Inhibitor = (m: Message, c: Command, args: string[]) => boolean | Promise<boolean>;
 export type PrefixGenerator = (m: Message) => string | Promise<string>;
 export type CooldownKeyGenerator = (m: Message, c: Command) => string;
+export type BeforeExecutionFunction = (m: Message) => boolean | Promise<boolean>;
 
 export class Dispatcher {
 
@@ -26,7 +27,7 @@ export class Dispatcher {
         this.addInhibitor((message, command) => {
             const reason = this.check(command);
             if (reason) {
-                message.channel.send(this.client.config.messages.COMMAND.COMMAND_DISABLED.replace(/\${REASON}/, reason));
+                message.channel.send(this.client.config.messages.COMMAND.COMMAND_DISABLED.replace(/\${REASON}/g, reason));
                 return false;
             }
             return true;
@@ -130,6 +131,8 @@ export class Dispatcher {
             }
         });
 
+        this.beforeExecute = () => true;
+
     }
 
     /**
@@ -144,6 +147,18 @@ export class Dispatcher {
     private readonly inhibitors: Set<[Inhibitor, number]>;
 
     private readonly DisabledCommands: StoreProvider<'string'>
+
+    /**
+     * Run statements before the dispatcher dispatches the message.
+     * 
+     * @returns `true` to continue dispatching. `false` to discontinue dispatching
+     * 
+     * @default
+     * ```js
+     * (message) => true;
+     * ```
+     */
+    beforeExecute: BeforeExecutionFunction;
 
     /**
      * Generators for flexibility on editing how would the dispatcher will get the prefix, to store cooldowns etc.
@@ -334,6 +349,8 @@ export class Dispatcher {
     private async exec(message: Message) {
 
         if (this.shouldHandleMessage(message)) {
+
+            if (!await this.beforeExecute(message)) return;
 
             const prefixRegex = new RegExp(`^(<@!?${this.client.user.id}>|${Escapes.regex(await this.generators.prefix(message))})\\s*`);
             if (!prefixRegex.test(message.content)) return;
