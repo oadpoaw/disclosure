@@ -1,7 +1,7 @@
 import { Disclosure } from './Disclosure';
 import { ClientEvents } from 'discord.js';
 
-export interface DiscordEvent<T = any> {
+export interface DiscordEvent<T = unknown> {
 
     /**
      * Run statements when the event is loaded.
@@ -20,7 +20,7 @@ export interface DiscordEvent<T = any> {
 
 }
 
-export abstract class DiscordEvent<T = any> {
+export abstract class DiscordEvent<T = unknown> {
 
     constructor(
         protected readonly client: Disclosure,
