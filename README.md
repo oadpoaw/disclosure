@@ -88,5 +88,5 @@ npm start
  - [MsSQL](https://en.wikipedia.org/wiki/Microsoft_SQL_Server)
 
 # Join Us For Support 
-[![Join](/assets/Capture.png)](https://discord.gg/HG8s98Uk) <br>
+[![Join](/assets/Capture.png)](https://discord.gg/fJCfptzwjG) <br>
 ![love](https://forthebadge.com/images/badges/built-with-love.svg)
