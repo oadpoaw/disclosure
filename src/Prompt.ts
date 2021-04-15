@@ -2,7 +2,7 @@ import { Message } from 'discord.js';
 import ms from 'pretty-ms';
 import { Disclosure, ExtractData, Prompts } from '.';
 
-export function StringToBoolean(str: string) {
+function StringToBoolean(str: string) {
     if (['true', 'yes', 'y'].includes(str.toLowerCase())) return true;
     else if (['false', 'no', 'n'].includes(str.toLowerCase())) return false;
     return undefined;

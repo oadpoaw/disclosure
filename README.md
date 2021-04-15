@@ -15,6 +15,7 @@ You can generate a Discord project with the finest file structure , which will p
 
 ## Features
 - Easy to use!
+- Flexible!
 - A CLI to generate a Discord Bot Project! 
 - Awesome TypeScript Definitions for awesome developer tooling!
 - Sharding Support!
@@ -25,6 +26,8 @@ You can generate a Discord project with the finest file structure , which will p
   - Prompts! with strong type definitions
   - Cooldown Throttles (Command Cooldown)
 - Supports many databases! See [here](#what-databases-does-it-support)
+
+Also see [Configuration](/Configuration.md) for guides how to edit Disclosure. And [Advanced Usages](Advanced.md) for advanced usages.
 
 ## Easy To Setup
 
