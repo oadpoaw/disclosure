@@ -27,7 +27,7 @@ You can generate a Discord project with the finest file structure , which will p
   - Cooldown Throttles (Command Cooldown)
 - Supports many databases! See [here](#what-databases-does-it-support)
 
-Also see [Configuration](/Configuration.md) for guides how to edit Disclosure. And [Advanced Usages](Advanced.md) for advanced usages.
+Also see [Configuration](/Guide-Configuration.md) for guides how to edit Disclosure. And [Advanced Usages](Advanced.md) for advanced usages.
 
 ## Easy To Setup
 
