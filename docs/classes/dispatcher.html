@@ -1,0 +1,862 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Dispatcher | disclosure-discord</title>
+	<meta name="description" content="Documentation for disclosure-discord">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+	<script async src="../assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">disclosure-discord</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../modules.html">disclosure-discord</a>
+				</li>
+				<li>
+					<a href="dispatcher.html">Dispatcher</a>
+				</li>
+			</ul>
+			<h1>Class Dispatcher</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">Dispatcher</span>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="dispatcher.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="dispatcher.html#disabledcommands" class="tsd-kind-icon">Disabled<wbr>Commands</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="dispatcher.html#awaiting" class="tsd-kind-icon">awaiting</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="dispatcher.html#beforeexecute" class="tsd-kind-icon">before<wbr>Execute</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="dispatcher.html#cache" class="tsd-kind-icon">cache</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="dispatcher.html#cooldowns" class="tsd-kind-icon">cooldowns</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="dispatcher.html#generators" class="tsd-kind-icon">generators</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="dispatcher.html#guilds" class="tsd-kind-icon">guilds</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="dispatcher.html#inhibitors" class="tsd-kind-icon">inhibitors</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="dispatcher.html#addinhibitor" class="tsd-kind-icon">add<wbr>Inhibitor</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="dispatcher.html#awaitreply" class="tsd-kind-icon">await<wbr>Reply</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="dispatcher.html#broadcast" class="tsd-kind-icon">broadcast</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="dispatcher.html#check" class="tsd-kind-icon">check</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="dispatcher.html#disable" class="tsd-kind-icon">disable</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="dispatcher.html#enable" class="tsd-kind-icon">enable</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="dispatcher.html#exec" class="tsd-kind-icon">exec</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="dispatcher.html#inihibit" class="tsd-kind-icon">inihibit</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="dispatcher.html#shouldhandlemessage" class="tsd-kind-icon">should<wbr>Handle<wbr>Message</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="dispatcher.html#synchronize" class="tsd-kind-icon">synchronize</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="dispatcher.html#throttleexec" class="tsd-kind-icon">throttle<wbr>Exec</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="dispatcher.html#throttlehandle" class="tsd-kind-icon">throttle<wbr>Handle</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Dispatcher<span class="tsd-signature-symbol">(</span>client<span class="tsd-signature-symbol">: </span><a href="disclosure.html" class="tsd-signature-type" data-tsd-kind="Class">Disclosure</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="dispatcher.html" class="tsd-signature-type" data-tsd-kind="Class">Dispatcher</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/oadpoaw/disclosure/blob/7dd9f9e/src/Dispatcher.ts#L13">Dispatcher.ts:13</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>client: <a href="disclosure.html" class="tsd-signature-type" data-tsd-kind="Class">Disclosure</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="dispatcher.html" class="tsd-signature-type" data-tsd-kind="Class">Dispatcher</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="disabledcommands" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> Disabled<wbr>Commands</h3>
+					<div class="tsd-signature tsd-kind-icon">Disabled<wbr>Commands<span class="tsd-signature-symbol">:</span> <a href="storeprovider.html" class="tsd-signature-type" data-tsd-kind="Class">StoreProvider</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">&quot;string&quot;</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/oadpoaw/disclosure/blob/7dd9f9e/src/Dispatcher.ts#L149">Dispatcher.ts:149</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="awaiting" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> awaiting</h3>
+					<div class="tsd-signature tsd-kind-icon">awaiting<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Set</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/oadpoaw/disclosure/blob/7dd9f9e/src/Dispatcher.ts#L141">Dispatcher.ts:141</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>storage for the user awaiting</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="beforeexecute" class="tsd-anchor"></a>
+					<h3>before<wbr>Execute</h3>
+					<div class="tsd-signature tsd-kind-icon">before<wbr>Execute<span class="tsd-signature-symbol">:</span> <a href="../modules.html#beforeexecutionfunction" class="tsd-signature-type" data-tsd-kind="Type alias">BeforeExecutionFunction</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/oadpoaw/disclosure/blob/7dd9f9e/src/Dispatcher.ts#L161">Dispatcher.ts:161</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Run statements before the dispatcher dispatches the message.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>returns</dt>
+							<dd><p><code>true</code> to continue dispatching. <code>false</code> to discontinue dispatching</p>
+							</dd>
+							<dt>default</dt>
+							<dd><pre><code class="language-js"><span style="color: #000000">(</span><span style="color: #001080">message</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">;</span>
+</code></pre>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="cache" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> cache</h3>
+					<div class="tsd-signature tsd-kind-icon">cache<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Collection</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/oadpoaw/disclosure/blob/7dd9f9e/src/Dispatcher.ts#L144">Dispatcher.ts:144</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>storage for the disabled commands</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="cooldowns" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> cooldowns</h3>
+					<div class="tsd-signature tsd-kind-icon">cooldowns<span class="tsd-signature-symbol">:</span> <a href="storeprovider.html" class="tsd-signature-type" data-tsd-kind="Class">StoreProvider</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">&quot;number&quot;</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/oadpoaw/disclosure/blob/7dd9f9e/src/Dispatcher.ts#L212">Dispatcher.ts:212</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Cooldowns stored as
+							<code>key: number</code></p>
+						</div>
+						<p>Key is generated like</p>
+						<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">key</span><span style="color: #000000"> = </span><span style="color: #A31515">`</span><span style="color: #0000FF">${</span><span style="color: #001080">command</span><span style="color: #000000FF">.</span><span style="color: #001080">config</span><span style="color: #000000FF">.</span><span style="color: #001080">name</span><span style="color: #0000FF">}</span><span style="color: #A31515">:</span><span style="color: #0000FF">${</span><span style="color: #001080">message</span><span style="color: #000000FF">.</span><span style="color: #001080">author</span><span style="color: #000000FF">.</span><span style="color: #001080">id</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span>
+</code></pre>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="generators" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> generators</h3>
+					<div class="tsd-signature tsd-kind-icon">generators<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>cooldown<span class="tsd-signature-symbol">: </span><a href="../modules.html#cooldownkeygenerator" class="tsd-signature-type" data-tsd-kind="Type alias">CooldownKeyGenerator</a><span class="tsd-signature-symbol">; </span>prefix<span class="tsd-signature-symbol">: </span><a href="../modules.html#prefixgenerator" class="tsd-signature-type" data-tsd-kind="Type alias">PrefixGenerator</a><span class="tsd-signature-symbol"> }</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/oadpoaw/disclosure/blob/7dd9f9e/src/Dispatcher.ts#L166">Dispatcher.ts:166</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Generators for flexibility on editing how would the dispatcher will get the prefix, to store cooldowns etc.</p>
+						</div>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5>cooldown<span class="tsd-signature-symbol">: </span><a href="../modules.html#cooldownkeygenerator" class="tsd-signature-type" data-tsd-kind="Type alias">CooldownKeyGenerator</a></h5>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>The Cooldown Key generator. Tells the dispatcher how to store cooldowns in the database</p>
+									</div>
+									<dl class="tsd-comment-tags">
+										<dt>default</dt>
+										<dd><pre><code class="language-js"><span style="color: #000000">(</span><span style="color: #001080">message</span><span style="color: #000000">, </span><span style="color: #001080">command</span><span style="color: #000000">, </span><span style="color: #001080">_args</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">     </span><span style="color: #AF00DB">return</span><span style="color: #000000"> </span><span style="color: #A31515">`</span><span style="color: #0000FF">${</span><span style="color: #001080">command</span><span style="color: #000000FF">.</span><span style="color: #001080">config</span><span style="color: #000000FF">.</span><span style="color: #001080">name</span><span style="color: #0000FF">}</span><span style="color: #A31515">:</span><span style="color: #0000FF">${</span><span style="color: #001080">message</span><span style="color: #000000FF">.</span><span style="color: #001080">author</span><span style="color: #000000FF">.</span><span style="color: #001080">id</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span>
+<span style="color: #000000">}</span>
+</code></pre>
+										</dd>
+									</dl>
+								</div>
+							</li>
+							<li class="tsd-parameter">
+								<h5>prefix<span class="tsd-signature-symbol">: </span><a href="../modules.html#prefixgenerator" class="tsd-signature-type" data-tsd-kind="Type alias">PrefixGenerator</a></h5>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>The Bot Prefix generator. Useful for per guild prefixes.</p>
+									</div>
+									<dl class="tsd-comment-tags">
+										<dt>default</dt>
+										<dd><pre><code class="language-js"><span style="color: #000000">(</span><span style="color: #001080">message</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">     </span><span style="color: #0000FF">let</span><span style="color: #000000"> </span><span style="color: #001080">prefix</span><span style="color: #000000"> = </span><span style="color: #0000FF">this</span><span style="color: #000000">.</span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #001080">config</span><span style="color: #000000">.</span><span style="color: #001080">prefix</span><span style="color: #000000">;</span>
+<span style="color: #000000">     </span><span style="color: #AF00DB">if</span><span style="color: #000000"> (</span><span style="color: #001080">message</span><span style="color: #000000">.</span><span style="color: #001080">guild</span><span style="color: #000000">) {</span>
+<span style="color: #000000">         </span><span style="color: #001080">prefix</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #0000FF">this</span><span style="color: #000000">.</span><span style="color: #001080">guilds</span><span style="color: #000000">.</span><span style="color: #795E26">get</span><span style="color: #000000">(</span><span style="color: #001080">message</span><span style="color: #000000">.</span><span style="color: #001080">guild</span><span style="color: #000000">.</span><span style="color: #001080">id</span><span style="color: #000000">) ?? </span><span style="color: #0000FF">this</span><span style="color: #000000">.</span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #001080">config</span><span style="color: #000000">.</span><span style="color: #001080">prefix</span><span style="color: #000000">;</span>
+<span style="color: #000000">     }</span>
+<span style="color: #000000">     </span><span style="color: #AF00DB">if</span><span style="color: #000000"> (</span><span style="color: #0000FF">typeof</span><span style="color: #000000"> </span><span style="color: #001080">prefix</span><span style="color: #000000"> !== </span><span style="color: #A31515">&#039;string&#039;</span><span style="color: #000000">) {</span>
+<span style="color: #000000">         </span><span style="color: #001080">prefix</span><span style="color: #000000"> = </span><span style="color: #0000FF">this</span><span style="color: #000000">.</span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #001080">config</span><span style="color: #000000">.</span><span style="color: #001080">prefix</span><span style="color: #000000">;</span>
+<span style="color: #000000">     }</span>
+<span style="color: #000000">     </span><span style="color: #AF00DB">return</span><span style="color: #000000"> </span><span style="color: #001080">prefix</span><span style="color: #000000">;</span>
+<span style="color: #000000">}</span>
+</code></pre>
+										</dd>
+									</dl>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="guilds" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> guilds</h3>
+					<div class="tsd-signature tsd-kind-icon">guilds<span class="tsd-signature-symbol">:</span> <a href="storeprovider.html" class="tsd-signature-type" data-tsd-kind="Class">StoreProvider</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">&quot;string&quot;</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/oadpoaw/disclosure/blob/7dd9f9e/src/Dispatcher.ts#L213">Dispatcher.ts:213</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="inhibitors" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> inhibitors</h3>
+					<div class="tsd-signature tsd-kind-icon">inhibitors<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Set</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">[</span><a href="../modules.html#inhibitor" class="tsd-signature-type" data-tsd-kind="Type alias">Inhibitor</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/oadpoaw/disclosure/blob/7dd9f9e/src/Dispatcher.ts#L147">Dispatcher.ts:147</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>storage for the inhibitors</p>
+						</div>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="addinhibitor" class="tsd-anchor"></a>
+					<h3>add<wbr>Inhibitor</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">add<wbr>Inhibitor<span class="tsd-signature-symbol">(</span>inhibitor<span class="tsd-signature-symbol">: </span><a href="../modules.html#inhibitor" class="tsd-signature-type" data-tsd-kind="Type alias">Inhibitor</a>, priority<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/oadpoaw/disclosure/blob/7dd9f9e/src/Dispatcher.ts#L271">Dispatcher.ts:271</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>inhibitor: <a href="../modules.html#inhibitor" class="tsd-signature-type" data-tsd-kind="Type alias">Inhibitor</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Return <code>true</code> to continue executing the command. Return <code>false</code> to discontinue executing the command.</p>
+									</div>
+								</li>
+								<li>
+									<h5>priority: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 0</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The priority of the inhibitor. Defaults to <code>0</code>. Higher the number, Higher the priority</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="awaitreply" class="tsd-anchor"></a>
+					<h3>await<wbr>Reply</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">await<wbr>Reply<span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Message</span>, time<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Message</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/oadpoaw/disclosure/blob/7dd9f9e/src/Dispatcher.ts#L278">Dispatcher.ts:278</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Await a message from the Message#Author with a timeout</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>message: <span class="tsd-signature-type">Message</span></h5>
+								</li>
+								<li>
+									<h5>time: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 60000</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Message</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="broadcast" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> broadcast</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">broadcast<span class="tsd-signature-symbol">(</span>action<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;enable&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;disable&quot;</span>, name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/oadpoaw/disclosure/blob/7dd9f9e/src/Dispatcher.ts#L215">Dispatcher.ts:215</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>action: <span class="tsd-signature-type">&quot;enable&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;disable&quot;</span></h5>
+								</li>
+								<li>
+									<h5>name: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="check" class="tsd-anchor"></a>
+					<h3>check</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">check<span class="tsd-signature-symbol">(</span>command<span class="tsd-signature-symbol">: </span><a href="command.html" class="tsd-signature-type" data-tsd-kind="Class">Command</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/oadpoaw/disclosure/blob/7dd9f9e/src/Dispatcher.ts#L238">Dispatcher.ts:238</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>command: <a href="command.html" class="tsd-signature-type" data-tsd-kind="Class">Command</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The command to check</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<p>The reason why is it disabled.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="disable" class="tsd-anchor"></a>
+					<h3>disable</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">disable<span class="tsd-signature-symbol">(</span>command<span class="tsd-signature-symbol">: </span><a href="command.html" class="tsd-signature-type" data-tsd-kind="Class">Command</a>, reason<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/oadpoaw/disclosure/blob/7dd9f9e/src/Dispatcher.ts#L259">Dispatcher.ts:259</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>command: <a href="command.html" class="tsd-signature-type" data-tsd-kind="Class">Command</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The command to disable</p>
+									</div>
+								</li>
+								<li>
+									<h5>reason: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;No reason provided.&#x27;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p><code>true</code> if it&#39;s disabled. <code>false</code> if it&#39;s already disabled.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="enable" class="tsd-anchor"></a>
+					<h3>enable</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">enable<span class="tsd-signature-symbol">(</span>command<span class="tsd-signature-symbol">: </span><a href="command.html" class="tsd-signature-type" data-tsd-kind="Class">Command</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/oadpoaw/disclosure/blob/7dd9f9e/src/Dispatcher.ts#L247">Dispatcher.ts:247</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>command: <a href="command.html" class="tsd-signature-type" data-tsd-kind="Class">Command</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The command to enable</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p><code>true</code> if it&#39;s enabled. <code>false</code> if it&#39;s already enabled.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="exec" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> exec</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">exec<span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Message</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Message</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/oadpoaw/disclosure/blob/7dd9f9e/src/Dispatcher.ts#L349">Dispatcher.ts:349</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>message: <span class="tsd-signature-type">Message</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Message</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="inihibit" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> inihibit</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">inihibit<span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Message</span>, command<span class="tsd-signature-symbol">: </span><a href="command.html" class="tsd-signature-type" data-tsd-kind="Class">Command</a>, args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/oadpoaw/disclosure/blob/7dd9f9e/src/Dispatcher.ts#L301">Dispatcher.ts:301</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>message: <span class="tsd-signature-type">Message</span></h5>
+								</li>
+								<li>
+									<h5>command: <a href="command.html" class="tsd-signature-type" data-tsd-kind="Class">Command</a></h5>
+								</li>
+								<li>
+									<h5>args: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="shouldhandlemessage" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> should<wbr>Handle<wbr>Message</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">should<wbr>Handle<wbr>Message<span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Message</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/oadpoaw/disclosure/blob/7dd9f9e/src/Dispatcher.ts#L310">Dispatcher.ts:310</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>message: <span class="tsd-signature-type">Message</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="synchronize" class="tsd-anchor"></a>
+					<h3>synchronize</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">synchronize<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/oadpoaw/disclosure/blob/7dd9f9e/src/Dispatcher.ts#L226">Dispatcher.ts:226</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Synchronize the DisabledCommands to the cache</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="throttleexec" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> throttle<wbr>Exec</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">throttle<wbr>Exec<span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Message</span>, command<span class="tsd-signature-symbol">: </span><a href="command.html" class="tsd-signature-type" data-tsd-kind="Class">Command</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/oadpoaw/disclosure/blob/7dd9f9e/src/Dispatcher.ts#L342">Dispatcher.ts:342</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>message: <span class="tsd-signature-type">Message</span></h5>
+								</li>
+								<li>
+									<h5>command: <a href="command.html" class="tsd-signature-type" data-tsd-kind="Class">Command</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="throttlehandle" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> throttle<wbr>Handle</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">throttle<wbr>Handle<span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Message</span>, command<span class="tsd-signature-symbol">: </span><a href="command.html" class="tsd-signature-type" data-tsd-kind="Class">Command</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Message</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/oadpoaw/disclosure/blob/7dd9f9e/src/Dispatcher.ts#L319">Dispatcher.ts:319</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>message: <span class="tsd-signature-type">Message</span></h5>
+								</li>
+								<li>
+									<h5>command: <a href="command.html" class="tsd-signature-type" data-tsd-kind="Class">Command</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Message</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="../modules.html">Exports</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-class">
+						<a href="argumenterror.html" class="tsd-kind-icon">Argument<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="command.html" class="tsd-kind-icon">Command</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="disclosure.html" class="tsd-kind-icon">Disclosure</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="disclosuredatabasevalidationerror.html" class="tsd-kind-icon">Disclosure<wbr>Database<wbr>Validation<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="disclosureerror.html" class="tsd-kind-icon">Disclosure<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="disclosuresharder.html" class="tsd-kind-icon">Disclosure<wbr>Sharder</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="disclosuretypeerror.html" class="tsd-kind-icon">Disclosure<wbr>Type<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-class tsd-has-type-parameter">
+						<a href="discordevent.html" class="tsd-kind-icon">Discord<wbr>Event</a>
+					</li>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class">
+						<a href="dispatcher.html" class="tsd-kind-icon">Dispatcher</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="dispatcher.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="dispatcher.html#disabledcommands" class="tsd-kind-icon">Disabled<wbr>Commands</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="dispatcher.html#awaiting" class="tsd-kind-icon">awaiting</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="dispatcher.html#beforeexecute" class="tsd-kind-icon">before<wbr>Execute</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="dispatcher.html#cache" class="tsd-kind-icon">cache</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="dispatcher.html#cooldowns" class="tsd-kind-icon">cooldowns</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="dispatcher.html#generators" class="tsd-kind-icon">generators</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="dispatcher.html#guilds" class="tsd-kind-icon">guilds</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="dispatcher.html#inhibitors" class="tsd-kind-icon">inhibitors</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="dispatcher.html#addinhibitor" class="tsd-kind-icon">add<wbr>Inhibitor</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="dispatcher.html#awaitreply" class="tsd-kind-icon">await<wbr>Reply</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="dispatcher.html#broadcast" class="tsd-kind-icon">broadcast</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="dispatcher.html#check" class="tsd-kind-icon">check</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="dispatcher.html#disable" class="tsd-kind-icon">disable</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="dispatcher.html#enable" class="tsd-kind-icon">enable</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="dispatcher.html#exec" class="tsd-kind-icon">exec</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="dispatcher.html#inihibit" class="tsd-kind-icon">inihibit</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="dispatcher.html#shouldhandlemessage" class="tsd-kind-icon">should<wbr>Handle<wbr>Message</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="dispatcher.html#synchronize" class="tsd-kind-icon">synchronize</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="dispatcher.html#throttleexec" class="tsd-kind-icon">throttle<wbr>Exec</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="dispatcher.html#throttlehandle" class="tsd-kind-icon">throttle<wbr>Handle</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+					<li class=" tsd-kind-class tsd-has-type-parameter">
+						<a href="storeprovider.html" class="tsd-kind-icon">Store<wbr>Provider</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/arguments.html" class="tsd-kind-icon">Arguments</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/argvdefinition.html" class="tsd-kind-icon">Argv<wbr>Definition</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/commandconfig.html" class="tsd-kind-icon">Command<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/disclosurelogger.html" class="tsd-kind-icon">Disclosure<wbr>Logger</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/promptoption.html" class="tsd-kind-icon">Prompt<wbr>Option</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../modules.html#argsdefinition" class="tsd-kind-icon">Args<wbr>Definition</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../modules.html#beforeexecutionfunction" class="tsd-kind-icon">Before<wbr>Execution<wbr>Function</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../modules.html#columntype" class="tsd-kind-icon">Column<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../modules.html#config" class="tsd-kind-icon">Config</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../modules.html#cooldownkeygenerator" class="tsd-kind-icon">Cooldown<wbr>Key<wbr>Generator</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../modules.html#datatype" class="tsd-kind-icon">Data<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../modules.html#dialects" class="tsd-kind-icon">Dialects</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="../modules.html#extractcolumntype" class="tsd-kind-icon">Extract<wbr>Column<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="../modules.html#extractdata" class="tsd-kind-icon">Extract<wbr>Data</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="../modules.html#extractdatatype" class="tsd-kind-icon">Extract<wbr>Data<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="../modules.html#functionprovider" class="tsd-kind-icon">Function<wbr>Provider</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../modules.html#inhibitor" class="tsd-kind-icon">Inhibitor</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../modules.html#messageresolvable" class="tsd-kind-icon">Message<wbr>Resolvable</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../modules.html#prefixgenerator" class="tsd-kind-icon">Prefix<wbr>Generator</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../modules.html#prompts" class="tsd-kind-icon">Prompts</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="../modules.html#resolvablearray" class="tsd-kind-icon">Resolvable<wbr>Array</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="../modules.html#validatefunction" class="tsd-kind-icon">Validate<wbr>Function</a>
+					</li>
+					<li class=" tsd-kind-property">
+						<a href="../modules.html#version" class="tsd-kind-icon">version</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="../modules.html#providers" class="tsd-kind-icon">Providers</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="../modules.html#prompt" class="tsd-kind-icon">Prompt</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="../modules.html#scaffold" class="tsd-kind-icon">Scaffold</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="../modules.html#validate" class="tsd-kind-icon">validate</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,317 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>disclosure-discord</title>
+	<meta name="description" content="Documentation for disclosure-discord">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+	<script async src="assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">disclosure-discord</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<h1>disclosure-discord</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<a href="#disclosure™" id="disclosure™" style="color: inherit; text-decoration: none;">
+					<h1>Disclosure™</h1>
+				</a>
+				<p><a href=""><img src="https://forthebadge.com/images/badges/made-with-typescript.svg" alt="TS"></a></p>
+				<a href="#a-discord-bot-generator-cli-amp-command-handler" id="a-discord-bot-generator-cli-amp-command-handler" style="color: inherit; text-decoration: none;">
+					<h2>A Discord Bot Generator CLI &amp; Command Handler</h2>
+				</a>
+				<p>This right here is a simple tool (<code>Command Line Interface</code>) to scaffold a Discord bot that you or your team would stun the whole discord with in future!
+					<br />
+					<br />
+					It not only generates an awesome project you can work with but also supports you with it&#39;s very own in-built Command Handler
+					<br />
+					<br />
+					This CLI tool allows you to create and manage your Discord Bot project by adding/registering commands &amp; events and <strong>much much more!</strong> , organizing all of your commands &amp; events into its own folder and groups. It will help you Integrate with Git and furthermore help you installing your dependecies and will choose a database for you as well as set it up!
+					<br /> <br />
+					You can generate a Discord project with the finest file structure , which will provide a slightly better experience to your whole coding experience for the bot~! <br />
+				<a href=""><img src="https://forthebadge.com/images/badges/it-works-why.svg" alt="works"></a> <br/></p>
+				<a href="#features" id="features" style="color: inherit; text-decoration: none;">
+					<h2>Features</h2>
+				</a>
+				<ul>
+					<li>Easy to use!</li>
+					<li>Flexible!</li>
+					<li>A CLI to generate a Discord Bot Project! </li>
+					<li>Awesome TypeScript Definitions for awesome developer tooling!</li>
+					<li>Sharding Support!</li>
+					<li>Active support!</li>
+					<li>Built-in Command Handler, includes:<ul>
+							<li>Argument Parsing</li>
+							<li>Command Inhibitors</li>
+							<li>Prompts! with strong type definitions</li>
+							<li>Cooldown Throttles (Command Cooldown)</li>
+						</ul>
+					</li>
+					<li>Supports many databases! See <a href="#what-databases-does-it-support">here</a></li>
+				</ul>
+				<p>Also see <a href="/Configuration.md">Configuration</a> for guides how to edit Disclosure. And <a href="Advanced.md">Advanced Usages</a> for advanced usages.</p>
+				<a href="#easy-to-setup" id="easy-to-setup" style="color: inherit; text-decoration: none;">
+					<h2>Easy To Setup</h2>
+				</a>
+				<a href="#what-could-have-you-ever-asked-for-it-is-the-best-cli-made-for-your-project-out-there-so-far" id="what-could-have-you-ever-asked-for-it-is-the-best-cli-made-for-your-project-out-there-so-far" style="color: inherit; text-decoration: none;">
+					<h3>What could have you ever asked for? It is the best CLI made for your project out there so far!</h3>
+				</a>
+				<p>Don&#39;t Believe Me? Let me show you how:</p>
+				<pre><code class="language-sh"><span style="color: #008000"># Using npx to ensure that we are always using the latest version of disclosure-discord</span>
+<span style="color: #000000">$ npx disclosure-discord</span>
+</code></pre>
+				<p><img src="/assets/test.gif" alt="done"></p>
+				<a href="#initial-project-structure" id="initial-project-structure" style="color: inherit; text-decoration: none;">
+					<h2>Initial Project Structure</h2>
+				</a>
+				<pre><code class="language-sh"><span style="color: #000000">├───src</span>
+<span style="color: #000000">│   ├───commands</span>
+<span style="color: #000000">│   ├───events</span>
+<span style="color: #000000">│   └───index.ts</span>
+<span style="color: #000000">├───.env</span>
+<span style="color: #000000">├───disclosure.json</span>
+<span style="color: #000000">├───package-lock.json</span>
+<span style="color: #000000">└───package.json</span>
+</code></pre>
+				<p>Yep!, just that and with few lines of code!</p>
+				<a href="#easy-to-use" id="easy-to-use" style="color: inherit; text-decoration: none;">
+					<h2>Easy to Use!</h2>
+				</a>
+				<a href="#super-duper-easy-to-use" id="super-duper-easy-to-use" style="color: inherit; text-decoration: none;">
+					<h3>Super-duper easy to use</h3>
+				</a>
+				<p>Simple commands </p>
+				<pre><code class="language-sh"><span style="color: #000000">$ npx disclosure-discord </span><span style="color: #795E26">command</span>
+<span style="color: #008000"># For a new command</span>
+
+<span style="color: #000000">$ npx disclosure-discord event</span>
+<span style="color: #008000"># For a new event</span>
+</code></pre>
+				<p><img src="/assets/test2.gif" alt="func"></p>
+				<a href="#running-the-bot" id="running-the-bot" style="color: inherit; text-decoration: none;">
+					<h3>Running the Bot</h3>
+				</a>
+				<pre><code class="language-sh"><span style="color: #000000">npm run build</span>
+<span style="color: #008000"># To build the project</span>
+
+<span style="color: #000000">npm start</span>
+<span style="color: #008000"># To start the bot!</span>
+</code></pre>
+				<a href="#what-databases-does-it-support" id="what-databases-does-it-support" style="color: inherit; text-decoration: none;">
+					<h2>What Databases does it support?</h2>
+				</a>
+				<ul>
+					<li><a href="https://www.sqlite.org/index.html">SQLite</a></li>
+					<li><a href="https://www.postgresql.org/">PostgreSQL</a></li>
+					<li><a href="https://mariadb.org/">MariaDB</a></li>
+					<li><a href="https://www.mongodb.com/">MongoDB</a></li>
+					<li><a href="https://www.mysql.com/">MySQL</a></li>
+					<li><a href="https://redis.io/">Redis</a></li>
+					<li><a href="https://en.wikipedia.org/wiki/In-memory_database">In-Memory</a></li>
+					<li><a href="https://en.wikipedia.org/wiki/Microsoft_SQL_Server">MsSQL</a></li>
+				</ul>
+				<a href="#join-us-for-support" id="join-us-for-support" style="color: inherit; text-decoration: none;">
+					<h1>Join Us For Support</h1>
+				</a>
+				<p><a href="https://discord.gg/fJCfptzwjG"><img src="/assets/Capture.png" alt="Join"></a> <br>
+				<img src="https://forthebadge.com/images/badges/built-with-love.svg" alt="love"></p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="modules.html">Exports</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-class">
+						<a href="classes/argumenterror.html" class="tsd-kind-icon">Argument<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/command.html" class="tsd-kind-icon">Command</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/disclosure.html" class="tsd-kind-icon">Disclosure</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/disclosuredatabasevalidationerror.html" class="tsd-kind-icon">Disclosure<wbr>Database<wbr>Validation<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/disclosureerror.html" class="tsd-kind-icon">Disclosure<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/disclosuresharder.html" class="tsd-kind-icon">Disclosure<wbr>Sharder</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/disclosuretypeerror.html" class="tsd-kind-icon">Disclosure<wbr>Type<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-class tsd-has-type-parameter">
+						<a href="classes/discordevent.html" class="tsd-kind-icon">Discord<wbr>Event</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/dispatcher.html" class="tsd-kind-icon">Dispatcher</a>
+					</li>
+					<li class=" tsd-kind-class tsd-has-type-parameter">
+						<a href="classes/storeprovider.html" class="tsd-kind-icon">Store<wbr>Provider</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/arguments.html" class="tsd-kind-icon">Arguments</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/argvdefinition.html" class="tsd-kind-icon">Argv<wbr>Definition</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/commandconfig.html" class="tsd-kind-icon">Command<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/disclosurelogger.html" class="tsd-kind-icon">Disclosure<wbr>Logger</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/promptoption.html" class="tsd-kind-icon">Prompt<wbr>Option</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#argsdefinition" class="tsd-kind-icon">Args<wbr>Definition</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#beforeexecutionfunction" class="tsd-kind-icon">Before<wbr>Execution<wbr>Function</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#columntype" class="tsd-kind-icon">Column<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#config" class="tsd-kind-icon">Config</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#cooldownkeygenerator" class="tsd-kind-icon">Cooldown<wbr>Key<wbr>Generator</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#datatype" class="tsd-kind-icon">Data<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#dialects" class="tsd-kind-icon">Dialects</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="modules.html#extractcolumntype" class="tsd-kind-icon">Extract<wbr>Column<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="modules.html#extractdata" class="tsd-kind-icon">Extract<wbr>Data</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="modules.html#extractdatatype" class="tsd-kind-icon">Extract<wbr>Data<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="modules.html#functionprovider" class="tsd-kind-icon">Function<wbr>Provider</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#inhibitor" class="tsd-kind-icon">Inhibitor</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#messageresolvable" class="tsd-kind-icon">Message<wbr>Resolvable</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#prefixgenerator" class="tsd-kind-icon">Prefix<wbr>Generator</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#prompts" class="tsd-kind-icon">Prompts</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="modules.html#resolvablearray" class="tsd-kind-icon">Resolvable<wbr>Array</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="modules.html#validatefunction" class="tsd-kind-icon">Validate<wbr>Function</a>
+					</li>
+					<li class=" tsd-kind-property">
+						<a href="modules.html#version" class="tsd-kind-icon">version</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="modules.html#providers" class="tsd-kind-icon">Providers</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="modules.html#prompt" class="tsd-kind-icon">Prompt</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#scaffold" class="tsd-kind-icon">Scaffold</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#validate" class="tsd-kind-icon">validate</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
