@@ -34,7 +34,7 @@
   "dependencies": {
     "@xetha/escapes": "^1.0.6",
     "discord.js": "^12.5.1",
-    "dotenv": "^9.0.0",
+    "dotenv": "^10.0.0",
     "inquirer": "^8.0.0",
     "lookpath": "^1.2.0",
     "minimist": "^1.2.5",
